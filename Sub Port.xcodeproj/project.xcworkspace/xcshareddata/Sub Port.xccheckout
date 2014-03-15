@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5AE73CA9-B306-4821-A777-34B590353BF4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Sub Port</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D1B03622-A4AA-4D94-B6F3-A13A2A8B2373</key>
+		<string>https://github.com/rkehl27/SubPort.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Sub Port.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D1B03622-A4AA-4D94-B6F3-A13A2A8B2373</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/rkehl27/SubPort.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D1B03622-A4AA-4D94-B6F3-A13A2A8B2373</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D1B03622-A4AA-4D94-B6F3-A13A2A8B2373</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SubPort</string>
+		</dict>
+	</array>
+</dict>
+</plist>
