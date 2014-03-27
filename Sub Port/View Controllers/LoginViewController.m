@@ -54,11 +54,31 @@
 {
     _jsonData = [[NSMutableData alloc] init];
     
-    NSURL *url = [NSURL URLWithString:@"http://subportinc.herokuapp.com/api/v1/sessions"];
-
-    NSURLRequest *req = [NSURLRequest requestWithURL:url];
+    NSDictionary *inputData = @{@"Key":@"Object"};
     
-    _connection = [[NSURLConnection alloc] initWithRequest:req delegate:self startImmediately:YES];
+    NSError *error = nil;
+    NSData *jsonInputData = [NSJSONSerialization dataWithJSONObject:inputData options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSURL *url = [NSURL URLWithString:@"http://subportinc.herokuapp.com/api/v1/sessions"];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:jsonInputData];
+
+    NSURLResponse *response;
+    NSError *err;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    id jsonResponseData = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:nil];
+    
+    NSDictionary *jsonResponseDict;
+    
+    if ([jsonResponseData isKindOfClass:[NSDictionary class]]) {
+        jsonResponseDict = jsonResponseData;
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
