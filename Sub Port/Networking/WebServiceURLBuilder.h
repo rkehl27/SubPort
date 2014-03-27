@@ -10,5 +10,9 @@
 
 @interface WebServiceURLBuilder : NSObject
 
++ (NSMutableURLRequest *)URLRequestForURL:(NSURL *)url;
+
++ (NSMutableURLRequest *)URLRequestForURL:(NSURL *)url JSONToPost:(NSData *)json;
+
 
 @end
