@@ -41,20 +41,43 @@
 }
 
 - (IBAction)loginComplete:(id)sender {
+    _user = [[VerifiedUser alloc] init];
     [_user setUsername:[_usernameField text]];
     [_user setPassword:[_passwordField text]];
     
-    [self validateUserInformation];
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Login" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alertView show];
+    [self postUserInformationToServer];
 }
 
--(void)validateUserInformation
-{
-    _jsonData = [[NSMutableData alloc] init];
+- (IBAction)logout:(id)sender {
+    NSString *baseLogoutURL = @"http://subportinc.herokuapp.com/api/v1/sessions/?auth_token=";
     
-    NSDictionary *inputData = @{@"Key":@"Object"};
+    NSString *fullLogoutURL = [baseLogoutURL stringByAppendingString:[_user authToken]];
+    
+    NSURL *url = [NSURL URLWithString:fullLogoutURL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"DELETE"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSURLResponse *response;
+    NSError *err;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Log Out Response: %@", responseString);
+
+//    [_user setUsername:nil];
+//    [_user setPassword:nil];
+//    [_user setAuthToken:nil];
+    
+    //fix log out to completely delete user and auth token!
+}
+
+-(void)postUserInformationToServer
+{
+    NSDictionary *inputData = @{@"user":@{@"email":[_user username], @"password":[_user password]}};
     
     NSError *error = nil;
     NSData *jsonInputData = [NSJSONSerialization dataWithJSONObject:inputData options:NSJSONWritingPrettyPrinted error:&error];
@@ -65,6 +88,7 @@
     
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setHTTPBody:jsonInputData];
 
     NSURLResponse *response;
@@ -72,30 +96,30 @@
     
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
     
-    id jsonResponseData = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:nil];
+    [self connectionDidFinishWithData:responseData orError:err];
+}
+
+- (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
+{
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     
-    NSDictionary *jsonResponseDict;
+    NSLog(@"Response: %@", responseString);
     
-    if ([jsonResponseData isKindOfClass:[NSDictionary class]]) {
-        jsonResponseDict = jsonResponseData;
+    NSError *localError;
+    
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
+    
+    if([responseDictionary valueForKey:@"success"]) {
+        NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+        [_user setAuthToken:[dataDict objectForKey:@"auth_token"]];
+        NSLog(@"Auth Token: %@", [_user authToken]);
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success" message:[responseDictionary valueForKey:@"info"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
     }
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [_jsonData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    NSString *jsonCheck = [[NSString alloc] initWithData:_jsonData encoding:NSUTF8StringEncoding];
-    NSLog(@"Json check = %@", jsonCheck);
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-    [av show];
 }
 
 @end

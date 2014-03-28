@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong, readwrite) NSString *password;
 
+@property (nonatomic, strong, readwrite) NSString *authToken;
+
 @end
