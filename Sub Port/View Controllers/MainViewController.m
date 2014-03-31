@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "LoginViewController.h"
 #import "CreateAccountViewController.h"
+#import "CreateAccountTableViewController.h"
 
 @interface MainViewController ()
 
@@ -44,7 +45,9 @@
 }
 
 - (IBAction)signUpButton:(id)sender {
-    CreateAccountViewController *createAccountViewController = [[CreateAccountViewController alloc] init];
+//    CreateAccountViewController *createAccountViewController = [[CreateAccountViewController alloc] init];
+    
+    CreateAccountTableViewController *createAccountViewController = [[CreateAccountTableViewController alloc] init];
     
     [[self navigationController] pushViewController:createAccountViewController animated:YES];
 }

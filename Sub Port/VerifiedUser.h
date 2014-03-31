@@ -10,10 +10,11 @@
 
 @interface VerifiedUser : NSObject
 
-@property (nonatomic, strong, readwrite) NSString *username;
-
+@property (nonatomic, strong, readwrite) NSString *name;
 @property (nonatomic, strong, readwrite) NSString *password;
-
+@property (nonatomic, strong, readwrite) NSString *email;
+@property (nonatomic, strong, readwrite) NSString *creditCardNumber;
+@property (nonatomic, strong, readwrite) NSString *expirationDate;
 @property (nonatomic, strong, readwrite) NSString *authToken;
 
 @end

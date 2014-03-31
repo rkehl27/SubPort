@@ -12,7 +12,7 @@
     NSURLConnection *_connection;
     NSMutableData *_jsonData;
 }
-@property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
 @end
@@ -24,6 +24,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [[self navigationItem] setTitle:@"Login"];
     }
     return self;
 }
@@ -42,7 +43,7 @@
 
 - (IBAction)loginComplete:(id)sender {
     _user = [[VerifiedUser alloc] init];
-    [_user setUsername:[_usernameField text]];
+    [_user setEmail:[_emailField text]];
     [_user setPassword:[_passwordField text]];
     
     [self postUserInformationToServer];
@@ -77,7 +78,7 @@
 
 -(void)postUserInformationToServer
 {
-    NSDictionary *inputData = @{@"user":@{@"email":[_user username], @"password":[_user password]}};
+    NSDictionary *inputData = @{@"user":@{@"email":[_user email], @"password":[_user password]}};
     
     NSError *error = nil;
     NSData *jsonInputData = [NSJSONSerialization dataWithJSONObject:inputData options:NSJSONWritingPrettyPrinted error:&error];
