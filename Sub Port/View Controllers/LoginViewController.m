@@ -69,11 +69,16 @@
     NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     NSLog(@"Log Out Response: %@", responseString);
 
-//    [_user setUsername:nil];
-//    [_user setPassword:nil];
-//    [_user setAuthToken:nil];
+    [_user setEmail:nil];
+    [_user setPassword:nil];
+    [_user setAuthToken:nil];
     
     //fix log out to completely delete user and auth token!
+    
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *each in cookieStorage.cookies) {
+        [cookieStorage deleteCookie:each];
+    }
 }
 
 -(void)postUserInformationToServer

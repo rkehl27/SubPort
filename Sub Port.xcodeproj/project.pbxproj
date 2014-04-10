@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		BF061B6118E7893F005B1246 /* FormFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF061B5F18E7893F005B1246 /* FormFieldTableViewCell.m */; };
 		BF061B6218E7893F005B1246 /* FormFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF061B6018E7893F005B1246 /* FormFieldTableViewCell.xib */; };
-		BF135C2318D1C09200299D05 /* CreateAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF135C2118D1C09200299D05 /* CreateAccountViewController.m */; };
-		BF135C2418D1C09200299D05 /* CreateAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF135C2218D1C09200299D05 /* CreateAccountViewController.xib */; };
 		BF6986D518B9D2E80004E31F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF6986D418B9D2E80004E31F /* Foundation.framework */; };
 		BF6986D718B9D2E80004E31F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF6986D618B9D2E80004E31F /* CoreGraphics.framework */; };
 		BF6986D918B9D2E80004E31F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF6986D818B9D2E80004E31F /* UIKit.framework */; };
@@ -48,9 +46,6 @@
 		BF061B5E18E7893F005B1246 /* FormFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormFieldTableViewCell.h; sourceTree = "<group>"; };
 		BF061B5F18E7893F005B1246 /* FormFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormFieldTableViewCell.m; sourceTree = "<group>"; };
 		BF061B6018E7893F005B1246 /* FormFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormFieldTableViewCell.xib; sourceTree = "<group>"; };
-		BF135C2018D1C09200299D05 /* CreateAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountViewController.h; sourceTree = "<group>"; };
-		BF135C2118D1C09200299D05 /* CreateAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountViewController.m; sourceTree = "<group>"; };
-		BF135C2218D1C09200299D05 /* CreateAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateAccountViewController.xib; sourceTree = "<group>"; };
 		BF6986D118B9D2E80004E31F /* Sub Port.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sub Port.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6986D418B9D2E80004E31F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BF6986D618B9D2E80004E31F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -207,9 +202,6 @@
 				BF69871818BA82D00004E31F /* MainViewController.h */,
 				BF69871918BA82D00004E31F /* MainViewController.m */,
 				BF69871A18BA82D00004E31F /* MainViewController.xib */,
-				BF135C2018D1C09200299D05 /* CreateAccountViewController.h */,
-				BF135C2118D1C09200299D05 /* CreateAccountViewController.m */,
-				BF135C2218D1C09200299D05 /* CreateAccountViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -303,7 +295,6 @@
 				BF6986DF18B9D2E80004E31F /* InfoPlist.strings in Resources */,
 				BF6986E718B9D2E80004E31F /* Images.xcassets in Resources */,
 				BF061B6218E7893F005B1246 /* FormFieldTableViewCell.xib in Resources */,
-				BF135C2418D1C09200299D05 /* CreateAccountViewController.xib in Resources */,
 				BF69871718BA82B90004E31F /* LoginViewController.xib in Resources */,
 				BF69871C18BA82D00004E31F /* MainViewController.xib in Resources */,
 			);
@@ -330,7 +321,6 @@
 				BF9FB27618E9350200B81140 /* FormFieldRow.m in Sources */,
 				BF6986E518B9D2E80004E31F /* AppDelegate.m in Sources */,
 				BF061B6118E7893F005B1246 /* FormFieldTableViewCell.m in Sources */,
-				BF135C2318D1C09200299D05 /* CreateAccountViewController.m in Sources */,
 				BF6986E118B9D2E80004E31F /* main.m in Sources */,
 				BF69871618BA82B90004E31F /* LoginViewController.m in Sources */,
 				BF7A776A18D3B1100035C267 /* LoginWebServiceOperation.m in Sources */,
