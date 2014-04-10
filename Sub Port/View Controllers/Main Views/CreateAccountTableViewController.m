@@ -23,7 +23,7 @@
 
 - (id)init
 {
-    self = [super initWithStyle:UITableViewStyleGrouped];
+    self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         [self.tableView setRowHeight:66];
         _rows = [[NSMutableArray alloc] init];

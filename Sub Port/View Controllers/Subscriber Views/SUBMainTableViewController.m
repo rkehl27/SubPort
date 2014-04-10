@@ -1,24 +1,26 @@
 //
-//  CreateAcountTableViewController.m
+//  SUBMainViewControllerTableViewController.m
 //  Sub Port
 //
-//  Created by School on 3/30/14.
+//  Created by Brandon Michael Kiefer on 4/10/14.
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
 
-#import "CreateAcountTableViewController.h"
+#import "SUBMainTableViewController.h"
+#import "SUBSettingsViewController.h"
 
-@interface CreateAcountTableViewController ()
+@interface SUBMainTableViewController ()
 
 @end
 
-@implementation CreateAcountTableViewController
+@implementation SUBMainTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        [self customizeNavigationItem];
     }
     return self;
 }
@@ -44,14 +46,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return 0;
 }
@@ -115,5 +115,20 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)settings:(id)sender
+{
+    SUBSettingsViewController *settingsView = [[SUBSettingsViewController alloc] init];
+    [[self navigationController] pushViewController:settingsView animated:YES];
+}
+
+- (void)customizeNavigationItem
+{
+    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [[self navigationItem] setLeftBarButtonItem:bbi];
+    
+    UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
+    [[self navigationItem] setRightBarButtonItem:rightbbi];
+}
 
 @end

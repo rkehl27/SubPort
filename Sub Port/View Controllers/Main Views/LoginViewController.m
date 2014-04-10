@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "SUBMainTableViewController.h"
 
 @interface LoginViewController () <UIAlertViewDelegate>{
     NSURLConnection *_connection;
@@ -120,8 +121,8 @@
         [_user setAuthToken:[dataDict objectForKey:@"auth_token"]];
         NSLog(@"Auth Token: %@", [_user authToken]);
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success" message:[responseDictionary valueForKey:@"info"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alertView show];
+        SUBMainTableViewController *mainViewController = [[SUBMainTableViewController alloc] init];
+        [[self navigationController] pushViewController:mainViewController animated:YES];
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
