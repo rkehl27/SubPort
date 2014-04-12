@@ -7,6 +7,7 @@
 //
 
 #import "SUBSelectProvidersTableViewController.h"
+#import "SUBProviderDetailTableViewController.h"
 #import "SUBSettingsViewController.h"
 #import "VerifiedUser.h"
 #import "Provider.h"
@@ -79,9 +80,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //Provider *selectedProvider = [self providerAtIndexPath:indexPath];
+    Provider *selectedProvider = [self providerAtIndexPath:indexPath];
     
+    SUBProviderDetailTableViewController *detailView = [[SUBProviderDetailTableViewController alloc] initWithProvider:selectedProvider];
     
+    [[self navigationController] pushViewController:detailView animated:YES];
 }
 
 #pragma mark - Connection Information

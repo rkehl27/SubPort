@@ -101,7 +101,7 @@
                                    otherButtonTitles: nil];
             emptyField = true;
         } else {
-            if ([[[cell rowLabel] text] isEqualToString:@"Name"]) {
+            if ([[[cell rowLabel] text] isEqualToString:@"Username"]) {
                 [_user setName:[[cell rowTextField] text]];
             } else if ([[[cell rowLabel] text] isEqualToString:@"Password"]) {
                 password = [[cell rowTextField] text];
@@ -158,13 +158,11 @@
 
 -(void)postNewAccountInformationToServer
 {
-    NSString *newName = [NSString stringWithFormat:@"+%@", [_user name]];
-    NSString *newPassword = [NSString stringWithFormat:@"+%@", [_user password]];
     NSDictionary *inputData = @{@"user":@{
                                         @"email":[_user email],
-                                        @"name":newName,
-                                        @"password":newPassword,
-                                        @"password_confirmation":newPassword,
+                                        @"name":[_user name],
+                                        @"password":[_user password],
+                                        @"password_confirmation":[_user password],
                                         @"credit_card_number":[_user creditCardNumber],
                                         @"expiration_date":[_user expirationDate]}};
     
