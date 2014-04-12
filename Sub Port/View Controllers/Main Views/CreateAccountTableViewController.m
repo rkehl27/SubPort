@@ -10,6 +10,7 @@
 #import "FormFieldTableViewCell.h"
 #import "FormFieldRow.h"
 #import "VerifiedUser.h"
+#import "SUBSelectProvidersTableViewController.h"
 
 @interface CreateAccountTableViewController ()<UIAlertViewDelegate>{
     NSMutableArray *_rows;
@@ -199,11 +200,17 @@
     
     if([responseDictionary valueForKey:@"success"]) {
         NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
-        [_user setAuthToken:[dataDict objectForKey:@"auth_token"]];
-        NSLog(@"Auth Token: %@", [_user authToken]);
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success" message:[responseDictionary valueForKey:@"info"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alertView show];
+        [[VerifiedUser sharedUser] setName:[_user name]];
+        [[VerifiedUser sharedUser] setPassword:[_user password]];
+        [[VerifiedUser sharedUser] setEmail:[_user email]];
+        [[VerifiedUser sharedUser] setCreditCardNumber:[_user creditCardNumber]];
+        [[VerifiedUser sharedUser] setExpirationDate:[_user expirationDate]];
+        [[VerifiedUser sharedUser] setAuthToken:[dataDict objectForKey:@"auth_token"]];
+        
+        SUBSelectProvidersTableViewController *selectProvidersViewController = [[SUBSelectProvidersTableViewController alloc] init];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:selectProvidersViewController];
+        [self presentViewController:navController animated:YES completion:nil];
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];

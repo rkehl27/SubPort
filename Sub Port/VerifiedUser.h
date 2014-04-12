@@ -17,4 +17,8 @@
 @property (nonatomic, strong, readwrite) NSString *expirationDate;
 @property (nonatomic, strong, readwrite) NSString *authToken;
 
++ (id)sharedUser;
+
+- (void)resetSharedUser;
+
 @end

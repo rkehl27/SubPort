@@ -124,9 +124,6 @@
 
 - (void)customizeNavigationItem
 {
-    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    [[self navigationItem] setLeftBarButtonItem:bbi];
-    
     UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
     [[self navigationItem] setRightBarButtonItem:rightbbi];
 }

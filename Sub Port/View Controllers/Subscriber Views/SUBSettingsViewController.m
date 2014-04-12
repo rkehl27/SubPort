@@ -7,6 +7,10 @@
 //
 
 #import "SUBSettingsViewController.h"
+#import "SUBSelectProvidersTableViewController.h"
+#import "VerifiedUser.h"
+#import "MainViewController.h"
+#import "WebServiceURLBuilder.h"
 
 @interface SUBSettingsViewController ()
 
@@ -35,40 +39,37 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)changeProviders:(id)sender {
+- (IBAction)changeProviders:(id)sender
+{
+    SUBSelectProvidersTableViewController *selectProvidersViewController = [[SUBSelectProvidersTableViewController alloc] init];
+    [[self navigationController] pushViewController:selectProvidersViewController animated:YES];
 }
-- (IBAction)updateAccount:(id)sender {
+- (IBAction)updateAccount:(id)sender
+{
+    //do nothing
 }
 - (IBAction)signOut:(id)sender {
-//    NSString *baseLogoutURL = @"http://subportinc.herokuapp.com/api/v1/sessions/?auth_token=";
+    NSMutableURLRequest *request = [WebServiceURLBuilder deleteRequestForRouteAppendix:@"sessions"];
+  
+    NSURLResponse *response;
+    NSError *err;
     
-    //NSString *fullLogoutURL = [baseLogoutURL stringByAppendingString:[_user authToken]];
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
     
-//    NSURL *url = [NSURL URLWithString:fullLogoutURL];
-//    
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-//    [request setHTTPMethod:@"DELETE"];
-//    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-//    
-//    NSURLResponse *response;
-//    NSError *err;
-//    
-//    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
-//    
-//    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-//    NSLog(@"Log Out Response: %@", responseString);
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Log Out Response: %@", responseString);
     
-    //[_user setEmail:nil];
-    //[_user setPassword:nil];
-    //[_user setAuthToken:nil];
-    
-    //fix log out to completely delete user and auth token!
+    [[VerifiedUser sharedUser] resetSharedUser];
     
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (NSHTTPCookie *each in cookieStorage.cookies) {
         [cookieStorage deleteCookie:each];
     }
+    
+    MainViewController *mainViewController = [[MainViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)customizeNavigationItem

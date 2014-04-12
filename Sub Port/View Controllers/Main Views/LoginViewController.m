@@ -43,48 +43,15 @@
 }
 
 - (IBAction)loginComplete:(id)sender {
-    _user = [[VerifiedUser alloc] init];
-    [_user setEmail:[_emailField text]];
-    [_user setPassword:[_passwordField text]];
+    [[VerifiedUser sharedUser] setEmail:[_emailField text]];
+    [[VerifiedUser sharedUser] setPassword:[_passwordField text]];
     
     [self postUserInformationToServer];
 }
 
-- (IBAction)logout:(id)sender {
-    NSString *baseLogoutURL = @"http://subportinc.herokuapp.com/api/v1/sessions/?auth_token=";
-    
-    NSString *fullLogoutURL = [baseLogoutURL stringByAppendingString:[_user authToken]];
-    
-    NSURL *url = [NSURL URLWithString:fullLogoutURL];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"DELETE"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
-    NSURLResponse *response;
-    NSError *err;
-    
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
-    
-    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-    NSLog(@"Log Out Response: %@", responseString);
-
-    [_user setEmail:nil];
-    [_user setPassword:nil];
-    [_user setAuthToken:nil];
-    
-    //fix log out to completely delete user and auth token!
-    
-    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (NSHTTPCookie *each in cookieStorage.cookies) {
-        [cookieStorage deleteCookie:each];
-    }
-}
-
 -(void)postUserInformationToServer
 {
-    NSDictionary *inputData = @{@"user":@{@"email":[_user email], @"password":[_user password]}};
+    NSDictionary *inputData = @{@"user":@{@"email":[[VerifiedUser sharedUser] email], @"password":[[VerifiedUser sharedUser] password]}};
     
     NSError *error = nil;
     NSData *jsonInputData = [NSJSONSerialization dataWithJSONObject:inputData options:NSJSONWritingPrettyPrinted error:&error];
@@ -118,11 +85,13 @@
     
     if([responseDictionary valueForKey:@"success"]) {
         NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
-        [_user setAuthToken:[dataDict objectForKey:@"auth_token"]];
-        NSLog(@"Auth Token: %@", [_user authToken]);
-        
+        [[VerifiedUser sharedUser] setAuthToken:[dataDict objectForKey:@"auth_token"]];
+        NSLog(@"Auth Token: %@", [[VerifiedUser sharedUser] authToken]);
+
         SUBMainTableViewController *mainViewController = [[SUBMainTableViewController alloc] init];
-        [[self navigationController] pushViewController:mainViewController animated:YES];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+        
+        [self presentViewController:navController animated:YES completion:nil];
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];

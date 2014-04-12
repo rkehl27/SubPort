@@ -30,9 +30,11 @@
 		BF69871C18BA82D00004E31F /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF69871A18BA82D00004E31F /* MainViewController.xib */; };
 		BF69871F18BA850C0004E31F /* VerifiedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BF69871E18BA850C0004E31F /* VerifiedUser.m */; };
 		BF7A776718D3AEA60035C267 /* WebServiceURLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7A776618D3AEA60035C267 /* WebServiceURLBuilder.m */; };
-		BF7A776A18D3B1100035C267 /* LoginWebServiceOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7A776918D3B1100035C267 /* LoginWebServiceOperation.m */; };
 		BF9FB23218E9055700B81140 /* CreateAccountTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9FB23118E9055700B81140 /* CreateAccountTableViewController.m */; };
 		BF9FB27618E9350200B81140 /* FormFieldRow.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9FB27518E9350200B81140 /* FormFieldRow.m */; };
+		BFB04C6218F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04C6118F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m */; };
+		BFB04C6518F8B89500B28EC8 /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04C6418F8B89500B28EC8 /* Provider.m */; };
+		BFB04C8718F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04C8618F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,12 +82,16 @@
 		BF69871E18BA850C0004E31F /* VerifiedUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifiedUser.m; sourceTree = "<group>"; };
 		BF7A776518D3AEA60035C267 /* WebServiceURLBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceURLBuilder.h; sourceTree = "<group>"; };
 		BF7A776618D3AEA60035C267 /* WebServiceURLBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceURLBuilder.m; sourceTree = "<group>"; };
-		BF7A776818D3B1100035C267 /* LoginWebServiceOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWebServiceOperation.h; sourceTree = "<group>"; };
-		BF7A776918D3B1100035C267 /* LoginWebServiceOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWebServiceOperation.m; sourceTree = "<group>"; };
 		BF9FB23018E9055700B81140 /* CreateAccountTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountTableViewController.h; sourceTree = "<group>"; };
 		BF9FB23118E9055700B81140 /* CreateAccountTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountTableViewController.m; sourceTree = "<group>"; };
 		BF9FB27418E9350200B81140 /* FormFieldRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormFieldRow.h; sourceTree = "<group>"; };
 		BF9FB27518E9350200B81140 /* FormFieldRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormFieldRow.m; sourceTree = "<group>"; };
+		BFB04C6018F8B84400B28EC8 /* SUBSelectProvidersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBSelectProvidersTableViewController.h; sourceTree = "<group>"; };
+		BFB04C6118F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBSelectProvidersTableViewController.m; sourceTree = "<group>"; };
+		BFB04C6318F8B89500B28EC8 /* Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Provider.h; sourceTree = "<group>"; };
+		BFB04C6418F8B89500B28EC8 /* Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Provider.m; sourceTree = "<group>"; };
+		BFB04C8518F8D0C700B28EC8 /* SUBProviderDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBProviderDetailTableViewController.h; sourceTree = "<group>"; };
+		BFB04C8618F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBProviderDetailTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +156,10 @@
 				56B7885F18F7584100E0022D /* SUBSettingsViewController.h */,
 				56B7886018F7584100E0022D /* SUBSettingsViewController.m */,
 				56B7886118F7584100E0022D /* SUBSettingsViewController.xib */,
+				BFB04C6018F8B84400B28EC8 /* SUBSelectProvidersTableViewController.h */,
+				BFB04C6118F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m */,
+				BFB04C8518F8D0C700B28EC8 /* SUBProviderDetailTableViewController.h */,
+				BFB04C8618F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m */,
 			);
 			path = "Subscriber Views";
 			sourceTree = "<group>";
@@ -204,6 +214,8 @@
 				BF6986E418B9D2E80004E31F /* AppDelegate.m */,
 				BF69871D18BA850C0004E31F /* VerifiedUser.h */,
 				BF69871E18BA850C0004E31F /* VerifiedUser.m */,
+				BFB04C6318F8B89500B28EC8 /* Provider.h */,
+				BFB04C6418F8B89500B28EC8 /* Provider.m */,
 				BF7A776418D3ADEC0035C267 /* Networking */,
 				BF69871218B9D97A0004E31F /* View Controllers */,
 				BF061B5D18E78923005B1246 /* Table View Components */,
@@ -258,8 +270,6 @@
 			children = (
 				BF7A776518D3AEA60035C267 /* WebServiceURLBuilder.h */,
 				BF7A776618D3AEA60035C267 /* WebServiceURLBuilder.m */,
-				BF7A776818D3B1100035C267 /* LoginWebServiceOperation.h */,
-				BF7A776918D3B1100035C267 /* LoginWebServiceOperation.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -371,9 +381,11 @@
 				BF9FB27618E9350200B81140 /* FormFieldRow.m in Sources */,
 				BF6986E518B9D2E80004E31F /* AppDelegate.m in Sources */,
 				BF061B6118E7893F005B1246 /* FormFieldTableViewCell.m in Sources */,
+				BFB04C6218F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m in Sources */,
+				BFB04C8718F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m in Sources */,
 				BF6986E118B9D2E80004E31F /* main.m in Sources */,
+				BFB04C6518F8B89500B28EC8 /* Provider.m in Sources */,
 				BF69871618BA82B90004E31F /* LoginViewController.m in Sources */,
-				BF7A776A18D3B1100035C267 /* LoginWebServiceOperation.m in Sources */,
 				BF69871B18BA82D00004E31F /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

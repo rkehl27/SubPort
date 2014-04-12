@@ -7,30 +7,62 @@
 //
 
 #import "WebServiceURLBuilder.h"
+#import "VerifiedUser.h"
 
 @implementation WebServiceURLBuilder
 
-+ (NSMutableURLRequest *)URLRequestForURL:(NSURL *)url
++ (NSMutableURLRequest *)getRequestForRouteAppendix:(NSString *)routeAppendix
 {
-    return [NSMutableURLRequest requestWithURL:url];
-}
-
-+ (NSMutableURLRequest *)URLRequestForURL:(NSURL *)url JSONToPost:(NSData *)json
-{
-    return [self URLRequestForURL:url dataToPost:json contentType:@"application/json"];
-}
-
-+ (NSMutableURLRequest *)URLRequestForURL:(NSURL *)url dataToPost:(NSData *)dataToPost contentType:(NSString *)contentType
-{
-    return [self mutableURLRequestForURL:url dataToPost:dataToPost contentType:contentType];
-}
-
-+ (NSMutableURLRequest *)mutableURLRequestForURL:(NSURL *)url dataToPost:(NSData *)dataToPost contentType:(NSString *)contentType
-{
+    NSString *baseURL = @"http://subportinc.herokuapp.com/api/v1/{routeAppendix}/?auth_token=";
+    baseURL = [baseURL stringByReplacingOccurrencesOfString:@"{routeAppendix}" withString:routeAppendix];
+    NSString *fullURL = [baseURL stringByAppendingString:[[VerifiedUser sharedUser] authToken]];
+    
+    NSURL *url = [NSURL URLWithString:fullURL];
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    return request;
+}
+
++ (NSMutableURLRequest *)postRequestWithDictionary:(NSDictionary *)postDictionary forRouteAppendix:(NSString *)routeAppendix
+{
+    NSError *error = nil;
+    NSData *jsonInputData = [NSJSONSerialization dataWithJSONObject:postDictionary options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSString *baseURL = @"http://subportinc.herokuapp.com/api/v1/{routeAppendix}/?auth_token=";
+    baseURL = [baseURL stringByReplacingOccurrencesOfString:@"{routeAppendix}" withString:routeAppendix];
+    NSString *fullURL = [baseURL stringByAppendingString:[[VerifiedUser sharedUser] authToken]];
+    
+    NSURL *url = [NSURL URLWithString:fullURL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
     [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:dataToPost];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setHTTPBody:jsonInputData];
+    
+    return request;
+}
+
++ (NSMutableURLRequest *)deleteRequestForRouteAppendix:(NSString *)routeAppendix
+{
+    NSString *baseURL = @"http://subportinc.herokuapp.com/api/v1/{routeAppendix}/?auth_token=";
+    baseURL = [baseURL stringByReplacingOccurrencesOfString:@"{routeAppendix}" withString:routeAppendix];
+    NSString *fullURL = [baseURL stringByAppendingString:[[VerifiedUser sharedUser] authToken]];
+    
+    NSURL *url = [NSURL URLWithString:fullURL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    [request setHTTPMethod:@"DELETE"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
     return request;
 }
 
