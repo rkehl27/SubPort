@@ -10,28 +10,22 @@
 #import "WebServiceURLBuilder.h"
 #import "DetailRow.h"
 #import "DetailTableViewCell.h"
-#import "PickerRow.h"
-#import "PickerTableViewCell.h"
 
-@interface SUBProviderDetailTableViewController ()<UIPickerViewDelegate, UIPickerViewDataSource> {
+#import "SubscriptionType.h"
+
+@interface SUBProviderDetailTableViewController () {
     Provider *_provider;
     NSString *_contentArea;
     NSString *_deliveryMode;
     NSArray *_subscriptionTypes;
+    SubscriptionType *_selectedSubType;
     NSString *_selectedSubscriptionType;
     
     NSMutableArray *_rows;
     NSMutableArray *_cells;
-    
-    PickerTableViewCell *_pickerCell;
 }
 
-@property (nonatomic, strong) UIPickerView *subscriptionTypePickerView;
-
 @end
-
-const CGFloat kOptimumPickerHeight = 216;
-const CGFloat kOptimumPickerWidth = 320;
 
 @implementation SUBProviderDetailTableViewController
 
@@ -41,6 +35,7 @@ const CGFloat kOptimumPickerWidth = 320;
     if (self) {
         _provider = provider;
         _rows = [[NSMutableArray alloc] init];
+        _cells = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -60,9 +55,6 @@ const CGFloat kOptimumPickerWidth = 320;
     
     UINib *nib = [UINib nibWithNibName:@"DetailTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"DetailTableViewCell"];
-    
-    UINib *nib2 = [UINib nibWithNibName:@"PickerTableViewCell" bundle:nil];
-    [[self tableView] registerNib:nib2 forCellReuseIdentifier:@"PickerTableViewCell"];
     
     [self customizeNavigationBar];
     [self fetchProviderDetails];
@@ -85,73 +77,46 @@ const CGFloat kOptimumPickerWidth = 320;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [_rows count] + 1;
+    return [_rows count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([indexPath row] < [_rows count]) {
-        DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailTableViewCell" forIndexPath:indexPath];
-        
-        DetailRow *row = [_rows objectAtIndex:[indexPath row]];
-        
-        [[cell leftLabel] setText:[row leftLabel]];
-        [[cell rightLabel] setText:[row rightLabel]];
-        
-        if ([indexPath row] < 2) {
-            [cell setUserInteractionEnabled:NO];
-        }
-        
-        [_cells addObject:cell];
-        
-        return cell;
-    } else {
-        _pickerCell = [tableView dequeueReusableCellWithIdentifier:@"PickerTableViewCell" forIndexPath:indexPath];
-        [[_pickerCell leftLabel] setText:@"TYPE"];
-        [_cells addObject:_pickerCell];
-        
-        return _pickerCell;
+    DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailTableViewCell" forIndexPath:indexPath];
+    
+    DetailRow *row = [_rows objectAtIndex:[indexPath row]];
+    
+    [[cell leftLabel] setText:[row leftLabel]];
+    [[cell rightLabel] setText:[row rightLabel]];
+    
+    if ([indexPath row] < 3) {
+        [cell setUserInteractionEnabled:NO];
     }
-
+    
+    [_cells addObject:cell];
+    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([indexPath row] == 2) {
-        NSLog(@"Selected row 2");
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if ([cell isSelected]) {
+        [cell setSelected:NO];
     }
-}
-
-#pragma mark - Picker View
-
-- (void)createPicker
-{
-    _subscriptionTypePickerView = [[UIPickerView alloc] init];
     
-    [[self subscriptionTypePickerView] setDelegate:self];
-    [[self subscriptionTypePickerView] setDataSource:self];
-    
-    [[self subscriptionTypePickerView] setBackgroundColor:[UIColor whiteColor]];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    _selectedSubscriptionType = [_subscriptionTypes objectAtIndex:row];
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return [_subscriptionTypes objectAtIndex:row];
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return [_subscriptionTypes count];
-}
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
+    if ([indexPath row] > 2) {
+        if ([_selectedSubscriptionType length] > 1) {
+            for (UITableViewCell *cell in _cells) {
+                [cell setAccessoryType:UITableViewCellAccessoryNone];
+            }
+        }
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        
+        DetailRow *selectedRow = [_rows objectAtIndex:[indexPath row]];
+        _selectedSubscriptionType = [selectedRow leftLabel];
+    }
 }
 
 #pragma mark - Connection Information
@@ -178,7 +143,7 @@ const CGFloat kOptimumPickerWidth = 320;
     
     if ([responseDictionary valueForKey:@"success"]) {
         NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
-        _subscriptionTypes = [dataDict objectForKey:@"subscriptions"];
+        NSArray *typesOfSubscriptions = [dataDict objectForKey:@"subscriptions"];
         _contentArea = [dataDict objectForKey:@"content_area"];
         _deliveryMode = [dataDict objectForKey:@"delivery_mode"];
         
@@ -191,11 +156,22 @@ const CGFloat kOptimumPickerWidth = 320;
         [deliveryModeRow setRightLabel:_deliveryMode];
         
         DetailRow *subscriptionTypeRow = [[DetailRow alloc] init];
-        [subscriptionTypeRow setLeftLabel:@"Subscription Type"];
+        [subscriptionTypeRow setLeftLabel:@"Subscription Types:"];
         
         [_rows addObject:contentAreaRow];
         [_rows addObject:deliveryModeRow];
         [_rows addObject:subscriptionTypeRow];
+        
+        for (NSDictionary *typeOfSubscriptionDict in typesOfSubscriptions) {
+            SubscriptionType *subscriptionTypeInst = [[SubscriptionType alloc] init];
+            [subscriptionTypeInst setSubscriberName:[typeOfSubscriptionDict objectForKey:@"name"]];
+            [subscriptionTypeInst setIdNumber:[typeOfSubscriptionDict objectForKey:@"id"]];
+            [subscriptionTypeInst setAssociatedProvider:_provider];
+            
+            DetailRow *typeRow = [[DetailRow alloc] init];
+            [typeRow setLeftLabel:[subscriptionTypeInst subscriberName]];
+            [_rows addObject:typeRow];
+        }
         
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -208,6 +184,9 @@ const CGFloat kOptimumPickerWidth = 320;
 - (IBAction)addProvider:(id)sender
 {
     [_provider setIsSelected:YES];
+    
+    
+    
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
@@ -228,7 +207,7 @@ const CGFloat kOptimumPickerWidth = 320;
     
     UIBarButtonItem *addProvider = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addProvider:)];
     
-    UIBarButtonItem *removeProvider = [[UIBarButtonItem alloc] initWithTitle:@"Remove" style:UIBarButtonItemStylePlain target:self action:@selector(removeProvider:)];
+    UIBarButtonItem *removeProvider = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(removeProvider:)];
     
     UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
     

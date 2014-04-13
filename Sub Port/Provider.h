@@ -12,6 +12,7 @@
 
 @property (nonatomic, readwrite) NSString *providerName;
 @property (nonatomic, readwrite) NSNumber *idNumber;
+@property (nonatomic, readwrite) NSString *subscriptionID;
 @property (nonatomic, readwrite) BOOL isSelected;
 
 @end
