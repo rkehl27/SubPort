@@ -38,6 +38,9 @@
 		BFB04CC918F8F9ED00B28EC8 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04CC718F8F9ED00B28EC8 /* DetailTableViewCell.m */; };
 		BFB04CCA18F8F9ED00B28EC8 /* DetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFB04CC818F8F9ED00B28EC8 /* DetailTableViewCell.xib */; };
 		BFB04CCD18F8FA0D00B28EC8 /* DetailRow.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04CCC18F8FA0D00B28EC8 /* DetailRow.m */; };
+		BFB70F2C18FA51E700A19302 /* PickerRow.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB70F2B18FA51E700A19302 /* PickerRow.m */; };
+		BFB70F3018FA51FF00A19302 /* PickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB70F2E18FA51FF00A19302 /* PickerTableViewCell.m */; };
+		BFB70F3118FA51FF00A19302 /* PickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFB70F2F18FA51FF00A19302 /* PickerTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +103,11 @@
 		BFB04CC818F8F9ED00B28EC8 /* DetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailTableViewCell.xib; sourceTree = "<group>"; };
 		BFB04CCB18F8FA0D00B28EC8 /* DetailRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailRow.h; sourceTree = "<group>"; };
 		BFB04CCC18F8FA0D00B28EC8 /* DetailRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailRow.m; sourceTree = "<group>"; };
+		BFB70F2A18FA51E700A19302 /* PickerRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerRow.h; sourceTree = "<group>"; };
+		BFB70F2B18FA51E700A19302 /* PickerRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerRow.m; sourceTree = "<group>"; };
+		BFB70F2D18FA51FF00A19302 /* PickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerTableViewCell.h; sourceTree = "<group>"; };
+		BFB70F2E18FA51FF00A19302 /* PickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerTableViewCell.m; sourceTree = "<group>"; };
+		BFB70F2F18FA51FF00A19302 /* PickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +193,11 @@
 				BFB04CC618F8F9ED00B28EC8 /* DetailTableViewCell.h */,
 				BFB04CC718F8F9ED00B28EC8 /* DetailTableViewCell.m */,
 				BFB04CC818F8F9ED00B28EC8 /* DetailTableViewCell.xib */,
+				BFB70F2A18FA51E700A19302 /* PickerRow.h */,
+				BFB70F2B18FA51E700A19302 /* PickerRow.m */,
+				BFB70F2D18FA51FF00A19302 /* PickerTableViewCell.h */,
+				BFB70F2E18FA51FF00A19302 /* PickerTableViewCell.m */,
+				BFB70F2F18FA51FF00A19302 /* PickerTableViewCell.xib */,
 			);
 			name = "Table View Components";
 			path = "View Controllers/Table View Components";
@@ -363,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF6986DF18B9D2E80004E31F /* InfoPlist.strings in Resources */,
+				BFB70F3118FA51FF00A19302 /* PickerTableViewCell.xib in Resources */,
 				BF6986E718B9D2E80004E31F /* Images.xcassets in Resources */,
 				56B7886318F7584100E0022D /* SUBSettingsViewController.xib in Resources */,
 				BF061B6218E7893F005B1246 /* FormFieldTableViewCell.xib in Resources */,
@@ -392,7 +406,9 @@
 				BF7A776718D3AEA60035C267 /* WebServiceURLBuilder.m in Sources */,
 				BF9FB23218E9055700B81140 /* CreateAccountTableViewController.m in Sources */,
 				56B7885E18F74F6E00E0022D /* SUBMainTableViewController.m in Sources */,
+				BFB70F3018FA51FF00A19302 /* PickerTableViewCell.m in Sources */,
 				BF69871F18BA850C0004E31F /* VerifiedUser.m in Sources */,
+				BFB70F2C18FA51E700A19302 /* PickerRow.m in Sources */,
 				BF9FB27618E9350200B81140 /* FormFieldRow.m in Sources */,
 				BFB04CC918F8F9ED00B28EC8 /* DetailTableViewCell.m in Sources */,
 				BF6986E518B9D2E80004E31F /* AppDelegate.m in Sources */,

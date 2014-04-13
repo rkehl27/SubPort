@@ -1,14 +1,14 @@
 //
-//  DetailRow.h
+//  PickerRow.h
 //  Sub Port
 //
-//  Created by School on 4/11/14.
+//  Created by School on 4/13/14.
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface DetailRow : NSObject
+@interface PickerRow : NSObject
 
 @property (nonatomic, strong, readwrite) NSString *leftLabel;
 @property (nonatomic, strong, readwrite) NSString *rightLabel;

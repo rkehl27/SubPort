@@ -39,6 +39,13 @@
     [self fetchProvidersInBackground];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[self tableView] reloadData];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -69,6 +76,12 @@
     
     Provider *providerInstance = [self providerAtIndexPath:indexPath];
     [[cell textLabel]setText:[providerInstance providerName]];
+    
+    if ([providerInstance isSelected]) {
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    } else {
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }
     
     return cell;
 }
@@ -136,8 +149,8 @@
 - (void)customizeNavigationItem
 {
     [[self navigationItem] setTitle:@"Select Providers"];
-    UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
-    [[self navigationItem] setRightBarButtonItem:rightbbi];
+//    UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
+//    [[self navigationItem] setRightBarButtonItem:rightbbi];
 }
 
 

@@ -11,20 +11,4 @@
 
 @implementation DetailRow
 
-#pragma mark - Cell Configuration
-
-- (NSString *)cellIdentifier
-{
-    return @"DetailTableViewCell";
-}
-
-- (UITableViewCell *)cellForDetailRow
-{
-    DetailTableViewCell *detailCell = [[DetailTableViewCell alloc] init];
-    [[detailCell leftLabel] setText:[self leftLabel]];
-    [[detailCell rightLabel] setText:[self rightLabel]];
-    
-    return detailCell;
-}
-
 @end

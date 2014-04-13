@@ -9,17 +9,29 @@
 #import "SUBProviderDetailTableViewController.h"
 #import "WebServiceURLBuilder.h"
 #import "DetailRow.h"
+#import "DetailTableViewCell.h"
+#import "PickerRow.h"
+#import "PickerTableViewCell.h"
 
-@interface SUBProviderDetailTableViewController () {
+@interface SUBProviderDetailTableViewController ()<UIPickerViewDelegate, UIPickerViewDataSource> {
     Provider *_provider;
     NSString *_contentArea;
     NSString *_deliveryMode;
     NSArray *_subscriptionTypes;
+    NSString *_selectedSubscriptionType;
     
     NSMutableArray *_rows;
+    NSMutableArray *_cells;
+    
+    PickerTableViewCell *_pickerCell;
 }
 
+@property (nonatomic, strong) UIPickerView *subscriptionTypePickerView;
+
 @end
+
+const CGFloat kOptimumPickerHeight = 216;
+const CGFloat kOptimumPickerWidth = 320;
 
 @implementation SUBProviderDetailTableViewController
 
@@ -45,8 +57,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UINib *nib = [UINib nibWithNibName:@"DetailTableViewCell" bundle:nil];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"DetailTableViewCell"];
+    
+    UINib *nib2 = [UINib nibWithNibName:@"PickerTableViewCell" bundle:nil];
+    [[self tableView] registerNib:nib2 forCellReuseIdentifier:@"PickerTableViewCell"];
+    
+    [self customizeNavigationBar];
     [self fetchProviderDetails];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,26 +85,73 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [_rows count];
+    return [_rows count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSString *cellIdentifier = @"cellIdentifier";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-//    }
-//    
-//    if ([indexPath row] == 2) {
-//        [[cell textLabel] setText:@"Type"];
-//    }
-//
-    DetailRow *row = [_rows objectAtIndex:[indexPath row]];
+    if ([indexPath row] < [_rows count]) {
+        DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailTableViewCell" forIndexPath:indexPath];
+        
+        DetailRow *row = [_rows objectAtIndex:[indexPath row]];
+        
+        [[cell leftLabel] setText:[row leftLabel]];
+        [[cell rightLabel] setText:[row rightLabel]];
+        
+        if ([indexPath row] < 2) {
+            [cell setUserInteractionEnabled:NO];
+        }
+        
+        [_cells addObject:cell];
+        
+        return cell;
+    } else {
+        _pickerCell = [tableView dequeueReusableCellWithIdentifier:@"PickerTableViewCell" forIndexPath:indexPath];
+        [[_pickerCell leftLabel] setText:@"TYPE"];
+        [_cells addObject:_pickerCell];
+        
+        return _pickerCell;
+    }
 
-    UITableViewCell *cell = [[row cellForDetailRow] copy];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([indexPath row] == 2) {
+        NSLog(@"Selected row 2");
+    }
+}
+
+#pragma mark - Picker View
+
+- (void)createPicker
+{
+    _subscriptionTypePickerView = [[UIPickerView alloc] init];
     
-    return cell;
+    [[self subscriptionTypePickerView] setDelegate:self];
+    [[self subscriptionTypePickerView] setDataSource:self];
+    
+    [[self subscriptionTypePickerView] setBackgroundColor:[UIColor whiteColor]];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    _selectedSubscriptionType = [_subscriptionTypes objectAtIndex:row];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [_subscriptionTypes objectAtIndex:row];
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [_subscriptionTypes count];
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
 }
 
 #pragma mark - Connection Information
@@ -125,7 +191,7 @@
         [deliveryModeRow setRightLabel:_deliveryMode];
         
         DetailRow *subscriptionTypeRow = [[DetailRow alloc] init];
-        [subscriptionTypeRow setLeftLabel:@"Type"];
+        [subscriptionTypeRow setLeftLabel:@"Subscription Type"];
         
         [_rows addObject:contentAreaRow];
         [_rows addObject:deliveryModeRow];
@@ -134,6 +200,44 @@
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
+    }
+}
+
+#pragma mark - Navigation Control
+
+- (IBAction)addProvider:(id)sender
+{
+    [_provider setIsSelected:YES];
+    [[self navigationController] popViewControllerAnimated:YES];
+}
+
+- (IBAction)removeProvider:(id)sender
+{
+    [_provider setIsSelected:NO];
+    [[self navigationController] popViewControllerAnimated:YES];
+}
+
+- (IBAction)cancel:(id)sender
+{
+    [[self navigationController] popViewControllerAnimated:YES];
+}
+
+- (void)customizeNavigationBar
+{
+    [[self navigationItem] setTitle:[_provider providerName]];
+    
+    UIBarButtonItem *addProvider = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addProvider:)];
+    
+    UIBarButtonItem *removeProvider = [[UIBarButtonItem alloc] initWithTitle:@"Remove" style:UIBarButtonItemStylePlain target:self action:@selector(removeProvider:)];
+    
+    UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+    
+    [[self navigationItem] setLeftBarButtonItem:cancel];
+    
+    if ([_provider isSelected]) {
+        [[self navigationItem] setRightBarButtonItem:removeProvider];
+    } else {
+        [[self navigationItem] setRightBarButtonItem:addProvider];
     }
 }
 
