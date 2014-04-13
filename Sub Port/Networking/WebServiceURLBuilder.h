@@ -18,5 +18,8 @@
 
 + (NSMutableURLRequest *)deleteRequestForRouteAppendix:(NSString *)routeAppendix;
 
++ (NSMutableURLRequest *)deleteRequestForRouteAppendix:(NSString *)routeAppendix withDictionary:(NSDictionary *)deleteDictionary;
+
++ (NSMutableURLRequest *)putRequestForRouteAppendix:(NSString *)routeAppendix withDictionary:(NSDictionary *)putDictionary;
 
 @end

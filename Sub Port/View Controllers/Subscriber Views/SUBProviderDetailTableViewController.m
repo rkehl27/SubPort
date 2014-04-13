@@ -17,9 +17,8 @@
     Provider *_provider;
     NSString *_contentArea;
     NSString *_deliveryMode;
-    NSArray *_subscriptionTypes;
+    NSMutableArray *_subscriptionTypes;
     SubscriptionType *_selectedSubType;
-    NSString *_selectedSubscriptionType;
     
     NSMutableArray *_rows;
     NSMutableArray *_cells;
@@ -34,8 +33,10 @@
     self = [self initWithStyle:UITableViewStyleGrouped];
     if (self) {
         _provider = provider;
+        _selectedSubType = [_provider subType];
         _rows = [[NSMutableArray alloc] init];
         _cells = [[NSMutableArray alloc] init];
+        _subscriptionTypes = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -95,6 +96,12 @@
     
     [_cells addObject:cell];
     
+    if ([indexPath row] > 2) {
+        if ([[row leftLabel]isEqualToString:[_selectedSubType subscriberName]]) {
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        }
+    }
+    
     return cell;
 }
 
@@ -107,7 +114,7 @@
     }
     
     if ([indexPath row] > 2) {
-        if ([_selectedSubscriptionType length] > 1) {
+        if ([[_selectedSubType subscriberName] length] > 1) {
             for (UITableViewCell *cell in _cells) {
                 [cell setAccessoryType:UITableViewCellAccessoryNone];
             }
@@ -115,7 +122,12 @@
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
         
         DetailRow *selectedRow = [_rows objectAtIndex:[indexPath row]];
-        _selectedSubscriptionType = [selectedRow leftLabel];
+        
+        for (SubscriptionType *subType in _subscriptionTypes) {
+            if ([[selectedRow leftLabel] isEqualToString:[subType subscriberName]]) {
+                _selectedSubType = subType;
+            }
+        }
     }
 }
 
@@ -168,6 +180,8 @@
             [subscriptionTypeInst setIdNumber:[typeOfSubscriptionDict objectForKey:@"id"]];
             [subscriptionTypeInst setAssociatedProvider:_provider];
             
+            [_subscriptionTypes addObject:subscriptionTypeInst];
+            
             DetailRow *typeRow = [[DetailRow alloc] init];
             [typeRow setLeftLabel:[subscriptionTypeInst subscriberName]];
             [_rows addObject:typeRow];
@@ -179,13 +193,63 @@
     }
 }
 
+//TODO: Fix this put and delete providers from users
+- (void)addProviderToUser
+{
+    NSDictionary *inputData = @{@"provider_id":[_provider idNumber], @"sub_id":[[_provider subType] idNumber]};
+    
+    NSMutableURLRequest *request = [WebServiceURLBuilder putRequestForRouteAppendix:@"subscriptions" withDictionary:inputData];
+    
+    NSURLResponse *response;
+    NSError *err;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    [self putConnectionDidFinishWithData:responseData orError:err];
+}
+
+- (void)putConnectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
+{
+    NSError *localError;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
+
+    NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+    
+    NSLog(@"Put request Completed");
+}
+
+- (void)removeProviderFromUser
+{
+    NSDictionary *inputData = @{@"provider_id":[_provider idNumber]};
+    
+    NSMutableURLRequest *request = [WebServiceURLBuilder deleteRequestForRouteAppendix:@"subscriptions" withDictionary:inputData];
+    
+    NSURLResponse *response;
+    NSError *err;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    [self deleteConnectionDidFinishWithData:responseData orError:err];
+}
+
+- (void)deleteConnectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
+{
+    NSError *localError;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
+    
+    NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+    
+    NSLog(@"Delete request Completed");
+}
+
 #pragma mark - Navigation Control
 
 - (IBAction)addProvider:(id)sender
 {
     [_provider setIsSelected:YES];
+    [_provider setSubType:_selectedSubType];
     
-    
+    [self addProviderToUser];
     
     [[self navigationController] popViewControllerAnimated:YES];
 }
@@ -193,6 +257,10 @@
 - (IBAction)removeProvider:(id)sender
 {
     [_provider setIsSelected:NO];
+    
+    [self removeProviderFromUser];
+    
+    [_provider setSubType:nil];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 

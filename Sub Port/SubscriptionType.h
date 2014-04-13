@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "Provider.h"
 
+@class Provider;
+
 @interface SubscriptionType : NSObject
 
 @property (nonatomic, readwrite) NSString *subscriberName;
