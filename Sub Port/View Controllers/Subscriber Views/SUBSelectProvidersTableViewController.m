@@ -15,6 +15,7 @@
 
 @interface SUBSelectProvidersTableViewController ()<UIAlertViewDelegate> {
     NSMutableArray *_providers;
+    NSMutableArray *_myProviders;
 }
 
 @end
@@ -26,6 +27,7 @@
     self = [super initWithStyle:style];
     if (self) {
         _providers = [[NSMutableArray alloc] init];
+        _myProviders = [[NSMutableArray alloc] init];
         [self customizeNavigationItem];
         // Custom initialization
     }
@@ -130,12 +132,35 @@
             [_providers addObject:currentProvider];
         }
         
+        NSDictionary *myProviders = [dataDict objectForKey:@"my_providers"];
+        
+        for (NSDictionary *providerDictionary in myProviders) {
+            Provider *currentProvider = [[Provider alloc] init];
+            [currentProvider setIdNumber:[providerDictionary objectForKey:@"id"]];
+            [currentProvider setProviderName:[providerDictionary objectForKey:@"name"]];
+            [currentProvider setIsSelected:YES];
+            [_myProviders addObject:currentProvider];
+        }
+        
+        [self synchronizeMyProvidersListWithProvidersList];
+        
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
     }
     
     [[self tableView] reloadData];
+}
+
+- (void)synchronizeMyProvidersListWithProvidersList
+{
+    for (Provider *currProv in _providers) {
+        for (Provider *myProv in _myProviders) {
+            if ([currProv idNumber] == [myProv idNumber]) {
+                [currProv setIsSelected:YES];
+            }
+        }
+    }
 }
 
 #pragma mark - Navigation Information

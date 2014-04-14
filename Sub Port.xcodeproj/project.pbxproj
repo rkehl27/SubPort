@@ -32,6 +32,10 @@
 		BF7A776718D3AEA60035C267 /* WebServiceURLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7A776618D3AEA60035C267 /* WebServiceURLBuilder.m */; };
 		BF9FB23218E9055700B81140 /* CreateAccountTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9FB23118E9055700B81140 /* CreateAccountTableViewController.m */; };
 		BF9FB27618E9350200B81140 /* FormFieldRow.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9FB27518E9350200B81140 /* FormFieldRow.m */; };
+		BFAC495C18FB5B43007F3862 /* ADMMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC495B18FB5B43007F3862 /* ADMMainTableViewController.m */; };
+		BFAC495F18FB5B59007F3862 /* CMAMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC495E18FB5B59007F3862 /* CMAMainTableViewController.m */; };
+		BFAC496618FB6A90007F3862 /* UNISettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC496418FB6A90007F3862 /* UNISettingsViewController.m */; };
+		BFAC496718FB6A90007F3862 /* UNISettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFAC496518FB6A90007F3862 /* UNISettingsViewController.xib */; };
 		BFB04C6218F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04C6118F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m */; };
 		BFB04C6518F8B89500B28EC8 /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04C6418F8B89500B28EC8 /* Provider.m */; };
 		BFB04C8718F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04C8618F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m */; };
@@ -90,6 +94,13 @@
 		BF9FB23118E9055700B81140 /* CreateAccountTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountTableViewController.m; sourceTree = "<group>"; };
 		BF9FB27418E9350200B81140 /* FormFieldRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormFieldRow.h; sourceTree = "<group>"; };
 		BF9FB27518E9350200B81140 /* FormFieldRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormFieldRow.m; sourceTree = "<group>"; };
+		BFAC495A18FB5B43007F3862 /* ADMMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMMainTableViewController.h; sourceTree = "<group>"; };
+		BFAC495B18FB5B43007F3862 /* ADMMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMMainTableViewController.m; sourceTree = "<group>"; };
+		BFAC495D18FB5B59007F3862 /* CMAMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMAMainTableViewController.h; sourceTree = "<group>"; };
+		BFAC495E18FB5B59007F3862 /* CMAMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMAMainTableViewController.m; sourceTree = "<group>"; };
+		BFAC496318FB6A90007F3862 /* UNISettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNISettingsViewController.h; sourceTree = "<group>"; };
+		BFAC496418FB6A90007F3862 /* UNISettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNISettingsViewController.m; sourceTree = "<group>"; };
+		BFAC496518FB6A90007F3862 /* UNISettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UNISettingsViewController.xib; sourceTree = "<group>"; };
 		BFB04C6018F8B84400B28EC8 /* SUBSelectProvidersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBSelectProvidersTableViewController.h; sourceTree = "<group>"; };
 		BFB04C6118F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBSelectProvidersTableViewController.m; sourceTree = "<group>"; };
 		BFB04C6318F8B89500B28EC8 /* Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Provider.h; sourceTree = "<group>"; };
@@ -140,23 +151,12 @@
 				BF69871818BA82D00004E31F /* MainViewController.h */,
 				BF69871918BA82D00004E31F /* MainViewController.m */,
 				BF69871A18BA82D00004E31F /* MainViewController.xib */,
+				BFAC496318FB6A90007F3862 /* UNISettingsViewController.h */,
+				BFAC496418FB6A90007F3862 /* UNISettingsViewController.m */,
+				BFAC496518FB6A90007F3862 /* UNISettingsViewController.xib */,
 			);
 			name = "Universal Views";
 			path = "Main Views";
-			sourceTree = "<group>";
-		};
-		56B7885918F74F4400E0022D /* Admin Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Admin Views";
-			sourceTree = "<group>";
-		};
-		56B7885A18F74F4400E0022D /* Content Manager Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Content Manager Views";
 			sourceTree = "<group>";
 		};
 		56B7885B18F74F4400E0022D /* Subscriber Views */ = {
@@ -276,9 +276,9 @@
 			isa = PBXGroup;
 			children = (
 				56B7885818F74BF700E0022D /* Universal Views */,
-				56B7885918F74F4400E0022D /* Admin Views */,
-				56B7885A18F74F4400E0022D /* Content Manager Views */,
 				56B7885B18F74F4400E0022D /* Subscriber Views */,
+				BFAC495818FB5B12007F3862 /* Admin Views */,
+				BFAC495918FB5B2D007F3862 /* Content Manager Views */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -290,6 +290,24 @@
 				BF7A776618D3AEA60035C267 /* WebServiceURLBuilder.m */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		BFAC495818FB5B12007F3862 /* Admin Views */ = {
+			isa = PBXGroup;
+			children = (
+				BFAC495A18FB5B43007F3862 /* ADMMainTableViewController.h */,
+				BFAC495B18FB5B43007F3862 /* ADMMainTableViewController.m */,
+			);
+			path = "Admin Views";
+			sourceTree = "<group>";
+		};
+		BFAC495918FB5B2D007F3862 /* Content Manager Views */ = {
+			isa = PBXGroup;
+			children = (
+				BFAC495D18FB5B59007F3862 /* CMAMainTableViewController.h */,
+				BFAC495E18FB5B59007F3862 /* CMAMainTableViewController.m */,
+			);
+			path = "Content Manager Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,6 +387,7 @@
 			files = (
 				BF6986DF18B9D2E80004E31F /* InfoPlist.strings in Resources */,
 				BF6986E718B9D2E80004E31F /* Images.xcassets in Resources */,
+				BFAC496718FB6A90007F3862 /* UNISettingsViewController.xib in Resources */,
 				56B7886318F7584100E0022D /* SUBSettingsViewController.xib in Resources */,
 				BF061B6218E7893F005B1246 /* FormFieldTableViewCell.xib in Resources */,
 				BF69871718BA82B90004E31F /* LoginViewController.xib in Resources */,
@@ -393,8 +412,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				56B7886218F7584100E0022D /* SUBSettingsViewController.m in Sources */,
+				BFAC495C18FB5B43007F3862 /* ADMMainTableViewController.m in Sources */,
 				BFB04CCD18F8FA0D00B28EC8 /* DetailRow.m in Sources */,
 				BF7A776718D3AEA60035C267 /* WebServiceURLBuilder.m in Sources */,
+				BFAC495F18FB5B59007F3862 /* CMAMainTableViewController.m in Sources */,
 				BF9FB23218E9055700B81140 /* CreateAccountTableViewController.m in Sources */,
 				56B7885E18F74F6E00E0022D /* SUBMainTableViewController.m in Sources */,
 				BF69871F18BA850C0004E31F /* VerifiedUser.m in Sources */,
@@ -408,6 +429,7 @@
 				BF6986E118B9D2E80004E31F /* main.m in Sources */,
 				BFB04C6518F8B89500B28EC8 /* Provider.m in Sources */,
 				BF69871618BA82B90004E31F /* LoginViewController.m in Sources */,
+				BFAC496618FB6A90007F3862 /* UNISettingsViewController.m in Sources */,
 				BF69871B18BA82D00004E31F /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

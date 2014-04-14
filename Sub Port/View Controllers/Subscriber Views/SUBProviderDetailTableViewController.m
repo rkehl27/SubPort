@@ -13,7 +13,7 @@
 
 #import "SubscriptionType.h"
 
-@interface SUBProviderDetailTableViewController () {
+@interface SUBProviderDetailTableViewController ()<UIAlertViewDelegate> {
     Provider *_provider;
     NSString *_contentArea;
     NSString *_deliveryMode;
@@ -57,8 +57,8 @@
     UINib *nib = [UINib nibWithNibName:@"DetailTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"DetailTableViewCell"];
     
-    [self customizeNavigationBar];
     [self fetchProviderDetails];
+    [self customizeNavigationBar];
 }
 
 - (void)didReceiveMemoryWarning
@@ -187,18 +187,28 @@
             [_rows addObject:typeRow];
         }
         
+        [self synchronizeSubscriptionTypesWithSelectedSubscription:[dataDict objectForKey:@"sub_id"]];
+        
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
     }
 }
 
-//TODO: Fix this put and delete providers from users
+- (void)synchronizeSubscriptionTypesWithSelectedSubscription:(NSNumber *)idNumber
+{
+    for (SubscriptionType *subType in _subscriptionTypes) {
+        if ([subType idNumber] == idNumber) {
+            _selectedSubType = subType;
+        }
+    }
+}
+
 - (void)addProviderToUser
 {
     NSDictionary *inputData = @{@"provider_id":[_provider idNumber], @"sub_id":[[_provider subType] idNumber]};
     
-    NSMutableURLRequest *request = [WebServiceURLBuilder putRequestForRouteAppendix:@"subscriptions" withDictionary:inputData];
+    NSMutableURLRequest *request = [WebServiceURLBuilder putRequestForRouteAppendix:@"sub_providers" withDictionary:inputData];
     
     NSURLResponse *response;
     NSError *err;
@@ -220,9 +230,9 @@
 
 - (void)removeProviderFromUser
 {
-    NSDictionary *inputData = @{@"provider_id":[_provider idNumber]};
+    NSDictionary *inputData = @{@"id":[_provider idNumber]};
     
-    NSMutableURLRequest *request = [WebServiceURLBuilder deleteRequestForRouteAppendix:@"subscriptions" withDictionary:inputData];
+    NSMutableURLRequest *request = [WebServiceURLBuilder deleteRequestForRouteAppendix:@"sub_providers" withDictionary:inputData];
     
     NSURLResponse *response;
     NSError *err;
@@ -246,12 +256,16 @@
 
 - (IBAction)addProvider:(id)sender
 {
-    [_provider setIsSelected:YES];
     [_provider setSubType:_selectedSubType];
     
-    [self addProviderToUser];
-    
-    [[self navigationController] popViewControllerAnimated:YES];
+    if ([_selectedSubType idNumber] != nil) {
+        [_provider setIsSelected:YES];
+        [self addProviderToUser];
+        [[self navigationController] popViewControllerAnimated:YES];
+    } else {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You must select a subscription type" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [av show];
+    }
 }
 
 - (IBAction)removeProvider:(id)sender
@@ -285,6 +299,10 @@
         [[self navigationItem] setRightBarButtonItem:removeProvider];
     } else {
         [[self navigationItem] setRightBarButtonItem:addProvider];
+    }
+
+    if ([_subscriptionTypes count] == 0) {
+        [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
     }
 }
 
