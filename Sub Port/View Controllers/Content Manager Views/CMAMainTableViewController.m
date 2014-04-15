@@ -7,6 +7,8 @@
 //
 
 #import "CMAMainTableViewController.h"
+#import "CMAContentListTableViewController.h"
+#import "CMAEditContentDetailsViewController.h"
 #import "UNISettingsViewController.h"
 #import "Provider.h"
 #import "WebServiceURLBuilder.h"
@@ -80,7 +82,11 @@
 {
     Provider *selectedProvider = [self providerAtIndexPath:indexPath];
     
+    CMAContentListTableViewController *contentList = [[CMAContentListTableViewController alloc] initWithProvider:selectedProvider];
     
+//    CMAEditContentDetailsViewController *contentList = [[CMAEditContentDetailsViewController alloc] init];
+    
+    [[self navigationController] pushViewController:contentList animated:YES];
 }
 
 #pragma mark - Connection Information

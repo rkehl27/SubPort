@@ -72,7 +72,7 @@
     
     if ([responseDictionary valueForKey:@"success"]) {
         NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
-        NSDictionary *contentDict = [dataDict objectForKey:@"content_elements"];
+        NSDictionary *contentDict = [dataDict objectForKey:@"content_element"];
         
         NSString *urlString = [contentDict objectForKey:@"url"];
         
@@ -80,8 +80,8 @@
         [[self webView] setScalesPageToFit:YES];
         [[self webView] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
     } else {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:[localError localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [av show];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
     }
 }
 

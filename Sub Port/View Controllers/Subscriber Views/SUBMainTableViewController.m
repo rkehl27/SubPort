@@ -12,7 +12,7 @@
 #import "WebServiceURLBuilder.h"
 #import "ContentElement.h"
 
-@interface SUBMainTableViewController () {
+@interface SUBMainTableViewController ()<UIAlertViewDelegate> {
     NSMutableArray *_contentList;
 }
 
@@ -111,6 +111,9 @@
             
             [_contentList addObject:currElement];
         }
+    }else {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [av show];
     }
     
     [[self tableView] reloadData];

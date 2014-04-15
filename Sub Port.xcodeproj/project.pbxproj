@@ -48,6 +48,8 @@
 		BFB04CCA18F8F9ED00B28EC8 /* DetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFB04CC818F8F9ED00B28EC8 /* DetailTableViewCell.xib */; };
 		BFB04CCD18F8FA0D00B28EC8 /* DetailRow.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04CCC18F8FA0D00B28EC8 /* DetailRow.m */; };
 		BFB70F7218FA6D9B00A19302 /* SubscriptionType.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB70F7118FA6D9B00A19302 /* SubscriptionType.m */; };
+		BFFB40B218FDDCA500F99243 /* CMAEditContentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFFB40B018FDDCA500F99243 /* CMAEditContentDetailsViewController.m */; };
+		BFFB40B318FDDCA500F99243 /* CMAEditContentDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFFB40B118FDDCA500F99243 /* CMAEditContentDetailsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +130,9 @@
 		BFB04CCC18F8FA0D00B28EC8 /* DetailRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailRow.m; sourceTree = "<group>"; };
 		BFB70F7018FA6D9B00A19302 /* SubscriptionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionType.h; sourceTree = "<group>"; };
 		BFB70F7118FA6D9B00A19302 /* SubscriptionType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionType.m; sourceTree = "<group>"; };
+		BFFB40AF18FDDCA500F99243 /* CMAEditContentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMAEditContentDetailsViewController.h; sourceTree = "<group>"; };
+		BFFB40B018FDDCA500F99243 /* CMAEditContentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMAEditContentDetailsViewController.m; sourceTree = "<group>"; };
+		BFFB40B118FDDCA500F99243 /* CMAEditContentDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMAEditContentDetailsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +334,9 @@
 				BFAC495E18FB5B59007F3862 /* CMAMainTableViewController.m */,
 				BFAF6B9D18FCEB470004FCE1 /* CMAContentListTableViewController.h */,
 				BFAF6B9E18FCEB470004FCE1 /* CMAContentListTableViewController.m */,
+				BFFB40AF18FDDCA500F99243 /* CMAEditContentDetailsViewController.h */,
+				BFFB40B018FDDCA500F99243 /* CMAEditContentDetailsViewController.m */,
+				BFFB40B118FDDCA500F99243 /* CMAEditContentDetailsViewController.xib */,
 			);
 			path = "Content Manager Views";
 			sourceTree = "<group>";
@@ -411,6 +419,7 @@
 				BFAF6B9C18FCDB860004FCE1 /* SUBContentDetailsViewController.xib in Resources */,
 				BF6986DF18B9D2E80004E31F /* InfoPlist.strings in Resources */,
 				BF6986E718B9D2E80004E31F /* Images.xcassets in Resources */,
+				BFFB40B318FDDCA500F99243 /* CMAEditContentDetailsViewController.xib in Resources */,
 				BFAC496718FB6A90007F3862 /* UNISettingsViewController.xib in Resources */,
 				56B7886318F7584100E0022D /* SUBSettingsViewController.xib in Resources */,
 				BF061B6218E7893F005B1246 /* FormFieldTableViewCell.xib in Resources */,
@@ -459,6 +468,7 @@
 				BF69871618BA82B90004E31F /* LoginViewController.m in Sources */,
 				BFAC496618FB6A90007F3862 /* UNISettingsViewController.m in Sources */,
 				BF69871B18BA82D00004E31F /* MainViewController.m in Sources */,
+				BFFB40B218FDDCA500F99243 /* CMAEditContentDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

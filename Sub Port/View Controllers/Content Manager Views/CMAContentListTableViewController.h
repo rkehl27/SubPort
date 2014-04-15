@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Provider.h"
 
 @interface CMAContentListTableViewController : UITableViewController
 
+- (id)initWithProvider:(Provider *)provider;
 
 @end
