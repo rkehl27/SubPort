@@ -7,8 +7,14 @@
 //
 
 #import "ADMMainTableViewController.h"
+#import "ADMProvidersTableViewController.h"
+#import "UNISettingsViewController.h"
+#import "DetailRow.h"
+#import "DetailTableViewCell.h"
 
-@interface ADMMainTableViewController ()
+@interface ADMMainTableViewController () {
+    NSMutableArray *_rows;
+}
 
 @end
 
@@ -16,9 +22,10 @@
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithStyle:style];
+    self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         // Custom initialization
+        _rows = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -28,11 +35,10 @@
     [super viewDidLoad];
     [self customizeNavigationBar];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    [self loadTableModel];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UINib *nib = [UINib nibWithNibName:@"DetailTableViewCell" bundle:nil];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"DetailTableViewCell"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,80 +51,85 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [_rows count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailTableViewCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    DetailRow *row = [_rows objectAtIndex:[indexPath row]];
+    
+    [[cell leftLabel] setText:[row leftLabel]];
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    UITableViewController *view;
+    
+    switch ([indexPath row]) {
+        case 0:
+            break;
+            
+        case 1:
+            break;
+            
+        case 2:
+            break;
+            
+        case 3:
+            view = [[ADMProvidersTableViewController alloc] init];
+            [[self navigationController] pushViewController:view animated:YES];
+            break;
+            
+        default:
+            break;
+    }
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)loadTableModel
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    DetailRow *formatsRow = [[DetailRow alloc] init];
+    [formatsRow setLeftLabel:@"Formats"];
+    
+    DetailRow *contentAreasRow = [[DetailRow alloc] init];
+    [contentAreasRow setLeftLabel:@"Content Areas"];
+    
+    DetailRow *deliveryModesRow = [[DetailRow alloc] init];
+    [deliveryModesRow setLeftLabel:@"Delivery Modes"];
+    
+    DetailRow *providersRow = [[DetailRow alloc] init];
+    [providersRow setLeftLabel:@"Providers"];
+    
+    [_rows addObject:formatsRow];
+    [_rows addObject:contentAreasRow];
+    [_rows addObject:deliveryModesRow];
+    [_rows addObject:providersRow];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+#pragma mark - Configure Navigation Controller
+
+- (IBAction)settings:(id)sender
 {
+    UNISettingsViewController *settingsView = [[UNISettingsViewController alloc] init];
+    [[self navigationController] pushViewController:settingsView animated:YES];
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void)customizeNavigationBar
 {
+    UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
+    [[self navigationItem] setRightBarButtonItem:rightbbi];
     [[self navigationItem] setTitle:@"Admin"];
 }
 

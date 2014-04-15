@@ -39,16 +39,20 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)changeProviders:(id)sender
 {
     SUBSelectProvidersTableViewController *selectProvidersViewController = [[SUBSelectProvidersTableViewController alloc] init];
     [[self navigationController] pushViewController:selectProvidersViewController animated:YES];
 }
+
 - (IBAction)updateAccount:(id)sender
 {
     //do nothing
 }
-- (IBAction)signOut:(id)sender {
+
+- (IBAction)signOut:(id)sender
+{
     NSMutableURLRequest *request = [WebServiceURLBuilder deleteRequestForRouteAppendix:@"sessions"];
   
     NSURLResponse *response;

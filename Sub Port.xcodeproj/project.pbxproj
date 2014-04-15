@@ -36,6 +36,11 @@
 		BFAC495F18FB5B59007F3862 /* CMAMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC495E18FB5B59007F3862 /* CMAMainTableViewController.m */; };
 		BFAC496618FB6A90007F3862 /* UNISettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC496418FB6A90007F3862 /* UNISettingsViewController.m */; };
 		BFAC496718FB6A90007F3862 /* UNISettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFAC496518FB6A90007F3862 /* UNISettingsViewController.xib */; };
+		BFAF6B7518FCBF270004FCE1 /* ContentElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAF6B7418FCBF270004FCE1 /* ContentElement.m */; };
+		BFAF6B7818FCCFE10004FCE1 /* ADMProvidersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAF6B7718FCCFE10004FCE1 /* ADMProvidersTableViewController.m */; };
+		BFAF6B9B18FCDB860004FCE1 /* SUBContentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAF6B9918FCDB860004FCE1 /* SUBContentDetailsViewController.m */; };
+		BFAF6B9C18FCDB860004FCE1 /* SUBContentDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFAF6B9A18FCDB860004FCE1 /* SUBContentDetailsViewController.xib */; };
+		BFAF6B9F18FCEB470004FCE1 /* CMAContentListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAF6B9E18FCEB470004FCE1 /* CMAContentListTableViewController.m */; };
 		BFB04C6218F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04C6118F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m */; };
 		BFB04C6518F8B89500B28EC8 /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04C6418F8B89500B28EC8 /* Provider.m */; };
 		BFB04C8718F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04C8618F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m */; };
@@ -101,6 +106,15 @@
 		BFAC496318FB6A90007F3862 /* UNISettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNISettingsViewController.h; sourceTree = "<group>"; };
 		BFAC496418FB6A90007F3862 /* UNISettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNISettingsViewController.m; sourceTree = "<group>"; };
 		BFAC496518FB6A90007F3862 /* UNISettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UNISettingsViewController.xib; sourceTree = "<group>"; };
+		BFAF6B7318FCBF270004FCE1 /* ContentElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentElement.h; sourceTree = "<group>"; };
+		BFAF6B7418FCBF270004FCE1 /* ContentElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentElement.m; sourceTree = "<group>"; };
+		BFAF6B7618FCCFE10004FCE1 /* ADMProvidersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMProvidersTableViewController.h; sourceTree = "<group>"; };
+		BFAF6B7718FCCFE10004FCE1 /* ADMProvidersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMProvidersTableViewController.m; sourceTree = "<group>"; };
+		BFAF6B9818FCDB860004FCE1 /* SUBContentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBContentDetailsViewController.h; sourceTree = "<group>"; };
+		BFAF6B9918FCDB860004FCE1 /* SUBContentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBContentDetailsViewController.m; sourceTree = "<group>"; };
+		BFAF6B9A18FCDB860004FCE1 /* SUBContentDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SUBContentDetailsViewController.xib; sourceTree = "<group>"; };
+		BFAF6B9D18FCEB470004FCE1 /* CMAContentListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMAContentListTableViewController.h; sourceTree = "<group>"; };
+		BFAF6B9E18FCEB470004FCE1 /* CMAContentListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMAContentListTableViewController.m; sourceTree = "<group>"; };
 		BFB04C6018F8B84400B28EC8 /* SUBSelectProvidersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBSelectProvidersTableViewController.h; sourceTree = "<group>"; };
 		BFB04C6118F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBSelectProvidersTableViewController.m; sourceTree = "<group>"; };
 		BFB04C6318F8B89500B28EC8 /* Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Provider.h; sourceTree = "<group>"; };
@@ -164,6 +178,9 @@
 			children = (
 				56B7885C18F74F6E00E0022D /* SUBMainTableViewController.h */,
 				56B7885D18F74F6E00E0022D /* SUBMainTableViewController.m */,
+				BFAF6B9818FCDB860004FCE1 /* SUBContentDetailsViewController.h */,
+				BFAF6B9918FCDB860004FCE1 /* SUBContentDetailsViewController.m */,
+				BFAF6B9A18FCDB860004FCE1 /* SUBContentDetailsViewController.xib */,
 				56B7885F18F7584100E0022D /* SUBSettingsViewController.h */,
 				56B7886018F7584100E0022D /* SUBSettingsViewController.m */,
 				56B7886118F7584100E0022D /* SUBSettingsViewController.xib */,
@@ -234,6 +251,8 @@
 				BFB04C6418F8B89500B28EC8 /* Provider.m */,
 				BFB70F7018FA6D9B00A19302 /* SubscriptionType.h */,
 				BFB70F7118FA6D9B00A19302 /* SubscriptionType.m */,
+				BFAF6B7318FCBF270004FCE1 /* ContentElement.h */,
+				BFAF6B7418FCBF270004FCE1 /* ContentElement.m */,
 				BF7A776418D3ADEC0035C267 /* Networking */,
 				BF69871218B9D97A0004E31F /* View Controllers */,
 				BF061B5D18E78923005B1246 /* Table View Components */,
@@ -297,6 +316,8 @@
 			children = (
 				BFAC495A18FB5B43007F3862 /* ADMMainTableViewController.h */,
 				BFAC495B18FB5B43007F3862 /* ADMMainTableViewController.m */,
+				BFAF6B7618FCCFE10004FCE1 /* ADMProvidersTableViewController.h */,
+				BFAF6B7718FCCFE10004FCE1 /* ADMProvidersTableViewController.m */,
 			);
 			path = "Admin Views";
 			sourceTree = "<group>";
@@ -306,6 +327,8 @@
 			children = (
 				BFAC495D18FB5B59007F3862 /* CMAMainTableViewController.h */,
 				BFAC495E18FB5B59007F3862 /* CMAMainTableViewController.m */,
+				BFAF6B9D18FCEB470004FCE1 /* CMAContentListTableViewController.h */,
+				BFAF6B9E18FCEB470004FCE1 /* CMAContentListTableViewController.m */,
 			);
 			path = "Content Manager Views";
 			sourceTree = "<group>";
@@ -354,7 +377,7 @@
 		BF6986C918B9D2E80004E31F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Sub Port Inc.";
 				TargetAttributes = {
 					BF6986EB18B9D2E80004E31F = {
@@ -385,6 +408,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFAF6B9C18FCDB860004FCE1 /* SUBContentDetailsViewController.xib in Resources */,
 				BF6986DF18B9D2E80004E31F /* InfoPlist.strings in Resources */,
 				BF6986E718B9D2E80004E31F /* Images.xcassets in Resources */,
 				BFAC496718FB6A90007F3862 /* UNISettingsViewController.xib in Resources */,
@@ -413,8 +437,10 @@
 			files = (
 				56B7886218F7584100E0022D /* SUBSettingsViewController.m in Sources */,
 				BFAC495C18FB5B43007F3862 /* ADMMainTableViewController.m in Sources */,
+				BFAF6B9B18FCDB860004FCE1 /* SUBContentDetailsViewController.m in Sources */,
 				BFB04CCD18F8FA0D00B28EC8 /* DetailRow.m in Sources */,
 				BF7A776718D3AEA60035C267 /* WebServiceURLBuilder.m in Sources */,
+				BFAF6B9F18FCEB470004FCE1 /* CMAContentListTableViewController.m in Sources */,
 				BFAC495F18FB5B59007F3862 /* CMAMainTableViewController.m in Sources */,
 				BF9FB23218E9055700B81140 /* CreateAccountTableViewController.m in Sources */,
 				56B7885E18F74F6E00E0022D /* SUBMainTableViewController.m in Sources */,
@@ -425,6 +451,8 @@
 				BF061B6118E7893F005B1246 /* FormFieldTableViewCell.m in Sources */,
 				BFB04C6218F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m in Sources */,
 				BFB70F7218FA6D9B00A19302 /* SubscriptionType.m in Sources */,
+				BFAF6B7518FCBF270004FCE1 /* ContentElement.m in Sources */,
+				BFAF6B7818FCCFE10004FCE1 /* ADMProvidersTableViewController.m in Sources */,
 				BFB04C8718F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m in Sources */,
 				BF6986E118B9D2E80004E31F /* main.m in Sources */,
 				BFB04C6518F8B89500B28EC8 /* Provider.m in Sources */,
@@ -476,7 +504,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -516,7 +543,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -577,7 +603,6 @@
 		BF69870118B9D2E80004E31F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Sub Port.app/Sub Port";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -600,7 +625,6 @@
 		BF69870218B9D2E80004E31F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Sub Port.app/Sub Port";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

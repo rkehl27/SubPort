@@ -8,8 +8,13 @@
 
 #import "SUBMainTableViewController.h"
 #import "SUBSettingsViewController.h"
+#import "SUBContentDetailsViewController.h"
+#import "WebServiceURLBuilder.h"
+#import "ContentElement.h"
 
-@interface SUBMainTableViewController ()
+@interface SUBMainTableViewController () {
+    NSMutableArray *_contentList;
+}
 
 @end
 
@@ -19,8 +24,9 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        _contentList = [[NSMutableArray alloc] init];
         [self customizeNavigationItem];
+        [self configureRefreshControl];
     }
     return self;
 }
@@ -28,12 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self fetchContentInBackground];
+    [[self refreshControl] beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,74 +49,88 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 0;
+    return [_contentList count];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    NSString *cellIdentifier = @"cellIdentifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
     
-    // Configure the cell...
+    ContentElement *contentElementInstance = [_contentList objectAtIndex:[indexPath row]];
+    [[cell textLabel] setText:[contentElementInstance name]];
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    SUBContentDetailsViewController *detailView = [[SUBContentDetailsViewController alloc] initWithContent:[_contentList objectAtIndex:[indexPath row]]];
+    [[self navigationController] pushViewController:detailView animated:YES];
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - Connection Information
+
+- (void)fetchContentInBackground
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    NSMutableURLRequest *request = [WebServiceURLBuilder getRequestForRouteAppendix:@"user_content_elements"];
+    
+    NSURLResponse *response;
+    NSError *err;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    [self connectionDidFinishWithData:responseData orError:err];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
-}
-*/
+    [[self refreshControl] endRefreshing];
+    [_contentList removeAllObjects];
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+    NSError *localError;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
+    
+    if ([responseDictionary valueForKey:@"success"]) {
+        NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+        NSArray *content = [dataDict objectForKey:@"content_elements"];
+        
+        for (NSDictionary *dict in content) {
+            ContentElement *currElement = [[ContentElement alloc] init];
+            [currElement setIdNumber:[dict objectForKey:@"id"]];
+            [currElement setName:[dict objectForKey:@"name"]];
+            
+            [_contentList addObject:currElement];
+        }
+    }
+    
+    [[self tableView] reloadData];
+}
+
+
+- (void)configureRefreshControl
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(userPulledToRefresh:) forControlEvents:UIControlEventValueChanged];
+    [refreshControl setTintColor:[UIColor blackColor]];
+    [self setRefreshControl:refreshControl];
 }
-*/
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)userPulledToRefresh:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    [self fetchContentInBackground];
 }
-*/
+
+#pragma mark - Configure Navigation Bar
 
 - (IBAction)settings:(id)sender
 {
@@ -126,6 +142,8 @@
 {
     UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
     [[self navigationItem] setRightBarButtonItem:rightbbi];
+    
+    [[self navigationItem] setTitle:@"List"];
 }
 
 @end
