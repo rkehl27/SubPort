@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		567729271909851F000AF156 /* ADMFormatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567729261909851F000AF156 /* ADMFormatTableViewController.m */; };
+		5677292A19098537000AF156 /* ADMContentAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5677292919098537000AF156 /* ADMContentAreasTableViewController.m */; };
+		5677292D1909854E000AF156 /* ADMDeliveryModesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5677292C1909854E000AF156 /* ADMDeliveryModesTableViewController.m */; };
+		5677293019098590000AF156 /* FormatType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5677292F19098590000AF156 /* FormatType.m */; };
 		56B7885E18F74F6E00E0022D /* SUBMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B7885D18F74F6E00E0022D /* SUBMainTableViewController.m */; };
 		56B7886218F7584100E0022D /* SUBSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B7886018F7584100E0022D /* SUBSettingsViewController.m */; };
 		56B7886318F7584100E0022D /* SUBSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56B7886118F7584100E0022D /* SUBSettingsViewController.xib */; };
@@ -63,6 +67,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		567729251909851F000AF156 /* ADMFormatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMFormatTableViewController.h; sourceTree = "<group>"; };
+		567729261909851F000AF156 /* ADMFormatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMFormatTableViewController.m; sourceTree = "<group>"; };
+		5677292819098537000AF156 /* ADMContentAreasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMContentAreasTableViewController.h; sourceTree = "<group>"; };
+		5677292919098537000AF156 /* ADMContentAreasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMContentAreasTableViewController.m; sourceTree = "<group>"; };
+		5677292B1909854E000AF156 /* ADMDeliveryModesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMDeliveryModesTableViewController.h; sourceTree = "<group>"; };
+		5677292C1909854E000AF156 /* ADMDeliveryModesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMDeliveryModesTableViewController.m; sourceTree = "<group>"; };
+		5677292E19098590000AF156 /* FormatType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatType.h; sourceTree = "<group>"; };
+		5677292F19098590000AF156 /* FormatType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatType.m; sourceTree = "<group>"; };
 		56B7885C18F74F6E00E0022D /* SUBMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBMainTableViewController.h; sourceTree = "<group>"; };
 		56B7885D18F74F6E00E0022D /* SUBMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBMainTableViewController.m; sourceTree = "<group>"; };
 		56B7885F18F7584100E0022D /* SUBSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBSettingsViewController.h; sourceTree = "<group>"; };
@@ -254,6 +266,8 @@
 				BF69871E18BA850C0004E31F /* VerifiedUser.m */,
 				BFB04C6318F8B89500B28EC8 /* Provider.h */,
 				BFB04C6418F8B89500B28EC8 /* Provider.m */,
+				5677292E19098590000AF156 /* FormatType.h */,
+				5677292F19098590000AF156 /* FormatType.m */,
 				BFB70F7018FA6D9B00A19302 /* SubscriptionType.h */,
 				BFB70F7118FA6D9B00A19302 /* SubscriptionType.m */,
 				BFAF6B7318FCBF270004FCE1 /* ContentElement.h */,
@@ -323,6 +337,12 @@
 				BFAC495B18FB5B43007F3862 /* ADMMainTableViewController.m */,
 				BFAF6B7618FCCFE10004FCE1 /* ADMProvidersTableViewController.h */,
 				BFAF6B7718FCCFE10004FCE1 /* ADMProvidersTableViewController.m */,
+				567729251909851F000AF156 /* ADMFormatTableViewController.h */,
+				567729261909851F000AF156 /* ADMFormatTableViewController.m */,
+				5677292819098537000AF156 /* ADMContentAreasTableViewController.h */,
+				5677292919098537000AF156 /* ADMContentAreasTableViewController.m */,
+				5677292B1909854E000AF156 /* ADMDeliveryModesTableViewController.h */,
+				5677292C1909854E000AF156 /* ADMDeliveryModesTableViewController.m */,
 			);
 			path = "Admin Views";
 			sourceTree = "<group>";
@@ -445,10 +465,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				56B7886218F7584100E0022D /* SUBSettingsViewController.m in Sources */,
+				5677293019098590000AF156 /* FormatType.m in Sources */,
 				BFAC495C18FB5B43007F3862 /* ADMMainTableViewController.m in Sources */,
 				BFAF6B9B18FCDB860004FCE1 /* SUBContentDetailsViewController.m in Sources */,
 				BFB04CCD18F8FA0D00B28EC8 /* DetailRow.m in Sources */,
 				BF7A776718D3AEA60035C267 /* WebServiceURLBuilder.m in Sources */,
+				5677292D1909854E000AF156 /* ADMDeliveryModesTableViewController.m in Sources */,
 				BFAF6B9F18FCEB470004FCE1 /* CMAContentListTableViewController.m in Sources */,
 				BFAC495F18FB5B59007F3862 /* CMAMainTableViewController.m in Sources */,
 				BF9FB23218E9055700B81140 /* CreateAccountTableViewController.m in Sources */,
@@ -463,6 +485,8 @@
 				BFAF6B7518FCBF270004FCE1 /* ContentElement.m in Sources */,
 				BFAF6B7818FCCFE10004FCE1 /* ADMProvidersTableViewController.m in Sources */,
 				BFB04C8718F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m in Sources */,
+				567729271909851F000AF156 /* ADMFormatTableViewController.m in Sources */,
+				5677292A19098537000AF156 /* ADMContentAreasTableViewController.m in Sources */,
 				BF6986E118B9D2E80004E31F /* main.m in Sources */,
 				BFB04C6518F8B89500B28EC8 /* Provider.m in Sources */,
 				BF69871618BA82B90004E31F /* LoginViewController.m in Sources */,

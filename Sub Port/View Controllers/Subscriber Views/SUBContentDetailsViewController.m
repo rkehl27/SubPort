@@ -79,6 +79,7 @@
         [[self webView] setBackgroundColor:[UIColor whiteColor]];
         [[self webView] setScalesPageToFit:YES];
         [[self webView] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
+        
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];

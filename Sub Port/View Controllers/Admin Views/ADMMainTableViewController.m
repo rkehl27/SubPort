@@ -8,6 +8,7 @@
 
 #import "ADMMainTableViewController.h"
 #import "ADMProvidersTableViewController.h"
+#import "ADMFormatTableViewController.h"
 #import "UNISettingsViewController.h"
 #import "DetailRow.h"
 #import "DetailTableViewCell.h"
@@ -80,6 +81,8 @@
     
     switch ([indexPath row]) {
         case 0:
+            view = [[ADMFormatTableViewController alloc] init];
+            //[[self navigationController] pushViewController:view animated:YES];
             break;
             
         case 1:

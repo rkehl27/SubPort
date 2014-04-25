@@ -43,6 +43,11 @@
 {
     [super viewDidLoad];
     [self customizeNavigationBar];
+    //[self fetchContentInBackground];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     [self fetchContentInBackground];
 }
 
@@ -136,11 +141,22 @@
     [[self tableView] reloadData];
 }
 
+- (IBAction)addItem:(id)sender
+{
+    NSLog(@"Add Content Tapped");
+    CMAEditContentDetailsViewController *addContentView = [[CMAEditContentDetailsViewController alloc] init];
+    
+    [[self navigationController] pushViewController:addContentView animated:YES];
+}
+
 #pragma mark - Configure Navigation
 
 - (void)customizeNavigationBar
 {
     [[self navigationItem] setTitle:[_currProvider providerName]];
+    
+    UIBarButtonItem *addContentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
+    [[self navigationItem] setRightBarButtonItem:addContentButton];
 }
 
 

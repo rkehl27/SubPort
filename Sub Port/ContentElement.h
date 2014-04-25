@@ -12,5 +12,7 @@
 
 @property (nonatomic, readwrite) NSNumber *idNumber;
 @property (nonatomic, readwrite) NSString *name;
+@property (nonatomic, readwrite) NSString *url;
+@property (nonatomic, readwrite) BOOL isHidden;
 
 @end
