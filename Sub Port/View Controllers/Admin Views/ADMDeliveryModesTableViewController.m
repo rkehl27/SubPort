@@ -88,9 +88,6 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Perform the real delete action here. Note: you may need to check editing style
-    //   if you do not perform delete only.
-    
     DeliveryMode *modeToDelete = [_deliveryModes objectAtIndex:[indexPath row]];
     
     [_deliveryModes removeObjectAtIndex:[indexPath row]];

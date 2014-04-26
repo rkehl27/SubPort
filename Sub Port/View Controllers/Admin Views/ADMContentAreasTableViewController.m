@@ -33,6 +33,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     [self fetchContentAreasInBackground];
 }
 
@@ -85,9 +89,10 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Perform the real delete action here. Note: you may need to check editing style
-    //   if you do not perform delete only.
-    NSLog(@"Deleted row.");
+    ContentArea *areaToDelete = [_contentAreas objectAtIndex:[indexPath row]];
+    
+    [_contentAreas removeObjectAtIndex:[indexPath row]];
+    [self deleteContentArea:areaToDelete];
 }
 
 #pragma mark - Connection Information
@@ -119,6 +124,36 @@
             [currentContentArea setContentAreaName:[contentAreaDictionary objectForKey:@"name"]];
             [_contentAreas addObject:currentContentArea];
         }
+        
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
+    
+    [[self tableView] reloadData];
+}
+
+- (void)deleteContentArea:(ContentArea *)areaToDelete
+{
+    NSDictionary *deleteDict = @{@"id":[areaToDelete idNumber]};
+    
+    NSMutableURLRequest *request = [WebServiceURLBuilder deleteRequestForRouteAppendix:@"content_areas" withDictionary:deleteDict];
+    
+    NSURLResponse *response;
+    NSError *err;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    [self deleteConnectionDidFinishWithData:responseData orError:err];
+}
+
+- (void)deleteConnectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
+{
+    NSError *localError;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
+    
+    if ([responseDictionary valueForKey:@"success"]) {
+        NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
         
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];

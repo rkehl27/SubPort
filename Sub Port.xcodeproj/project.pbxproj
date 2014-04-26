@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B44D4D4190B496D0027B984 /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4D3190B496D0027B984 /* Provider.m */; };
-		2B44D4D9190B49860027B984 /* ContentArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4D6190B49860027B984 /* ContentArea.m */; };
-		2B44D4DA190B49860027B984 /* DeliveryMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4D8190B49860027B984 /* DeliveryMode.m */; };
-		2B44D4DD190B49A40027B984 /* SubscriptionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4DC190B49A40027B984 /* SubscriptionType.m */; };
 		2B44D4E1190B61900027B984 /* ToggleRowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4DF190B61900027B984 /* ToggleRowTableViewCell.m */; };
 		2B44D4E2190B61900027B984 /* ToggleRowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B44D4E0190B61900027B984 /* ToggleRowTableViewCell.xib */; };
 		2B44D4E5190B624B0027B984 /* ToggleRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4E4190B624B0027B984 /* ToggleRow.m */; };
-		2B44D4F2190B71810027B984 /* AdminObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4F1190B71810027B984 /* AdminObject.m */; };
 		2B44D4F6190B75EE0027B984 /* ADMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4F4190B75EE0027B984 /* ADMDetailViewController.m */; };
 		2B44D4F7190B75EE0027B984 /* ADMDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B44D4F5190B75EE0027B984 /* ADMDetailViewController.xib */; };
+		2BA190ED190C36AA0051FDED /* AdminObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190E2190C36AA0051FDED /* AdminObject.m */; };
+		2BA190EE190C36AA0051FDED /* ContentArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190E4190C36AA0051FDED /* ContentArea.m */; };
+		2BA190EF190C36AA0051FDED /* DeliveryMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190E6190C36AA0051FDED /* DeliveryMode.m */; };
+		2BA190F0190C36AA0051FDED /* FormatType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190E8190C36AA0051FDED /* FormatType.m */; };
+		2BA190F1190C36AA0051FDED /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190EA190C36AA0051FDED /* Provider.m */; };
+		2BA190F2190C36AA0051FDED /* SubscriptionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190EC190C36AA0051FDED /* SubscriptionType.m */; };
 		567729271909851F000AF156 /* ADMFormatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567729261909851F000AF156 /* ADMFormatTableViewController.m */; };
 		5677292A19098537000AF156 /* ADMContentAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5677292919098537000AF156 /* ADMContentAreasTableViewController.m */; };
 		5677292D1909854E000AF156 /* ADMDeliveryModesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5677292C1909854E000AF156 /* ADMDeliveryModesTableViewController.m */; };
@@ -73,24 +74,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2B44D4D2190B496D0027B984 /* Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Provider.h; path = "Sub Port/Provider.h"; sourceTree = SOURCE_ROOT; };
-		2B44D4D3190B496D0027B984 /* Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Provider.m; path = "Sub Port/Provider.m"; sourceTree = SOURCE_ROOT; };
-		2B44D4D5190B49860027B984 /* ContentArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentArea.h; path = "Sub Port/ContentArea.h"; sourceTree = SOURCE_ROOT; };
-		2B44D4D6190B49860027B984 /* ContentArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentArea.m; path = "Sub Port/ContentArea.m"; sourceTree = SOURCE_ROOT; };
-		2B44D4D7190B49860027B984 /* DeliveryMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeliveryMode.h; path = "Sub Port/DeliveryMode.h"; sourceTree = SOURCE_ROOT; };
-		2B44D4D8190B49860027B984 /* DeliveryMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeliveryMode.m; path = "Sub Port/DeliveryMode.m"; sourceTree = SOURCE_ROOT; };
-		2B44D4DB190B49A40027B984 /* SubscriptionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscriptionType.h; path = "Sub Port/SubscriptionType.h"; sourceTree = SOURCE_ROOT; };
-		2B44D4DC190B49A40027B984 /* SubscriptionType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscriptionType.m; path = "Sub Port/SubscriptionType.m"; sourceTree = SOURCE_ROOT; };
 		2B44D4DE190B61900027B984 /* ToggleRowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleRowTableViewCell.h; sourceTree = "<group>"; };
 		2B44D4DF190B61900027B984 /* ToggleRowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleRowTableViewCell.m; sourceTree = "<group>"; };
 		2B44D4E0190B61900027B984 /* ToggleRowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToggleRowTableViewCell.xib; sourceTree = "<group>"; };
 		2B44D4E3190B624B0027B984 /* ToggleRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleRow.h; sourceTree = "<group>"; };
 		2B44D4E4190B624B0027B984 /* ToggleRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleRow.m; sourceTree = "<group>"; };
-		2B44D4F0190B71810027B984 /* AdminObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdminObject.h; path = "Sub Port/AdminObject.h"; sourceTree = SOURCE_ROOT; };
-		2B44D4F1190B71810027B984 /* AdminObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdminObject.m; path = "Sub Port/AdminObject.m"; sourceTree = SOURCE_ROOT; };
 		2B44D4F3190B75EE0027B984 /* ADMDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADMDetailViewController.h; path = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.h"; sourceTree = SOURCE_ROOT; };
 		2B44D4F4190B75EE0027B984 /* ADMDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADMDetailViewController.m; path = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.m"; sourceTree = SOURCE_ROOT; };
 		2B44D4F5190B75EE0027B984 /* ADMDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ADMDetailViewController.xib; path = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.xib"; sourceTree = SOURCE_ROOT; };
+		2BA190E1190C36AA0051FDED /* AdminObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminObject.h; sourceTree = "<group>"; };
+		2BA190E2190C36AA0051FDED /* AdminObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminObject.m; sourceTree = "<group>"; };
+		2BA190E3190C36AA0051FDED /* ContentArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentArea.h; sourceTree = "<group>"; };
+		2BA190E4190C36AA0051FDED /* ContentArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentArea.m; sourceTree = "<group>"; };
+		2BA190E5190C36AA0051FDED /* DeliveryMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryMode.h; sourceTree = "<group>"; };
+		2BA190E6190C36AA0051FDED /* DeliveryMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryMode.m; sourceTree = "<group>"; };
+		2BA190E7190C36AA0051FDED /* FormatType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatType.h; sourceTree = "<group>"; };
+		2BA190E8190C36AA0051FDED /* FormatType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatType.m; sourceTree = "<group>"; };
+		2BA190E9190C36AA0051FDED /* Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Provider.h; sourceTree = "<group>"; };
+		2BA190EA190C36AA0051FDED /* Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Provider.m; sourceTree = "<group>"; };
+		2BA190EB190C36AA0051FDED /* SubscriptionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionType.h; sourceTree = "<group>"; };
+		2BA190EC190C36AA0051FDED /* SubscriptionType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionType.m; sourceTree = "<group>"; };
 		567729251909851F000AF156 /* ADMFormatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADMFormatTableViewController.h; path = ../ADMFormatTableViewController.h; sourceTree = "<group>"; };
 		567729261909851F000AF156 /* ADMFormatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADMFormatTableViewController.m; path = ../ADMFormatTableViewController.m; sourceTree = "<group>"; };
 		5677292819098537000AF156 /* ADMContentAreasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADMContentAreasTableViewController.h; path = ../ADMContentAreasTableViewController.h; sourceTree = "<group>"; };
@@ -210,6 +213,25 @@
 			path = "Detail Views";
 			sourceTree = "<group>";
 		};
+		2BA190E0190C36AA0051FDED /* Admin Objects */ = {
+			isa = PBXGroup;
+			children = (
+				2BA190E1190C36AA0051FDED /* AdminObject.h */,
+				2BA190E2190C36AA0051FDED /* AdminObject.m */,
+				2BA190E3190C36AA0051FDED /* ContentArea.h */,
+				2BA190E4190C36AA0051FDED /* ContentArea.m */,
+				2BA190E5190C36AA0051FDED /* DeliveryMode.h */,
+				2BA190E6190C36AA0051FDED /* DeliveryMode.m */,
+				2BA190E7190C36AA0051FDED /* FormatType.h */,
+				2BA190E8190C36AA0051FDED /* FormatType.m */,
+				2BA190E9190C36AA0051FDED /* Provider.h */,
+				2BA190EA190C36AA0051FDED /* Provider.m */,
+				2BA190EB190C36AA0051FDED /* SubscriptionType.h */,
+				2BA190EC190C36AA0051FDED /* SubscriptionType.m */,
+			);
+			path = "Admin Objects";
+			sourceTree = "<group>";
+		};
 		56B7885818F74BF700E0022D /* Universal Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,7 +332,7 @@
 				BF69871E18BA850C0004E31F /* VerifiedUser.m */,
 				BFAF6B7318FCBF270004FCE1 /* ContentElement.h */,
 				BFAF6B7418FCBF270004FCE1 /* ContentElement.m */,
-				BF9DE679190B2EC900869144 /* Admin Objects */,
+				2BA190E0190C36AA0051FDED /* Admin Objects */,
 				BF7A776418D3ADEC0035C267 /* Networking */,
 				BF69871218B9D97A0004E31F /* View Controllers */,
 				BF061B5D18E78923005B1246 /* Table View Components */,
@@ -367,23 +389,6 @@
 				BF7A776618D3AEA60035C267 /* WebServiceURLBuilder.m */,
 			);
 			path = Networking;
-			sourceTree = "<group>";
-		};
-		BF9DE679190B2EC900869144 /* Admin Objects */ = {
-			isa = PBXGroup;
-			children = (
-				2B44D4F0190B71810027B984 /* AdminObject.h */,
-				2B44D4F1190B71810027B984 /* AdminObject.m */,
-				2B44D4DB190B49A40027B984 /* SubscriptionType.h */,
-				2B44D4DC190B49A40027B984 /* SubscriptionType.m */,
-				2B44D4D5190B49860027B984 /* ContentArea.h */,
-				2B44D4D6190B49860027B984 /* ContentArea.m */,
-				2B44D4D7190B49860027B984 /* DeliveryMode.h */,
-				2B44D4D8190B49860027B984 /* DeliveryMode.m */,
-				2B44D4D2190B496D0027B984 /* Provider.h */,
-				2B44D4D3190B496D0027B984 /* Provider.m */,
-			);
-			path = "Admin Objects";
 			sourceTree = "<group>";
 		};
 		BFAC495818FB5B12007F3862 /* Admin Views */ = {
@@ -516,6 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BA190EE190C36AA0051FDED /* ContentArea.m in Sources */,
 				2B44D4E5190B624B0027B984 /* ToggleRow.m in Sources */,
 				56B7886218F7584100E0022D /* SUBSettingsViewController.m in Sources */,
 				BFAC495C18FB5B43007F3862 /* ADMMainTableViewController.m in Sources */,
@@ -532,22 +538,22 @@
 				BF9FB27618E9350200B81140 /* FormFieldRow.m in Sources */,
 				BFB04CC918F8F9ED00B28EC8 /* DetailTableViewCell.m in Sources */,
 				BF6986E518B9D2E80004E31F /* AppDelegate.m in Sources */,
-				2B44D4DA190B49860027B984 /* DeliveryMode.m in Sources */,
 				BF061B6118E7893F005B1246 /* FormFieldTableViewCell.m in Sources */,
 				BFB04C6218F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m in Sources */,
 				BFAF6B7518FCBF270004FCE1 /* ContentElement.m in Sources */,
-				2B44D4DD190B49A40027B984 /* SubscriptionType.m in Sources */,
-				2B44D4D9190B49860027B984 /* ContentArea.m in Sources */,
 				BFB04C8718F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m in Sources */,
+				2BA190F1190C36AA0051FDED /* Provider.m in Sources */,
 				567729271909851F000AF156 /* ADMFormatTableViewController.m in Sources */,
 				5677292A19098537000AF156 /* ADMContentAreasTableViewController.m in Sources */,
+				2BA190F0190C36AA0051FDED /* FormatType.m in Sources */,
+				2BA190EF190C36AA0051FDED /* DeliveryMode.m in Sources */,
 				BF6986E118B9D2E80004E31F /* main.m in Sources */,
+				2BA190F2190C36AA0051FDED /* SubscriptionType.m in Sources */,
 				BF69871618BA82B90004E31F /* LoginViewController.m in Sources */,
-				2B44D4D4190B496D0027B984 /* Provider.m in Sources */,
 				BFAC496618FB6A90007F3862 /* UNISettingsViewController.m in Sources */,
 				2B44D4F6190B75EE0027B984 /* ADMDetailViewController.m in Sources */,
 				BF69871B18BA82D00004E31F /* MainViewController.m in Sources */,
-				2B44D4F2190B71810027B984 /* AdminObject.m in Sources */,
+				2BA190ED190C36AA0051FDED /* AdminObject.m in Sources */,
 				BFFB40B218FDDCA500F99243 /* CMAEditContentDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
