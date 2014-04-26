@@ -10,8 +10,9 @@
 #import "SUBContentDetailsViewController.h"
 #import "WebServiceURLBuilder.h"
 
-@interface CMAEditContentDetailsViewController () {
+@interface CMAEditContentDetailsViewController ()<UIPickerViewDataSource, UIPickerViewDelegate> {
     ContentElement *_contentElement;
+    NSMutableArray *_formatTypes;
 }
 
 @end
@@ -23,16 +24,15 @@
     self = [super init];
     if (self) {
         _contentElement = contentElement;
+        _formatTypes = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (id)init
 {
-    self = [super init];
-    if (self) {
-        _contentElement = [[ContentElement alloc] init];
-    }
+    ContentElement *contentElement = [[ContentElement alloc] init];
+    self = [self initWithContentElement:contentElement];
     return self;
 }
 
@@ -53,6 +53,11 @@
         [self customizeNavigationBarForEditContent];
     } else {
         [self customizeNavigationBarForAddContent];
+        NSDate *currentDate = [[NSDate alloc] initWithTimeIntervalSinceNow:1209600];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterShortStyle];
+        NSString *currDateString = [formatter stringFromDate:currentDate];
+        [[self dateField] setText:currDateString];
     }
     // Do any additional setup after loading the view from its nib.
 }
@@ -74,6 +79,18 @@
 {
     SUBContentDetailsViewController *detailView = [[SUBContentDetailsViewController alloc] initWithContent: _contentElement];
     [[self navigationController] pushViewController:detailView animated:YES];
+}
+
+#pragma mark - Picker View
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [_formatTypes count];
 }
 
 #pragma mark - Connection Information
@@ -215,7 +232,7 @@
     [[self urlField] setEnabled:enabled];
     [[self hiddenToggle] setEnabled:enabled];
     [[self formatField] setEnabled:enabled];
-    [[self dateField] setEnabled:enabled];
+    [[self dateField] setEnabled:NO];
 }
 
 #pragma mark - Navigation Control
@@ -237,7 +254,7 @@
 {
     [[self navigationItem] setTitle:@"Add Content"];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContent:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(addContent:)];
     [[self navigationItem] setRightBarButtonItem:addButton];
     
     UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
