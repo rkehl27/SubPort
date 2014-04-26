@@ -7,6 +7,7 @@
 //
 
 #import "ADMDeliveryModesTableViewController.h"
+#import "ADMDetailViewController.h"
 #import "DeliveryMode.h"
 #import "WebServiceURLBuilder.h"
 
@@ -31,6 +32,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     [self fetchDeliveryModesInBackground];
 }
 
@@ -65,8 +70,6 @@
     DeliveryMode *deliveryModeInstance = [self deliveryModeAtIndexPath:indexPath];
     [[cell textLabel]setText:[deliveryModeInstance deliveryModeName]];
     
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    
     return cell;
 }
 
@@ -75,10 +78,32 @@
     return [_deliveryModes objectAtIndex:[indexPath row]];
 }
 
+#pragma mark - Swipe to Delete
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return YES - we will be able to delete all rows
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Perform the real delete action here. Note: you may need to check editing style
+    //   if you do not perform delete only.
+    
+    DeliveryMode *modeToDelete = [_deliveryModes objectAtIndex:[indexPath row]];
+    
+    [_deliveryModes removeObjectAtIndex:[indexPath row]];
+    [self deleteDeliveryMode:modeToDelete];
+    
+    NSLog(@"Deleted row.");
+}
+
 #pragma mark - Connection Information
 
 - (void)fetchDeliveryModesInBackground
 {
+    [_deliveryModes removeAllObjects];
     NSMutableURLRequest *request = [WebServiceURLBuilder getRequestForRouteAppendix:@"delivery_modes"];
     
     NSURLResponse *response;
@@ -113,11 +138,52 @@
     [[self tableView] reloadData];
 }
 
+- (void)deleteDeliveryMode:(DeliveryMode *)modeToDelete
+{
+    NSDictionary *deleteDict = @{@"id":[modeToDelete idNumber]};
+    
+    NSMutableURLRequest *request = [WebServiceURLBuilder deleteRequestForRouteAppendix:@"delivery_modes" withDictionary:deleteDict];
+    
+    NSURLResponse *response;
+    NSError *err;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    [self deleteConnectionDidFinishWithData:responseData orError:err];
+}
+
+- (void)deleteConnectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
+{
+    NSError *localError;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
+    
+    if ([responseDictionary valueForKey:@"success"]) {
+        NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+        
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
+    
+    [[self tableView] reloadData];
+}
+
 #pragma mark - Navigation Item Configuration
+
+- (IBAction)addDeliveryMode:(id)sender
+{
+    AdminObject *adminObj = [[AdminObject alloc] initWithObjectType:@"Delivery Mode" andRouteAppendix:@"delivery_modes"];
+    
+    ADMDetailViewController *detailView = [[ADMDetailViewController alloc] initWithAdminObject:adminObj];
+    [[self navigationController] pushViewController:detailView animated:YES];
+}
 
 - (void)customizeNavigationBar
 {
     [[self navigationItem] setTitle:@"Delivery Modes List"];
+    
+    UIBarButtonItem *addDeliveryModeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addDeliveryMode:)];
+    [[self navigationItem] setRightBarButtonItem:addDeliveryModeButton];
 }
 
 @end

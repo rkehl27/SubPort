@@ -8,7 +8,7 @@
 
 #import "ADMFormatTableViewController.h"
 #import "WebServiceURLBuilder.h"
-#import "FormatType.h"
+//#import "FormatType.h"
 
 @interface ADMFormatTableViewController () {
     NSMutableArray *_formatTypes;
@@ -62,7 +62,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    FormatType *formatInstance = [self providerAtIndexPath:indexPath];
+    //FormatType *formatInstance = [self providerAtIndexPath:indexPath];
     //[[cell textLabel]setText:[formatInstance providerName]];
     
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
@@ -70,10 +70,10 @@
     return cell;
 }
 
-- (FormatType *)providerAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [_formatTypes objectAtIndex:[indexPath row]];
-}
+//- (FormatType *)providerAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return [_formatTypes objectAtIndex:[indexPath row]];
+//}
 
 #pragma mark - Connection Information
 

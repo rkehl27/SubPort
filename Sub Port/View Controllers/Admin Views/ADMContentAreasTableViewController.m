@@ -7,6 +7,8 @@
 //
 
 #import "ADMContentAreasTableViewController.h"
+#import "ADMDetailViewController.h"
+#import "AdminObject.h"
 #import "ContentArea.h"
 #import "WebServiceURLBuilder.h"
 
@@ -64,15 +66,28 @@
     
     ContentArea *contentAreaInstance = [self contentAreaAtIndexPath:indexPath];
     [[cell textLabel]setText:[contentAreaInstance contentAreaName]];
-    
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    
+        
     return cell;
 }
 
 - (ContentArea *)contentAreaAtIndexPath:(NSIndexPath *)indexPath
 {
     return [_contentAreas objectAtIndex:[indexPath row]];
+}
+
+#pragma mark - Swipe to Delete
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return YES - we will be able to delete all rows
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Perform the real delete action here. Note: you may need to check editing style
+    //   if you do not perform delete only.
+    NSLog(@"Deleted row.");
 }
 
 #pragma mark - Connection Information
@@ -115,9 +130,20 @@
 
 #pragma mark - Navigation Item Configuration
 
+- (IBAction)addContentArea:(id)sender
+{
+    AdminObject *adminObj = [[AdminObject alloc] initWithObjectType:@"Content Area" andRouteAppendix:@"content_areas"];
+    
+    ADMDetailViewController *detailView = [[ADMDetailViewController alloc] initWithAdminObject:adminObj];
+    [[self navigationController] pushViewController:detailView animated:YES];
+}
+
 - (void)customizeNavigationBar
 {
     [[self navigationItem] setTitle:@"Content Areas List"];
+    
+    UIBarButtonItem *addContentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContentArea:)];
+    [[self navigationItem] setRightBarButtonItem:addContentButton];
 }
 
 @end

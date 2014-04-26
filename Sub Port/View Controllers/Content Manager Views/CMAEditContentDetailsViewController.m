@@ -93,20 +93,7 @@
     return [_formatTypes count];
 }
 
-#pragma mark - Connection Information
-
-- (void)fetchContentInBackground
-{
-    NSDictionary *postDictionary = @{@"id": [_contentElement idNumber]};
-    NSMutableURLRequest *request = [WebServiceURLBuilder putRequestForRouteAppendix:@"provider_content_elements" withDictionary:postDictionary];
-    
-    NSURLResponse *response;
-    NSError *err;
-    
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
-    
-    [self connectionDidFinishWithData:responseData orError:err];
-}
+#pragma mark - General Connection Information
 
 - (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
@@ -135,18 +122,49 @@
     
 }
 
-- (void)sychronizeObjectWithFields
+- (void)pushConnectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
+{
+    NSError *localError;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
+    
+    if ([responseDictionary valueForKey:@"success"]) {
+        
+    } else {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [av show];
+    }
+}
+
+- (void)synchronizeObjectWithFields
 {
     [_contentElement setName:[[self nameField] text]];
     [_contentElement setUrl:[[self urlField] text]];
     [_contentElement setIsHidden:[[self hiddenToggle] isOn]];
 }
 
-- (void)pushChangesToServer
-{
-    [self sychronizeObjectWithFields];
-    NSDictionary *postDictionary = @{@"id": [_contentElement idNumber], @"name":[_contentElement name], @"link":[_contentElement url], @"hidden_flag":@TRUE};
+#pragma mark - Connection Information FOR EDITING CONTENT
 
+- (void)fetchContentInBackground
+{
+    NSDictionary *postDictionary = @{@"id": [_contentElement idNumber]};
+    NSMutableURLRequest *request = [WebServiceURLBuilder putRequestForRouteAppendix:@"provider_content_elements" withDictionary:postDictionary];
+    
+    NSURLResponse *response;
+    NSError *err;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    [self connectionDidFinishWithData:responseData orError:err];
+}
+
+- (void)pushEditsToServer
+{
+    [self synchronizeObjectWithFields];
+    
+    NSNumber *isHiddenValue = [NSNumber numberWithBool:[_contentElement isHidden]];
+    
+    NSDictionary *postDictionary = @{@"id": [_contentElement idNumber], @"name":[_contentElement name], @"link":[_contentElement url], @"hidden_flag":isHiddenValue};
+    
     NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"manage_content_elements"];
     
     NSURLResponse *response;
@@ -157,15 +175,13 @@
     [self pushConnectionDidFinishWithData:responseData orError:err];
 }
 
-- (void)pushContentToServer
-{
-    
-}
-
 - (void)postHiddenFlag
 {
-    [self sychronizeObjectWithFields];
-    NSDictionary *postDictionary = @{@"id": [_contentElement idNumber], @"name":[_contentElement name], @"link":[_contentElement url], @"hidden_flag":@TRUE};
+    [self synchronizeObjectWithFields];
+    
+    NSNumber *isHiddenValue = [NSNumber numberWithBool:[_contentElement isHidden]];
+    
+    NSDictionary *postDictionary = @{@"id": [_contentElement idNumber], @"name":[_contentElement name], @"link":[_contentElement url], @"hidden_flag":isHiddenValue};
     
     NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"hide_content_areas"];
     
@@ -177,17 +193,25 @@
     [self pushConnectionDidFinishWithData:responseData orError:err];
 }
 
-- (void)pushConnectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
-{
-    NSError *localError;
-    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
-    
-    if ([responseDictionary valueForKey:@"success"]) {
+#pragma mark - Connection Information FOR ADDING CONTENT
 
-    } else {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [av show];
-    }
+- (void)pushNewContentToServer
+{
+    [self synchronizeObjectWithFields];
+    
+    NSNumber *isHiddenValue = [NSNumber numberWithBool:[_contentElement isHidden]];
+    
+    NSDictionary *putDictionary = @{@"provider_id":[[_contentElement provider] idNumber], @"name":[_contentElement name], @"link":[_contentElement url], @"hidden_flag":isHiddenValue};
+    
+    NSMutableURLRequest *request = [WebServiceURLBuilder putRequestForRouteAppendix:@"manage_content_elements" withDictionary:putDictionary];
+    
+    NSURLResponse *response;
+    NSError *err;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    [self pushConnectionDidFinishWithData:responseData orError:err];
+    
 }
 
 #pragma mark - Editing Control
@@ -201,7 +225,7 @@
         
         [self setFieldsEnabled:NO];
         
-        [self pushChangesToServer];
+        [self pushEditsToServer];
         //[self postHiddenFlag];
         
         [[self navigationController] popViewControllerAnimated:YES];
@@ -217,7 +241,7 @@
 - (IBAction)addContent:(id)sender
 {
     //Verify Information
-    [self pushContentToServer];
+    //[self pushNewContentToServer];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 

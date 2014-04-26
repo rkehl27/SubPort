@@ -43,7 +43,6 @@
 {
     [super viewDidLoad];
     [self customizeNavigationBar];
-    //[self fetchContentInBackground];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -144,7 +143,11 @@
 - (IBAction)addItem:(id)sender
 {
     NSLog(@"Add Content Tapped");
-    CMAEditContentDetailsViewController *addContentView = [[CMAEditContentDetailsViewController alloc] init];
+    
+    ContentElement *newContentElement = [[ContentElement alloc] init];
+    [newContentElement setProvider:_currProvider];
+    
+    CMAEditContentDetailsViewController *addContentView = [[CMAEditContentDetailsViewController alloc] initWithContentElement:newContentElement];
     
     [[self navigationController] pushViewController:addContentView animated:YES];
 }
