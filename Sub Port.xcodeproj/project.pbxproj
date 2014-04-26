@@ -34,6 +34,8 @@
 		BF69871C18BA82D00004E31F /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF69871A18BA82D00004E31F /* MainViewController.xib */; };
 		BF69871F18BA850C0004E31F /* VerifiedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BF69871E18BA850C0004E31F /* VerifiedUser.m */; };
 		BF7A776718D3AEA60035C267 /* WebServiceURLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7A776618D3AEA60035C267 /* WebServiceURLBuilder.m */; };
+		BF9DE675190B2E8500869144 /* ContentArea.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9DE674190B2E8500869144 /* ContentArea.m */; };
+		BF9DE678190B2EA500869144 /* DeliveryMode.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9DE677190B2EA500869144 /* DeliveryMode.m */; };
 		BF9FB23218E9055700B81140 /* CreateAccountTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9FB23118E9055700B81140 /* CreateAccountTableViewController.m */; };
 		BF9FB27618E9350200B81140 /* FormFieldRow.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9FB27518E9350200B81140 /* FormFieldRow.m */; };
 		BFAC495C18FB5B43007F3862 /* ADMMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC495B18FB5B43007F3862 /* ADMMainTableViewController.m */; };
@@ -73,8 +75,8 @@
 		5677292919098537000AF156 /* ADMContentAreasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMContentAreasTableViewController.m; sourceTree = "<group>"; };
 		5677292B1909854E000AF156 /* ADMDeliveryModesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMDeliveryModesTableViewController.h; sourceTree = "<group>"; };
 		5677292C1909854E000AF156 /* ADMDeliveryModesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMDeliveryModesTableViewController.m; sourceTree = "<group>"; };
-		5677292E19098590000AF156 /* FormatType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatType.h; sourceTree = "<group>"; };
-		5677292F19098590000AF156 /* FormatType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatType.m; sourceTree = "<group>"; };
+		5677292E19098590000AF156 /* FormatType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FormatType.h; path = ../FormatType.h; sourceTree = "<group>"; };
+		5677292F19098590000AF156 /* FormatType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FormatType.m; path = ../FormatType.m; sourceTree = "<group>"; };
 		56B7885C18F74F6E00E0022D /* SUBMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBMainTableViewController.h; sourceTree = "<group>"; };
 		56B7885D18F74F6E00E0022D /* SUBMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBMainTableViewController.m; sourceTree = "<group>"; };
 		56B7885F18F7584100E0022D /* SUBSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBSettingsViewController.h; sourceTree = "<group>"; };
@@ -109,6 +111,10 @@
 		BF69871E18BA850C0004E31F /* VerifiedUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifiedUser.m; sourceTree = "<group>"; };
 		BF7A776518D3AEA60035C267 /* WebServiceURLBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceURLBuilder.h; sourceTree = "<group>"; };
 		BF7A776618D3AEA60035C267 /* WebServiceURLBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceURLBuilder.m; sourceTree = "<group>"; };
+		BF9DE673190B2E8500869144 /* ContentArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentArea.h; path = ../ContentArea.h; sourceTree = "<group>"; };
+		BF9DE674190B2E8500869144 /* ContentArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentArea.m; path = ../ContentArea.m; sourceTree = "<group>"; };
+		BF9DE676190B2EA500869144 /* DeliveryMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeliveryMode.h; path = ../DeliveryMode.h; sourceTree = "<group>"; };
+		BF9DE677190B2EA500869144 /* DeliveryMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeliveryMode.m; path = ../DeliveryMode.m; sourceTree = "<group>"; };
 		BF9FB23018E9055700B81140 /* CreateAccountTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountTableViewController.h; sourceTree = "<group>"; };
 		BF9FB23118E9055700B81140 /* CreateAccountTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountTableViewController.m; sourceTree = "<group>"; };
 		BF9FB27418E9350200B81140 /* FormFieldRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormFieldRow.h; sourceTree = "<group>"; };
@@ -131,8 +137,8 @@
 		BFAF6B9E18FCEB470004FCE1 /* CMAContentListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMAContentListTableViewController.m; sourceTree = "<group>"; };
 		BFB04C6018F8B84400B28EC8 /* SUBSelectProvidersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBSelectProvidersTableViewController.h; sourceTree = "<group>"; };
 		BFB04C6118F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBSelectProvidersTableViewController.m; sourceTree = "<group>"; };
-		BFB04C6318F8B89500B28EC8 /* Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Provider.h; sourceTree = "<group>"; };
-		BFB04C6418F8B89500B28EC8 /* Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Provider.m; sourceTree = "<group>"; };
+		BFB04C6318F8B89500B28EC8 /* Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Provider.h; path = ../Provider.h; sourceTree = "<group>"; };
+		BFB04C6418F8B89500B28EC8 /* Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Provider.m; path = ../Provider.m; sourceTree = "<group>"; };
 		BFB04C8518F8D0C700B28EC8 /* SUBProviderDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBProviderDetailTableViewController.h; sourceTree = "<group>"; };
 		BFB04C8618F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBProviderDetailTableViewController.m; sourceTree = "<group>"; };
 		BFB04CC618F8F9ED00B28EC8 /* DetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewCell.h; sourceTree = "<group>"; };
@@ -140,8 +146,8 @@
 		BFB04CC818F8F9ED00B28EC8 /* DetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailTableViewCell.xib; sourceTree = "<group>"; };
 		BFB04CCB18F8FA0D00B28EC8 /* DetailRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailRow.h; sourceTree = "<group>"; };
 		BFB04CCC18F8FA0D00B28EC8 /* DetailRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailRow.m; sourceTree = "<group>"; };
-		BFB70F7018FA6D9B00A19302 /* SubscriptionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionType.h; sourceTree = "<group>"; };
-		BFB70F7118FA6D9B00A19302 /* SubscriptionType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionType.m; sourceTree = "<group>"; };
+		BFB70F7018FA6D9B00A19302 /* SubscriptionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscriptionType.h; path = ../SubscriptionType.h; sourceTree = "<group>"; };
+		BFB70F7118FA6D9B00A19302 /* SubscriptionType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscriptionType.m; path = ../SubscriptionType.m; sourceTree = "<group>"; };
 		BFFB40AF18FDDCA500F99243 /* CMAEditContentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMAEditContentDetailsViewController.h; sourceTree = "<group>"; };
 		BFFB40B018FDDCA500F99243 /* CMAEditContentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMAEditContentDetailsViewController.m; sourceTree = "<group>"; };
 		BFFB40B118FDDCA500F99243 /* CMAEditContentDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMAEditContentDetailsViewController.xib; sourceTree = "<group>"; };
@@ -264,14 +270,9 @@
 				BF6986E418B9D2E80004E31F /* AppDelegate.m */,
 				BF69871D18BA850C0004E31F /* VerifiedUser.h */,
 				BF69871E18BA850C0004E31F /* VerifiedUser.m */,
-				BFB04C6318F8B89500B28EC8 /* Provider.h */,
-				BFB04C6418F8B89500B28EC8 /* Provider.m */,
-				5677292E19098590000AF156 /* FormatType.h */,
-				5677292F19098590000AF156 /* FormatType.m */,
-				BFB70F7018FA6D9B00A19302 /* SubscriptionType.h */,
-				BFB70F7118FA6D9B00A19302 /* SubscriptionType.m */,
 				BFAF6B7318FCBF270004FCE1 /* ContentElement.h */,
 				BFAF6B7418FCBF270004FCE1 /* ContentElement.m */,
+				BF9DE679190B2EC900869144 /* Admin Objects */,
 				BF7A776418D3ADEC0035C267 /* Networking */,
 				BF69871218B9D97A0004E31F /* View Controllers */,
 				BF061B5D18E78923005B1246 /* Table View Components */,
@@ -328,6 +329,23 @@
 				BF7A776618D3AEA60035C267 /* WebServiceURLBuilder.m */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		BF9DE679190B2EC900869144 /* Admin Objects */ = {
+			isa = PBXGroup;
+			children = (
+				BFB04C6318F8B89500B28EC8 /* Provider.h */,
+				BFB04C6418F8B89500B28EC8 /* Provider.m */,
+				5677292E19098590000AF156 /* FormatType.h */,
+				5677292F19098590000AF156 /* FormatType.m */,
+				BFB70F7018FA6D9B00A19302 /* SubscriptionType.h */,
+				BFB70F7118FA6D9B00A19302 /* SubscriptionType.m */,
+				BF9DE673190B2E8500869144 /* ContentArea.h */,
+				BF9DE674190B2E8500869144 /* ContentArea.m */,
+				BF9DE676190B2EA500869144 /* DeliveryMode.h */,
+				BF9DE677190B2EA500869144 /* DeliveryMode.m */,
+			);
+			path = "Admin Objects";
 			sourceTree = "<group>";
 		};
 		BFAC495818FB5B12007F3862 /* Admin Views */ = {
@@ -470,6 +488,7 @@
 				BFAF6B9B18FCDB860004FCE1 /* SUBContentDetailsViewController.m in Sources */,
 				BFB04CCD18F8FA0D00B28EC8 /* DetailRow.m in Sources */,
 				BF7A776718D3AEA60035C267 /* WebServiceURLBuilder.m in Sources */,
+				BF9DE678190B2EA500869144 /* DeliveryMode.m in Sources */,
 				5677292D1909854E000AF156 /* ADMDeliveryModesTableViewController.m in Sources */,
 				BFAF6B9F18FCEB470004FCE1 /* CMAContentListTableViewController.m in Sources */,
 				BFAC495F18FB5B59007F3862 /* CMAMainTableViewController.m in Sources */,
@@ -484,6 +503,7 @@
 				BFB70F7218FA6D9B00A19302 /* SubscriptionType.m in Sources */,
 				BFAF6B7518FCBF270004FCE1 /* ContentElement.m in Sources */,
 				BFAF6B7818FCCFE10004FCE1 /* ADMProvidersTableViewController.m in Sources */,
+				BF9DE675190B2E8500869144 /* ContentArea.m in Sources */,
 				BFB04C8718F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m in Sources */,
 				567729271909851F000AF156 /* ADMFormatTableViewController.m in Sources */,
 				5677292A19098537000AF156 /* ADMContentAreasTableViewController.m in Sources */,

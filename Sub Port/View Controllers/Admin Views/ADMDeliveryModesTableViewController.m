@@ -2,13 +2,17 @@
 //  ADMDeliveryModesTableViewController.m
 //  Sub Port
 //
-//  Created by Brandon Michael Kiefer on 4/24/14.
+//  Created by School on 4/14/14.
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
 
 #import "ADMDeliveryModesTableViewController.h"
+#import "DeliveryMode.h"
+#import "WebServiceURLBuilder.h"
 
-@interface ADMDeliveryModesTableViewController ()
+@interface ADMDeliveryModesTableViewController () {
+    NSMutableArray *_deliveryModes;
+}
 
 @end
 
@@ -18,7 +22,8 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        _deliveryModes = [[NSMutableArray alloc] init];
+        [self customizeNavigationBar];
     }
     return self;
 }
@@ -26,12 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self fetchDeliveryModesInBackground];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,76 +44,80 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [_deliveryModes count];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    NSString *cellIdentifier = @"cellIdentifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
     
-    // Configure the cell...
+    DeliveryMode *deliveryModeInstance = [self deliveryModeAtIndexPath:indexPath];
+    [[cell textLabel]setText:[deliveryModeInstance deliveryModeName]];
+    
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (DeliveryMode *)deliveryModeAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return [_deliveryModes objectAtIndex:[indexPath row]];
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - Connection Information
+
+- (void)fetchDeliveryModesInBackground
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    NSMutableURLRequest *request = [WebServiceURLBuilder getRequestForRouteAppendix:@"delivery_modes"];
+    
+    NSURLResponse *response;
+    NSError *err;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    [self connectionDidFinishWithData:responseData orError:err];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
+    NSError *localError;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
+    
+    if ([responseDictionary valueForKey:@"success"]) {
+        NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+        NSDictionary *deliveryModes = [dataDict objectForKey:@"delivery_modes"];
+        
+        for (NSDictionary *deliveryModeDictionary in deliveryModes) {
+            DeliveryMode *currentDeliveryMode = [[DeliveryMode alloc] init];
+            [currentDeliveryMode setIdNumber:[deliveryModeDictionary objectForKey:@"id"]];
+            [currentDeliveryMode setDeliveryModeName:[deliveryModeDictionary objectForKey:@"name"]];
+            [_deliveryModes addObject:currentDeliveryMode];
+        }
+        
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
+    
+    [[self tableView] reloadData];
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - Navigation Item Configuration
+
+- (void)customizeNavigationBar
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    [[self navigationItem] setTitle:@"Delivery Modes List"];
 }
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
