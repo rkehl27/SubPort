@@ -7,7 +7,6 @@
 //
 
 #import "ADMMainTableViewController.h"
-#import "ADMProvidersTableViewController.h"
 #import "ADMFormatTableViewController.h"
 #import "ADMContentAreasTableViewController.h"
 #import "ADMDeliveryModesTableViewController.h"
@@ -98,8 +97,9 @@
             break;
             
         case 3:
-            view = [[ADMProvidersTableViewController alloc] init];
-            [[self navigationController] pushViewController:view animated:YES];
+            //Subscription types
+            
+            //[[self navigationController] pushViewController:view animated:YES];
             break;
             
         default:
@@ -119,7 +119,7 @@
     [deliveryModesRow setLeftLabel:@"Delivery Modes"];
     
     DetailRow *providersRow = [[DetailRow alloc] init];
-    [providersRow setLeftLabel:@"Providers"];
+    [providersRow setLeftLabel:@"Subscription Types"];
     
     [_rows addObject:formatsRow];
     [_rows addObject:contentAreasRow];

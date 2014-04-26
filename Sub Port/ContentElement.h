@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Provider.h"
 
 @interface ContentElement : NSObject
 
@@ -14,5 +15,7 @@
 @property (nonatomic, readwrite) NSString *name;
 @property (nonatomic, readwrite) NSString *url;
 @property (nonatomic, readwrite) BOOL isHidden;
+
+@property (nonatomic, readwrite) Provider *provider;
 
 @end

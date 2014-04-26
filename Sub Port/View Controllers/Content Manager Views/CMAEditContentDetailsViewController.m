@@ -10,8 +10,9 @@
 #import "SUBContentDetailsViewController.h"
 #import "WebServiceURLBuilder.h"
 
-@interface CMAEditContentDetailsViewController () {
+@interface CMAEditContentDetailsViewController ()<UIPickerViewDataSource, UIPickerViewDelegate> {
     ContentElement *_contentElement;
+    NSMutableArray *_formatTypes;
 }
 
 @end
@@ -23,16 +24,15 @@
     self = [super init];
     if (self) {
         _contentElement = contentElement;
+        _formatTypes = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (id)init
 {
-    self = [super init];
-    if (self) {
-        _contentElement = [[ContentElement alloc] init];
-    }
+    ContentElement *contentElement = [[ContentElement alloc] init];
+    self = [self initWithContentElement:contentElement];
     return self;
 }
 
@@ -53,6 +53,11 @@
         [self customizeNavigationBarForEditContent];
     } else {
         [self customizeNavigationBarForAddContent];
+        NSDate *currentDate = [[NSDate alloc] initWithTimeIntervalSinceNow:1209600];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterShortStyle];
+        NSString *currDateString = [formatter stringFromDate:currentDate];
+        [[self dateField] setText:currDateString];
     }
     // Do any additional setup after loading the view from its nib.
 }
@@ -76,20 +81,19 @@
     [[self navigationController] pushViewController:detailView animated:YES];
 }
 
-#pragma mark - Connection Information
+#pragma mark - Picker View
 
-- (void)fetchContentInBackground
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    NSDictionary *postDictionary = @{@"id": [_contentElement idNumber]};
-    NSMutableURLRequest *request = [WebServiceURLBuilder putRequestForRouteAppendix:@"provider_content_elements" withDictionary:postDictionary];
-    
-    NSURLResponse *response;
-    NSError *err;
-    
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
-    
-    [self connectionDidFinishWithData:responseData orError:err];
+    return 1;
 }
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [_formatTypes count];
+}
+
+#pragma mark - General Connection Information
 
 - (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
@@ -118,18 +122,49 @@
     
 }
 
-- (void)sychronizeObjectWithFields
+- (void)pushConnectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
+{
+    NSError *localError;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
+    
+    if ([responseDictionary valueForKey:@"success"]) {
+        
+    } else {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [av show];
+    }
+}
+
+- (void)synchronizeObjectWithFields
 {
     [_contentElement setName:[[self nameField] text]];
     [_contentElement setUrl:[[self urlField] text]];
     [_contentElement setIsHidden:[[self hiddenToggle] isOn]];
 }
 
-- (void)pushChangesToServer
-{
-    [self sychronizeObjectWithFields];
-    NSDictionary *postDictionary = @{@"id": [_contentElement idNumber], @"name":[_contentElement name], @"link":[_contentElement url], @"hidden_flag":@TRUE};
+#pragma mark - Connection Information FOR EDITING CONTENT
 
+- (void)fetchContentInBackground
+{
+    NSDictionary *postDictionary = @{@"id": [_contentElement idNumber]};
+    NSMutableURLRequest *request = [WebServiceURLBuilder putRequestForRouteAppendix:@"provider_content_elements" withDictionary:postDictionary];
+    
+    NSURLResponse *response;
+    NSError *err;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    [self connectionDidFinishWithData:responseData orError:err];
+}
+
+- (void)pushEditsToServer
+{
+    [self synchronizeObjectWithFields];
+    
+    NSNumber *isHiddenValue = [NSNumber numberWithBool:[_contentElement isHidden]];
+    
+    NSDictionary *postDictionary = @{@"id": [_contentElement idNumber], @"name":[_contentElement name], @"link":[_contentElement url], @"hidden_flag":isHiddenValue};
+    
     NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"manage_content_elements"];
     
     NSURLResponse *response;
@@ -140,15 +175,13 @@
     [self pushConnectionDidFinishWithData:responseData orError:err];
 }
 
-- (void)pushContentToServer
-{
-    
-}
-
 - (void)postHiddenFlag
 {
-    [self sychronizeObjectWithFields];
-    NSDictionary *postDictionary = @{@"id": [_contentElement idNumber], @"name":[_contentElement name], @"link":[_contentElement url], @"hidden_flag":@TRUE};
+    [self synchronizeObjectWithFields];
+    
+    NSNumber *isHiddenValue = [NSNumber numberWithBool:[_contentElement isHidden]];
+    
+    NSDictionary *postDictionary = @{@"id": [_contentElement idNumber], @"name":[_contentElement name], @"link":[_contentElement url], @"hidden_flag":isHiddenValue};
     
     NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"hide_content_areas"];
     
@@ -160,17 +193,25 @@
     [self pushConnectionDidFinishWithData:responseData orError:err];
 }
 
-- (void)pushConnectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
-{
-    NSError *localError;
-    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
-    
-    if ([responseDictionary valueForKey:@"success"]) {
+#pragma mark - Connection Information FOR ADDING CONTENT
 
-    } else {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [av show];
-    }
+- (void)pushNewContentToServer
+{
+    [self synchronizeObjectWithFields];
+    
+    NSNumber *isHiddenValue = [NSNumber numberWithBool:[_contentElement isHidden]];
+    
+    NSDictionary *putDictionary = @{@"provider_id":[[_contentElement provider] idNumber], @"name":[_contentElement name], @"link":[_contentElement url], @"hidden_flag":isHiddenValue};
+    
+    NSMutableURLRequest *request = [WebServiceURLBuilder putRequestForRouteAppendix:@"manage_content_elements" withDictionary:putDictionary];
+    
+    NSURLResponse *response;
+    NSError *err;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    [self pushConnectionDidFinishWithData:responseData orError:err];
+    
 }
 
 #pragma mark - Editing Control
@@ -184,7 +225,7 @@
         
         [self setFieldsEnabled:NO];
         
-        [self pushChangesToServer];
+        [self pushEditsToServer];
         //[self postHiddenFlag];
         
         [[self navigationController] popViewControllerAnimated:YES];
@@ -200,7 +241,7 @@
 - (IBAction)addContent:(id)sender
 {
     //Verify Information
-    [self pushContentToServer];
+    //[self pushNewContentToServer];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
@@ -215,7 +256,7 @@
     [[self urlField] setEnabled:enabled];
     [[self hiddenToggle] setEnabled:enabled];
     [[self formatField] setEnabled:enabled];
-    [[self dateField] setEnabled:enabled];
+    [[self dateField] setEnabled:NO];
 }
 
 #pragma mark - Navigation Control
@@ -237,7 +278,7 @@
 {
     [[self navigationItem] setTitle:@"Add Content"];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContent:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(addContent:)];
     [[self navigationItem] setRightBarButtonItem:addButton];
     
     UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];

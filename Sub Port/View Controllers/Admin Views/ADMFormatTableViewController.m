@@ -7,7 +7,7 @@
 //
 
 #import "ADMFormatTableViewController.h"
-#import "FormatType.h"
+//#import "FormatType.h"
 #import "WebServiceURLBuilder.h"
 
 @interface ADMFormatTableViewController () {
@@ -69,17 +69,17 @@
 
     }
     
-    FormatType *formatTypeInstance = [self formatTypeAtIndexPath:indexPath];
-    [[cell textLabel]setText:[formatTypeInstance formatTypeName]];
+    //FormatType *formatTypeInstance = [self formatTypeAtIndexPath:indexPath];
+    //[[cell textLabel]setText:[formatTypeInstance formatTypeName]];
     
     UISwitch *switchView = [[UISwitch alloc] init];
     cell.accessoryView = switchView;
-    if ([formatTypeInstance isHidden]) {
-        [switchView setOn:NO animated:NO];
-    }
-    else {
-        [switchView setOn:YES animated:NO];
-    }
+//    if ([formatTypeInstance isHidden]) {
+//        [switchView setOn:NO animated:NO];
+//    }
+//    else {
+//        [switchView setOn:YES animated:NO];
+//    }
     [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
     
     
@@ -93,27 +93,27 @@
     //NSIndexPath* indexPath = [[self tableView] indexPathForCell:cell];
     //NSLog(@"The %@ switch is %@", cell.textLabel.text, switchControl.on ? @"ON" : @"OFF" );
     
-    for (FormatType *tempFormatType in _formatTypes) {
-        if ([tempFormatType formatTypeName] == cell.textLabel.text) {
-            NSLog(@"The %@ %@ switch is %@", cell.textLabel.text, [tempFormatType idNumber], switchControl.on ? @"ON" : @"OFF" );
-            NSDictionary *postDictionary = @{@"id":[tempFormatType idNumber]};
-            NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"formats"];
-    
-            NSURLResponse *response;
-            NSError *err;
-    
-            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
-    
-            [self connectionDidFinishWithDataAfterPost:responseData orError:err];
-        }
-    }
+//    for (FormatType *tempFormatType in _formatTypes) {
+//        if ([tempFormatType formatTypeName] == cell.textLabel.text) {
+//            NSLog(@"The %@ %@ switch is %@", cell.textLabel.text, [tempFormatType idNumber], switchControl.on ? @"ON" : @"OFF" );
+//            NSDictionary *postDictionary = @{@"id":[tempFormatType idNumber]};
+//            NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"formats"];
+//    
+//            NSURLResponse *response;
+//            NSError *err;
+//    
+//            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+//    
+//            [self connectionDidFinishWithDataAfterPost:responseData orError:err];
+//        }
+//    }
     
 }
 
-- (FormatType *)formatTypeAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [_formatTypes objectAtIndex:[indexPath row]];
-}
+//- (FormatType *)formatTypeAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return [_formatTypes objectAtIndex:[indexPath row]];
+//}
 
 #pragma mark - Connection Information
 
@@ -173,20 +173,20 @@
         NSDictionary *formatTypes = [dataDict objectForKey:@"formats"];
         
         for (NSDictionary *formatTypeDictionary in formatTypes) {
-            FormatType *currentFormatType = [[FormatType alloc] init];
-            [currentFormatType setIdNumber:[formatTypeDictionary objectForKey:@"id"]];
-            [currentFormatType setFormatTypeName:[formatTypeDictionary objectForKey:@"name"]];
-            
-            if([[[formatTypeDictionary objectForKey:@"hidden_flag"] class] isSubclassOfClass:[NSNull class]])
-            {
-                [currentFormatType setIsHidden:NO];
-            } else {
-                [currentFormatType setIsHidden:YES];
-            }
-            
-            NSLog( @"%@ is %hhd", [currentFormatType formatTypeName], [currentFormatType isHidden] );
-            
-            [_formatTypes addObject:currentFormatType];
+//            FormatType *currentFormatType = [[FormatType alloc] init];
+//            [currentFormatType setIdNumber:[formatTypeDictionary objectForKey:@"id"]];
+//            [currentFormatType setFormatTypeName:[formatTypeDictionary objectForKey:@"name"]];
+//            
+//            if([[[formatTypeDictionary objectForKey:@"hidden_flag"] class] isSubclassOfClass:[NSNull class]])
+//            {
+//                [currentFormatType setIsHidden:NO];
+//            } else {
+//                [currentFormatType setIsHidden:YES];
+//            }
+//            
+//            NSLog( @"%@ is %hhd", [currentFormatType formatTypeName], [currentFormatType isHidden] );
+//            
+//            [_formatTypes addObject:currentFormatType];
         }
         
     } else {

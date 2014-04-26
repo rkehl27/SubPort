@@ -7,10 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B44D4D4190B496D0027B984 /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4D3190B496D0027B984 /* Provider.m */; };
+		2B44D4D9190B49860027B984 /* ContentArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4D6190B49860027B984 /* ContentArea.m */; };
+		2B44D4DA190B49860027B984 /* DeliveryMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4D8190B49860027B984 /* DeliveryMode.m */; };
+		2B44D4DD190B49A40027B984 /* SubscriptionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4DC190B49A40027B984 /* SubscriptionType.m */; };
+		2B44D4E1190B61900027B984 /* ToggleRowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4DF190B61900027B984 /* ToggleRowTableViewCell.m */; };
+		2B44D4E2190B61900027B984 /* ToggleRowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B44D4E0190B61900027B984 /* ToggleRowTableViewCell.xib */; };
+		2B44D4E5190B624B0027B984 /* ToggleRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4E4190B624B0027B984 /* ToggleRow.m */; };
+		2B44D4F2190B71810027B984 /* AdminObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4F1190B71810027B984 /* AdminObject.m */; };
+		2B44D4F6190B75EE0027B984 /* ADMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4F4190B75EE0027B984 /* ADMDetailViewController.m */; };
+		2B44D4F7190B75EE0027B984 /* ADMDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B44D4F5190B75EE0027B984 /* ADMDetailViewController.xib */; };
 		567729271909851F000AF156 /* ADMFormatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567729261909851F000AF156 /* ADMFormatTableViewController.m */; };
 		5677292A19098537000AF156 /* ADMContentAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5677292919098537000AF156 /* ADMContentAreasTableViewController.m */; };
 		5677292D1909854E000AF156 /* ADMDeliveryModesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5677292C1909854E000AF156 /* ADMDeliveryModesTableViewController.m */; };
-		5677293019098590000AF156 /* FormatType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5677292F19098590000AF156 /* FormatType.m */; };
 		56B7885E18F74F6E00E0022D /* SUBMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B7885D18F74F6E00E0022D /* SUBMainTableViewController.m */; };
 		56B7886218F7584100E0022D /* SUBSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B7886018F7584100E0022D /* SUBSettingsViewController.m */; };
 		56B7886318F7584100E0022D /* SUBSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56B7886118F7584100E0022D /* SUBSettingsViewController.xib */; };
@@ -34,8 +43,6 @@
 		BF69871C18BA82D00004E31F /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF69871A18BA82D00004E31F /* MainViewController.xib */; };
 		BF69871F18BA850C0004E31F /* VerifiedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BF69871E18BA850C0004E31F /* VerifiedUser.m */; };
 		BF7A776718D3AEA60035C267 /* WebServiceURLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7A776618D3AEA60035C267 /* WebServiceURLBuilder.m */; };
-		BF9DE675190B2E8500869144 /* ContentArea.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9DE674190B2E8500869144 /* ContentArea.m */; };
-		BF9DE678190B2EA500869144 /* DeliveryMode.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9DE677190B2EA500869144 /* DeliveryMode.m */; };
 		BF9FB23218E9055700B81140 /* CreateAccountTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9FB23118E9055700B81140 /* CreateAccountTableViewController.m */; };
 		BF9FB27618E9350200B81140 /* FormFieldRow.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9FB27518E9350200B81140 /* FormFieldRow.m */; };
 		BFAC495C18FB5B43007F3862 /* ADMMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC495B18FB5B43007F3862 /* ADMMainTableViewController.m */; };
@@ -43,17 +50,14 @@
 		BFAC496618FB6A90007F3862 /* UNISettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC496418FB6A90007F3862 /* UNISettingsViewController.m */; };
 		BFAC496718FB6A90007F3862 /* UNISettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFAC496518FB6A90007F3862 /* UNISettingsViewController.xib */; };
 		BFAF6B7518FCBF270004FCE1 /* ContentElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAF6B7418FCBF270004FCE1 /* ContentElement.m */; };
-		BFAF6B7818FCCFE10004FCE1 /* ADMProvidersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAF6B7718FCCFE10004FCE1 /* ADMProvidersTableViewController.m */; };
 		BFAF6B9B18FCDB860004FCE1 /* SUBContentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAF6B9918FCDB860004FCE1 /* SUBContentDetailsViewController.m */; };
 		BFAF6B9C18FCDB860004FCE1 /* SUBContentDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFAF6B9A18FCDB860004FCE1 /* SUBContentDetailsViewController.xib */; };
 		BFAF6B9F18FCEB470004FCE1 /* CMAContentListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAF6B9E18FCEB470004FCE1 /* CMAContentListTableViewController.m */; };
 		BFB04C6218F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04C6118F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m */; };
-		BFB04C6518F8B89500B28EC8 /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04C6418F8B89500B28EC8 /* Provider.m */; };
 		BFB04C8718F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04C8618F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m */; };
 		BFB04CC918F8F9ED00B28EC8 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04CC718F8F9ED00B28EC8 /* DetailTableViewCell.m */; };
 		BFB04CCA18F8F9ED00B28EC8 /* DetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFB04CC818F8F9ED00B28EC8 /* DetailTableViewCell.xib */; };
 		BFB04CCD18F8FA0D00B28EC8 /* DetailRow.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB04CCC18F8FA0D00B28EC8 /* DetailRow.m */; };
-		BFB70F7218FA6D9B00A19302 /* SubscriptionType.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB70F7118FA6D9B00A19302 /* SubscriptionType.m */; };
 		BFFB40B218FDDCA500F99243 /* CMAEditContentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFFB40B018FDDCA500F99243 /* CMAEditContentDetailsViewController.m */; };
 		BFFB40B318FDDCA500F99243 /* CMAEditContentDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFFB40B118FDDCA500F99243 /* CMAEditContentDetailsViewController.xib */; };
 /* End PBXBuildFile section */
@@ -69,14 +73,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		567729251909851F000AF156 /* ADMFormatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMFormatTableViewController.h; sourceTree = "<group>"; };
-		567729261909851F000AF156 /* ADMFormatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMFormatTableViewController.m; sourceTree = "<group>"; };
-		5677292819098537000AF156 /* ADMContentAreasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMContentAreasTableViewController.h; sourceTree = "<group>"; };
-		5677292919098537000AF156 /* ADMContentAreasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMContentAreasTableViewController.m; sourceTree = "<group>"; };
-		5677292B1909854E000AF156 /* ADMDeliveryModesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMDeliveryModesTableViewController.h; sourceTree = "<group>"; };
-		5677292C1909854E000AF156 /* ADMDeliveryModesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMDeliveryModesTableViewController.m; sourceTree = "<group>"; };
-		5677292E19098590000AF156 /* FormatType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FormatType.h; path = ../FormatType.h; sourceTree = "<group>"; };
-		5677292F19098590000AF156 /* FormatType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FormatType.m; path = ../FormatType.m; sourceTree = "<group>"; };
+		2B44D4D2190B496D0027B984 /* Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Provider.h; path = "Sub Port/Provider.h"; sourceTree = SOURCE_ROOT; };
+		2B44D4D3190B496D0027B984 /* Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Provider.m; path = "Sub Port/Provider.m"; sourceTree = SOURCE_ROOT; };
+		2B44D4D5190B49860027B984 /* ContentArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentArea.h; path = "Sub Port/ContentArea.h"; sourceTree = SOURCE_ROOT; };
+		2B44D4D6190B49860027B984 /* ContentArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentArea.m; path = "Sub Port/ContentArea.m"; sourceTree = SOURCE_ROOT; };
+		2B44D4D7190B49860027B984 /* DeliveryMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeliveryMode.h; path = "Sub Port/DeliveryMode.h"; sourceTree = SOURCE_ROOT; };
+		2B44D4D8190B49860027B984 /* DeliveryMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeliveryMode.m; path = "Sub Port/DeliveryMode.m"; sourceTree = SOURCE_ROOT; };
+		2B44D4DB190B49A40027B984 /* SubscriptionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscriptionType.h; path = "Sub Port/SubscriptionType.h"; sourceTree = SOURCE_ROOT; };
+		2B44D4DC190B49A40027B984 /* SubscriptionType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscriptionType.m; path = "Sub Port/SubscriptionType.m"; sourceTree = SOURCE_ROOT; };
+		2B44D4DE190B61900027B984 /* ToggleRowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleRowTableViewCell.h; sourceTree = "<group>"; };
+		2B44D4DF190B61900027B984 /* ToggleRowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleRowTableViewCell.m; sourceTree = "<group>"; };
+		2B44D4E0190B61900027B984 /* ToggleRowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToggleRowTableViewCell.xib; sourceTree = "<group>"; };
+		2B44D4E3190B624B0027B984 /* ToggleRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleRow.h; sourceTree = "<group>"; };
+		2B44D4E4190B624B0027B984 /* ToggleRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleRow.m; sourceTree = "<group>"; };
+		2B44D4F0190B71810027B984 /* AdminObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdminObject.h; path = "Sub Port/AdminObject.h"; sourceTree = SOURCE_ROOT; };
+		2B44D4F1190B71810027B984 /* AdminObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdminObject.m; path = "Sub Port/AdminObject.m"; sourceTree = SOURCE_ROOT; };
+		2B44D4F3190B75EE0027B984 /* ADMDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADMDetailViewController.h; path = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.h"; sourceTree = SOURCE_ROOT; };
+		2B44D4F4190B75EE0027B984 /* ADMDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADMDetailViewController.m; path = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.m"; sourceTree = SOURCE_ROOT; };
+		2B44D4F5190B75EE0027B984 /* ADMDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ADMDetailViewController.xib; path = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.xib"; sourceTree = SOURCE_ROOT; };
+		567729251909851F000AF156 /* ADMFormatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADMFormatTableViewController.h; path = ../ADMFormatTableViewController.h; sourceTree = "<group>"; };
+		567729261909851F000AF156 /* ADMFormatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADMFormatTableViewController.m; path = ../ADMFormatTableViewController.m; sourceTree = "<group>"; };
+		5677292819098537000AF156 /* ADMContentAreasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADMContentAreasTableViewController.h; path = ../ADMContentAreasTableViewController.h; sourceTree = "<group>"; };
+		5677292919098537000AF156 /* ADMContentAreasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADMContentAreasTableViewController.m; path = ../ADMContentAreasTableViewController.m; sourceTree = "<group>"; };
+		5677292B1909854E000AF156 /* ADMDeliveryModesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADMDeliveryModesTableViewController.h; path = ../ADMDeliveryModesTableViewController.h; sourceTree = "<group>"; };
+		5677292C1909854E000AF156 /* ADMDeliveryModesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADMDeliveryModesTableViewController.m; path = ../ADMDeliveryModesTableViewController.m; sourceTree = "<group>"; };
 		56B7885C18F74F6E00E0022D /* SUBMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBMainTableViewController.h; sourceTree = "<group>"; };
 		56B7885D18F74F6E00E0022D /* SUBMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBMainTableViewController.m; sourceTree = "<group>"; };
 		56B7885F18F7584100E0022D /* SUBSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBSettingsViewController.h; sourceTree = "<group>"; };
@@ -111,10 +131,6 @@
 		BF69871E18BA850C0004E31F /* VerifiedUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifiedUser.m; sourceTree = "<group>"; };
 		BF7A776518D3AEA60035C267 /* WebServiceURLBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceURLBuilder.h; sourceTree = "<group>"; };
 		BF7A776618D3AEA60035C267 /* WebServiceURLBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceURLBuilder.m; sourceTree = "<group>"; };
-		BF9DE673190B2E8500869144 /* ContentArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentArea.h; path = ../ContentArea.h; sourceTree = "<group>"; };
-		BF9DE674190B2E8500869144 /* ContentArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentArea.m; path = ../ContentArea.m; sourceTree = "<group>"; };
-		BF9DE676190B2EA500869144 /* DeliveryMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeliveryMode.h; path = ../DeliveryMode.h; sourceTree = "<group>"; };
-		BF9DE677190B2EA500869144 /* DeliveryMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeliveryMode.m; path = ../DeliveryMode.m; sourceTree = "<group>"; };
 		BF9FB23018E9055700B81140 /* CreateAccountTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountTableViewController.h; sourceTree = "<group>"; };
 		BF9FB23118E9055700B81140 /* CreateAccountTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountTableViewController.m; sourceTree = "<group>"; };
 		BF9FB27418E9350200B81140 /* FormFieldRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormFieldRow.h; sourceTree = "<group>"; };
@@ -128,8 +144,6 @@
 		BFAC496518FB6A90007F3862 /* UNISettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UNISettingsViewController.xib; sourceTree = "<group>"; };
 		BFAF6B7318FCBF270004FCE1 /* ContentElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentElement.h; sourceTree = "<group>"; };
 		BFAF6B7418FCBF270004FCE1 /* ContentElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentElement.m; sourceTree = "<group>"; };
-		BFAF6B7618FCCFE10004FCE1 /* ADMProvidersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMProvidersTableViewController.h; sourceTree = "<group>"; };
-		BFAF6B7718FCCFE10004FCE1 /* ADMProvidersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMProvidersTableViewController.m; sourceTree = "<group>"; };
 		BFAF6B9818FCDB860004FCE1 /* SUBContentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBContentDetailsViewController.h; sourceTree = "<group>"; };
 		BFAF6B9918FCDB860004FCE1 /* SUBContentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBContentDetailsViewController.m; sourceTree = "<group>"; };
 		BFAF6B9A18FCDB860004FCE1 /* SUBContentDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SUBContentDetailsViewController.xib; sourceTree = "<group>"; };
@@ -137,8 +151,6 @@
 		BFAF6B9E18FCEB470004FCE1 /* CMAContentListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMAContentListTableViewController.m; sourceTree = "<group>"; };
 		BFB04C6018F8B84400B28EC8 /* SUBSelectProvidersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBSelectProvidersTableViewController.h; sourceTree = "<group>"; };
 		BFB04C6118F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBSelectProvidersTableViewController.m; sourceTree = "<group>"; };
-		BFB04C6318F8B89500B28EC8 /* Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Provider.h; path = ../Provider.h; sourceTree = "<group>"; };
-		BFB04C6418F8B89500B28EC8 /* Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Provider.m; path = ../Provider.m; sourceTree = "<group>"; };
 		BFB04C8518F8D0C700B28EC8 /* SUBProviderDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBProviderDetailTableViewController.h; sourceTree = "<group>"; };
 		BFB04C8618F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBProviderDetailTableViewController.m; sourceTree = "<group>"; };
 		BFB04CC618F8F9ED00B28EC8 /* DetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewCell.h; sourceTree = "<group>"; };
@@ -146,8 +158,6 @@
 		BFB04CC818F8F9ED00B28EC8 /* DetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailTableViewCell.xib; sourceTree = "<group>"; };
 		BFB04CCB18F8FA0D00B28EC8 /* DetailRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailRow.h; sourceTree = "<group>"; };
 		BFB04CCC18F8FA0D00B28EC8 /* DetailRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailRow.m; sourceTree = "<group>"; };
-		BFB70F7018FA6D9B00A19302 /* SubscriptionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscriptionType.h; path = ../SubscriptionType.h; sourceTree = "<group>"; };
-		BFB70F7118FA6D9B00A19302 /* SubscriptionType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscriptionType.m; path = ../SubscriptionType.m; sourceTree = "<group>"; };
 		BFFB40AF18FDDCA500F99243 /* CMAEditContentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMAEditContentDetailsViewController.h; sourceTree = "<group>"; };
 		BFFB40B018FDDCA500F99243 /* CMAEditContentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMAEditContentDetailsViewController.m; sourceTree = "<group>"; };
 		BFFB40B118FDDCA500F99243 /* CMAEditContentDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMAEditContentDetailsViewController.xib; sourceTree = "<group>"; };
@@ -177,6 +187,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B44D4E9190B6D6C0027B984 /* List Views */ = {
+			isa = PBXGroup;
+			children = (
+				567729251909851F000AF156 /* ADMFormatTableViewController.h */,
+				567729261909851F000AF156 /* ADMFormatTableViewController.m */,
+				5677292819098537000AF156 /* ADMContentAreasTableViewController.h */,
+				5677292919098537000AF156 /* ADMContentAreasTableViewController.m */,
+				5677292B1909854E000AF156 /* ADMDeliveryModesTableViewController.h */,
+				5677292C1909854E000AF156 /* ADMDeliveryModesTableViewController.m */,
+			);
+			path = "List Views";
+			sourceTree = "<group>";
+		};
+		2B44D4EA190B6D8A0027B984 /* Detail Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B44D4F3190B75EE0027B984 /* ADMDetailViewController.h */,
+				2B44D4F4190B75EE0027B984 /* ADMDetailViewController.m */,
+				2B44D4F5190B75EE0027B984 /* ADMDetailViewController.xib */,
+			);
+			path = "Detail Views";
+			sourceTree = "<group>";
+		};
 		56B7885818F74BF700E0022D /* Universal Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +261,11 @@
 				BFB04CC618F8F9ED00B28EC8 /* DetailTableViewCell.h */,
 				BFB04CC718F8F9ED00B28EC8 /* DetailTableViewCell.m */,
 				BFB04CC818F8F9ED00B28EC8 /* DetailTableViewCell.xib */,
+				2B44D4E3190B624B0027B984 /* ToggleRow.h */,
+				2B44D4E4190B624B0027B984 /* ToggleRow.m */,
+				2B44D4DE190B61900027B984 /* ToggleRowTableViewCell.h */,
+				2B44D4DF190B61900027B984 /* ToggleRowTableViewCell.m */,
+				2B44D4E0190B61900027B984 /* ToggleRowTableViewCell.xib */,
 			);
 			name = "Table View Components";
 			path = "View Controllers/Table View Components";
@@ -334,16 +372,16 @@
 		BF9DE679190B2EC900869144 /* Admin Objects */ = {
 			isa = PBXGroup;
 			children = (
-				BFB04C6318F8B89500B28EC8 /* Provider.h */,
-				BFB04C6418F8B89500B28EC8 /* Provider.m */,
-				5677292E19098590000AF156 /* FormatType.h */,
-				5677292F19098590000AF156 /* FormatType.m */,
-				BFB70F7018FA6D9B00A19302 /* SubscriptionType.h */,
-				BFB70F7118FA6D9B00A19302 /* SubscriptionType.m */,
-				BF9DE673190B2E8500869144 /* ContentArea.h */,
-				BF9DE674190B2E8500869144 /* ContentArea.m */,
-				BF9DE676190B2EA500869144 /* DeliveryMode.h */,
-				BF9DE677190B2EA500869144 /* DeliveryMode.m */,
+				2B44D4F0190B71810027B984 /* AdminObject.h */,
+				2B44D4F1190B71810027B984 /* AdminObject.m */,
+				2B44D4DB190B49A40027B984 /* SubscriptionType.h */,
+				2B44D4DC190B49A40027B984 /* SubscriptionType.m */,
+				2B44D4D5190B49860027B984 /* ContentArea.h */,
+				2B44D4D6190B49860027B984 /* ContentArea.m */,
+				2B44D4D7190B49860027B984 /* DeliveryMode.h */,
+				2B44D4D8190B49860027B984 /* DeliveryMode.m */,
+				2B44D4D2190B496D0027B984 /* Provider.h */,
+				2B44D4D3190B496D0027B984 /* Provider.m */,
 			);
 			path = "Admin Objects";
 			sourceTree = "<group>";
@@ -353,14 +391,8 @@
 			children = (
 				BFAC495A18FB5B43007F3862 /* ADMMainTableViewController.h */,
 				BFAC495B18FB5B43007F3862 /* ADMMainTableViewController.m */,
-				BFAF6B7618FCCFE10004FCE1 /* ADMProvidersTableViewController.h */,
-				BFAF6B7718FCCFE10004FCE1 /* ADMProvidersTableViewController.m */,
-				567729251909851F000AF156 /* ADMFormatTableViewController.h */,
-				567729261909851F000AF156 /* ADMFormatTableViewController.m */,
-				5677292819098537000AF156 /* ADMContentAreasTableViewController.h */,
-				5677292919098537000AF156 /* ADMContentAreasTableViewController.m */,
-				5677292B1909854E000AF156 /* ADMDeliveryModesTableViewController.h */,
-				5677292C1909854E000AF156 /* ADMDeliveryModesTableViewController.m */,
+				2B44D4E9190B6D6C0027B984 /* List Views */,
+				2B44D4EA190B6D8A0027B984 /* Detail Views */,
 			);
 			path = "Admin Views";
 			sourceTree = "<group>";
@@ -455,8 +487,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFAF6B9C18FCDB860004FCE1 /* SUBContentDetailsViewController.xib in Resources */,
+				2B44D4E2190B61900027B984 /* ToggleRowTableViewCell.xib in Resources */,
 				BF6986DF18B9D2E80004E31F /* InfoPlist.strings in Resources */,
 				BF6986E718B9D2E80004E31F /* Images.xcassets in Resources */,
+				2B44D4F7190B75EE0027B984 /* ADMDetailViewController.xib in Resources */,
 				BFFB40B318FDDCA500F99243 /* CMAEditContentDetailsViewController.xib in Resources */,
 				BFAC496718FB6A90007F3862 /* UNISettingsViewController.xib in Resources */,
 				56B7886318F7584100E0022D /* SUBSettingsViewController.xib in Resources */,
@@ -482,13 +516,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B44D4E5190B624B0027B984 /* ToggleRow.m in Sources */,
 				56B7886218F7584100E0022D /* SUBSettingsViewController.m in Sources */,
-				5677293019098590000AF156 /* FormatType.m in Sources */,
 				BFAC495C18FB5B43007F3862 /* ADMMainTableViewController.m in Sources */,
 				BFAF6B9B18FCDB860004FCE1 /* SUBContentDetailsViewController.m in Sources */,
 				BFB04CCD18F8FA0D00B28EC8 /* DetailRow.m in Sources */,
+				2B44D4E1190B61900027B984 /* ToggleRowTableViewCell.m in Sources */,
 				BF7A776718D3AEA60035C267 /* WebServiceURLBuilder.m in Sources */,
-				BF9DE678190B2EA500869144 /* DeliveryMode.m in Sources */,
 				5677292D1909854E000AF156 /* ADMDeliveryModesTableViewController.m in Sources */,
 				BFAF6B9F18FCEB470004FCE1 /* CMAContentListTableViewController.m in Sources */,
 				BFAC495F18FB5B59007F3862 /* CMAMainTableViewController.m in Sources */,
@@ -498,20 +532,22 @@
 				BF9FB27618E9350200B81140 /* FormFieldRow.m in Sources */,
 				BFB04CC918F8F9ED00B28EC8 /* DetailTableViewCell.m in Sources */,
 				BF6986E518B9D2E80004E31F /* AppDelegate.m in Sources */,
+				2B44D4DA190B49860027B984 /* DeliveryMode.m in Sources */,
 				BF061B6118E7893F005B1246 /* FormFieldTableViewCell.m in Sources */,
 				BFB04C6218F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m in Sources */,
-				BFB70F7218FA6D9B00A19302 /* SubscriptionType.m in Sources */,
 				BFAF6B7518FCBF270004FCE1 /* ContentElement.m in Sources */,
-				BFAF6B7818FCCFE10004FCE1 /* ADMProvidersTableViewController.m in Sources */,
-				BF9DE675190B2E8500869144 /* ContentArea.m in Sources */,
+				2B44D4DD190B49A40027B984 /* SubscriptionType.m in Sources */,
+				2B44D4D9190B49860027B984 /* ContentArea.m in Sources */,
 				BFB04C8718F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m in Sources */,
 				567729271909851F000AF156 /* ADMFormatTableViewController.m in Sources */,
 				5677292A19098537000AF156 /* ADMContentAreasTableViewController.m in Sources */,
 				BF6986E118B9D2E80004E31F /* main.m in Sources */,
-				BFB04C6518F8B89500B28EC8 /* Provider.m in Sources */,
 				BF69871618BA82B90004E31F /* LoginViewController.m in Sources */,
+				2B44D4D4190B496D0027B984 /* Provider.m in Sources */,
 				BFAC496618FB6A90007F3862 /* UNISettingsViewController.m in Sources */,
+				2B44D4F6190B75EE0027B984 /* ADMDetailViewController.m in Sources */,
 				BF69871B18BA82D00004E31F /* MainViewController.m in Sources */,
+				2B44D4F2190B71810027B984 /* AdminObject.m in Sources */,
 				BFFB40B218FDDCA500F99243 /* CMAEditContentDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
