@@ -10,4 +10,8 @@
 
 @interface FormatType : NSObject
 
+@property (nonatomic, readwrite) NSString *formatTypeName;
+@property (nonatomic, readwrite) NSNumber *idNumber;
+@property (nonatomic, readwrite) BOOL isHidden;
+
 @end

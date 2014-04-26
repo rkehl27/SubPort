@@ -2,13 +2,13 @@
 //  ADMFormatTableViewController.m
 //  Sub Port
 //
-//  Created by Brandon Michael Kiefer on 4/24/14.
+//  Created by School on 4/14/14.
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
 
 #import "ADMFormatTableViewController.h"
-#import "WebServiceURLBuilder.h"
 #import "FormatType.h"
+#import "WebServiceURLBuilder.h"
 
 @interface ADMFormatTableViewController () {
     NSMutableArray *_formatTypes;
@@ -31,7 +31,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self fetchFormatsInBackground];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self fetchFormatTypesInBackground];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,24 +65,59 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        
+
     }
     
-    FormatType *formatInstance = [self providerAtIndexPath:indexPath];
-    //[[cell textLabel]setText:[formatInstance providerName]];
+    FormatType *formatTypeInstance = [self formatTypeAtIndexPath:indexPath];
+    [[cell textLabel]setText:[formatTypeInstance formatTypeName]];
     
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    UISwitch *switchView = [[UISwitch alloc] init];
+    cell.accessoryView = switchView;
+    if ([formatTypeInstance isHidden]) {
+        [switchView setOn:NO animated:NO];
+    }
+    else {
+        [switchView setOn:YES animated:NO];
+    }
+    [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+    
     
     return cell;
 }
 
-- (FormatType *)providerAtIndexPath:(NSIndexPath *)indexPath
+- (void) switchChanged:(id)sender {
+    UISwitch* switchControl = sender;
+    UIView* contentView = [switchControl superview];
+    UITableViewCell* cell = (UITableViewCell *)[contentView superview];
+    //NSIndexPath* indexPath = [[self tableView] indexPathForCell:cell];
+    //NSLog(@"The %@ switch is %@", cell.textLabel.text, switchControl.on ? @"ON" : @"OFF" );
+    
+    for (FormatType *tempFormatType in _formatTypes) {
+        if ([tempFormatType formatTypeName] == cell.textLabel.text) {
+            NSLog(@"The %@ %@ switch is %@", cell.textLabel.text, [tempFormatType idNumber], switchControl.on ? @"ON" : @"OFF" );
+            NSDictionary *postDictionary = @{@"id":[tempFormatType idNumber]};
+            NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"formats"];
+    
+            NSURLResponse *response;
+            NSError *err;
+    
+            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+            [self connectionDidFinishWithDataAfterPost:responseData orError:err];
+        }
+    }
+    
+}
+
+- (FormatType *)formatTypeAtIndexPath:(NSIndexPath *)indexPath
 {
     return [_formatTypes objectAtIndex:[indexPath row]];
 }
 
 #pragma mark - Connection Information
 
-- (void)fetchFormatsInBackground
+- (void)fetchFormatTypesInBackground
 {
     NSMutableURLRequest *request = [WebServiceURLBuilder getRequestForRouteAppendix:@"formats"];
     
@@ -89,6 +129,40 @@
     [self connectionDidFinishWithData:responseData orError:err];
 }
 
+- (void)connectionDidFinishWithDataAfterPost:(NSData *)responseData orError:(NSError *)error
+{
+    NSError *localError;
+    
+    
+    NSArray *json = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
+    if (!json && error && [error.domain isEqualToString:NSCocoaErrorDomain] && (error.code == NSPropertyListReadCorruptError)) {
+        // Encoding issue, try Latin-1
+        NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSISOLatin1StringEncoding];
+        if (jsonString) {
+            // Need to re-encode as UTF8 to parse, thanks Apple
+            json = [NSJSONSerialization JSONObjectWithData:
+                    [jsonString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]
+                                                   options:0 error:&error];
+        }
+    }
+    
+//    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+//    NSLog(@"Response: %@", responseString);
+//    
+//    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&localError];
+//
+//    if ([responseDictionary valueForKey:@"success"]) {
+//        NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+//        
+//        
+//    } else {
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//        [alertView show];
+//    }
+//    
+//    [[self tableView] reloadData];
+}
+
 - (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
     NSError *localError;
@@ -96,14 +170,24 @@
     
     if ([responseDictionary valueForKey:@"success"]) {
         NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
-//        NSDictionary *providers = [dataDict objectForKey:@"providers"];
-//        
-//        for (NSDictionary *providerDictionary in providers) {
-//            Provider *currentProvider = [[Provider alloc] init];
-//            [currentProvider setIdNumber:[providerDictionary objectForKey:@"id"]];
-//            [currentProvider setProviderName:[providerDictionary objectForKey:@"name"]];
-//            [_providers addObject:currentProvider];
-//        }
+        NSDictionary *formatTypes = [dataDict objectForKey:@"formats"];
+        
+        for (NSDictionary *formatTypeDictionary in formatTypes) {
+            FormatType *currentFormatType = [[FormatType alloc] init];
+            [currentFormatType setIdNumber:[formatTypeDictionary objectForKey:@"id"]];
+            [currentFormatType setFormatTypeName:[formatTypeDictionary objectForKey:@"name"]];
+            
+            if([[[formatTypeDictionary objectForKey:@"hidden_flag"] class] isSubclassOfClass:[NSNull class]])
+            {
+                [currentFormatType setIsHidden:NO];
+            } else {
+                [currentFormatType setIsHidden:YES];
+            }
+            
+            NSLog( @"%@ is %hhd", [currentFormatType formatTypeName], [currentFormatType isHidden] );
+            
+            [_formatTypes addObject:currentFormatType];
+        }
         
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -113,11 +197,12 @@
     [[self tableView] reloadData];
 }
 
+
 #pragma mark - Navigation Item Configuration
 
 - (void)customizeNavigationBar
 {
-    [[self navigationItem] setTitle:@"Formats List"];
+    [[self navigationItem] setTitle:@"Format Types List"];
 }
 
 @end

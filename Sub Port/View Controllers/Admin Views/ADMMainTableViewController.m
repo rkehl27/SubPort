@@ -84,7 +84,7 @@
     switch ([indexPath row]) {
         case 0:
             view = [[ADMFormatTableViewController alloc] init];
-            //[[self navigationController] pushViewController:view animated:YES];
+            [[self navigationController] pushViewController:view animated:YES];
             break;
             
         case 1:
