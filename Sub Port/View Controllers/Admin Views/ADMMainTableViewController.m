@@ -9,6 +9,8 @@
 #import "ADMMainTableViewController.h"
 #import "ADMProvidersTableViewController.h"
 #import "ADMFormatTableViewController.h"
+#import "ADMContentAreasTableViewController.h"
+#import "ADMDeliveryModesTableViewController.h"
 #import "UNISettingsViewController.h"
 #import "DetailRow.h"
 #import "DetailTableViewCell.h"
@@ -86,9 +88,13 @@
             break;
             
         case 1:
+            view = [[ADMContentAreasTableViewController alloc] init];
+            [[self navigationController] pushViewController:view animated:YES];
             break;
             
         case 2:
+            view = [[ADMDeliveryModesTableViewController alloc] init];
+            [[self navigationController] pushViewController:view animated:YES];
             break;
             
         case 3:
