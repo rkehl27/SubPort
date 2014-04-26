@@ -11,6 +11,4 @@
 
 @interface LoginViewController : UIViewController
 
-@property (nonatomic, strong, readwrite) VerifiedUser *user;
-
 @end

@@ -7,12 +7,13 @@
 //
 
 #import "LoginViewController.h"
+#import "SUBMainTableViewController.h"
 
 @interface LoginViewController () <UIAlertViewDelegate>{
     NSURLConnection *_connection;
     NSMutableData *_jsonData;
 }
-@property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
 @end
@@ -24,6 +25,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [[self navigationItem] setTitle:@"Login"];
     }
     return self;
 }
@@ -41,43 +43,15 @@
 }
 
 - (IBAction)loginComplete:(id)sender {
-    _user = [[VerifiedUser alloc] init];
-    [_user setUsername:[_usernameField text]];
-    [_user setPassword:[_passwordField text]];
+    [[VerifiedUser sharedUser] setEmail:[_emailField text]];
+    [[VerifiedUser sharedUser] setPassword:[_passwordField text]];
     
     [self postUserInformationToServer];
 }
 
-- (IBAction)logout:(id)sender {
-    NSString *baseLogoutURL = @"http://subportinc.herokuapp.com/api/v1/sessions/?auth_token=";
-    
-    NSString *fullLogoutURL = [baseLogoutURL stringByAppendingString:[_user authToken]];
-    
-    NSURL *url = [NSURL URLWithString:fullLogoutURL];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"DELETE"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
-    NSURLResponse *response;
-    NSError *err;
-    
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
-    
-    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-    NSLog(@"Log Out Response: %@", responseString);
-
-//    [_user setUsername:nil];
-//    [_user setPassword:nil];
-//    [_user setAuthToken:nil];
-    
-    //fix log out to completely delete user and auth token!
-}
-
 -(void)postUserInformationToServer
 {
-    NSDictionary *inputData = @{@"user":@{@"email":[_user username], @"password":[_user password]}};
+    NSDictionary *inputData = @{@"user":@{@"email":[[VerifiedUser sharedUser] email], @"password":[[VerifiedUser sharedUser] password]}};
     
     NSError *error = nil;
     NSData *jsonInputData = [NSJSONSerialization dataWithJSONObject:inputData options:NSJSONWritingPrettyPrinted error:&error];
@@ -111,11 +85,13 @@
     
     if([responseDictionary valueForKey:@"success"]) {
         NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
-        [_user setAuthToken:[dataDict objectForKey:@"auth_token"]];
-        NSLog(@"Auth Token: %@", [_user authToken]);
+        [[VerifiedUser sharedUser] setAuthToken:[dataDict objectForKey:@"auth_token"]];
+        NSLog(@"Auth Token: %@", [[VerifiedUser sharedUser] authToken]);
+
+        SUBMainTableViewController *mainViewController = [[SUBMainTableViewController alloc] init];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success" message:[responseDictionary valueForKey:@"info"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alertView show];
+        [self presentViewController:navController animated:YES completion:nil];
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];

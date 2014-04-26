@@ -10,9 +10,13 @@
 
 @interface WebServiceURLBuilder : NSObject
 
-+ (NSMutableURLRequest *)URLRequestForURL:(NSURL *)url;
+//These assume the baseURL is http://subportinc.herokuapp.com/api/v1 and route appendix comes after v1 with the auth_token added to end
 
-+ (NSMutableURLRequest *)URLRequestForURL:(NSURL *)url JSONToPost:(NSData *)json;
++ (NSMutableURLRequest *)getRequestForRouteAppendix:(NSString *)routeAppendix;
+
++ (NSMutableURLRequest *)postRequestWithDictionary:(NSDictionary *)postDictionary forRouteAppendix:(NSString *)routeAppendix;
+
++ (NSMutableURLRequest *)deleteRequestForRouteAppendix:(NSString *)routeAppendix;
 
 
 @end
