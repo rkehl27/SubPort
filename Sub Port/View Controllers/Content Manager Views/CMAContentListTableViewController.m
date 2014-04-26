@@ -1,32 +1,40 @@
 //
-//  SUBMainViewControllerTableViewController.m
+//  CMAContentListTableViewController.m
 //  Sub Port
 //
-//  Created by Brandon Michael Kiefer on 4/10/14.
+//  Created by School on 4/14/14.
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
 
-#import "SUBMainTableViewController.h"
-#import "SUBSettingsViewController.h"
-#import "SUBContentDetailsViewController.h"
-#import "WebServiceURLBuilder.h"
+#import "CMAContentListTableViewController.h"
+#import "CMAEditContentDetailsViewController.h"
 #import "ContentElement.h"
+#import "WebServiceURLBuilder.h"
 
-@interface SUBMainTableViewController ()<UIAlertViewDelegate> {
+@interface CMAContentListTableViewController ()<UIAlertViewDelegate> {
+    Provider *_currProvider;
     NSMutableArray *_contentList;
 }
 
 @end
 
-@implementation SUBMainTableViewController
+@implementation CMAContentListTableViewController
+
+- (id)initWithProvider:(Provider *)provider
+{
+    self = [super init];
+    if (self) {
+        _currProvider = provider;
+        _contentList = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        _contentList = [[NSMutableArray alloc] init];
-        [self customizeNavigationItem];
-        [self configureRefreshControl];
+        // Custom initialization
     }
     return self;
 }
@@ -34,8 +42,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self customizeNavigationBar];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     [self fetchContentInBackground];
-    [[self refreshControl] beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,6 +70,7 @@
     return [_contentList count];
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *cellIdentifier = @"cellIdentifier";
@@ -66,23 +79,31 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    ContentElement *contentElementInstance = [_contentList objectAtIndex:[indexPath row]];
-    [[cell textLabel] setText:[contentElementInstance name]];
+    // Configure the cell...
+    
+    ContentElement *currElement = [_contentList objectAtIndex:[indexPath row]];
+    
+    [[cell textLabel] setText:[currElement name]];
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SUBContentDetailsViewController *detailView = [[SUBContentDetailsViewController alloc] initWithContent:[_contentList objectAtIndex:[indexPath row]]];
-    [[self navigationController] pushViewController:detailView animated:YES];
+    ContentElement *_selectedElement = [_contentList objectAtIndex:[indexPath row]];
+    
+    CMAEditContentDetailsViewController *contentDetails = [[CMAEditContentDetailsViewController alloc] initWithContentElement:_selectedElement];
+    
+    [[self navigationController] pushViewController:contentDetails animated:YES];
 }
 
 #pragma mark - Connection Information
 
 - (void)fetchContentInBackground
 {
-    NSMutableURLRequest *request = [WebServiceURLBuilder getRequestForRouteAppendix:@"user_content_elements"];
+    NSDictionary *postDictionary = @{@"id": [_currProvider idNumber]};
+    NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"provider_content_elements"];
     
     NSURLResponse *response;
     NSError *err;
@@ -96,7 +117,7 @@
 {
     [[self refreshControl] endRefreshing];
     [_contentList removeAllObjects];
-
+    
     NSError *localError;
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
@@ -111,7 +132,7 @@
             
             [_contentList addObject:currElement];
         }
-    }else {
+    } else {
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [av show];
     }
@@ -119,34 +140,27 @@
     [[self tableView] reloadData];
 }
 
-
-- (void)configureRefreshControl
+- (IBAction)addItem:(id)sender
 {
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(userPulledToRefresh:) forControlEvents:UIControlEventValueChanged];
-    [refreshControl setTintColor:[UIColor blackColor]];
-    [self setRefreshControl:refreshControl];
-}
-
-- (void)userPulledToRefresh:(id)sender
-{
-    [self fetchContentInBackground];
-}
-
-#pragma mark - Configure Navigation Bar
-
-- (IBAction)settings:(id)sender
-{
-    SUBSettingsViewController *settingsView = [[SUBSettingsViewController alloc] init];
-    [[self navigationController] pushViewController:settingsView animated:YES];
-}
-
-- (void)customizeNavigationItem
-{
-    UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
-    [[self navigationItem] setRightBarButtonItem:rightbbi];
+    NSLog(@"Add Content Tapped");
     
-    [[self navigationItem] setTitle:@"List"];
+    ContentElement *newContentElement = [[ContentElement alloc] init];
+    [newContentElement setProvider:_currProvider];
+    
+    CMAEditContentDetailsViewController *addContentView = [[CMAEditContentDetailsViewController alloc] initWithContentElement:newContentElement];
+    
+    [[self navigationController] pushViewController:addContentView animated:YES];
 }
+
+#pragma mark - Configure Navigation
+
+- (void)customizeNavigationBar
+{
+    [[self navigationItem] setTitle:[_currProvider providerName]];
+    
+    UIBarButtonItem *addContentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
+    [[self navigationItem] setRightBarButtonItem:addContentButton];
+}
+
 
 @end

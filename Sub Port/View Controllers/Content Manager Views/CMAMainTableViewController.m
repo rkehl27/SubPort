@@ -1,35 +1,32 @@
 //
-//  SUBSelectProvidersTableViewController.m
+//  CMAMainTableViewController.m
 //  Sub Port
 //
-//  Created by School on 4/11/14.
+//  Created by School on 4/13/14.
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
 
-#import "SUBSelectProvidersTableViewController.h"
-#import "SUBProviderDetailTableViewController.h"
-#import "SUBSettingsViewController.h"
-#import "VerifiedUser.h"
+#import "CMAMainTableViewController.h"
+#import "CMAContentListTableViewController.h"
+#import "CMAEditContentDetailsViewController.h"
+#import "UNISettingsViewController.h"
 #import "Provider.h"
 #import "WebServiceURLBuilder.h"
 
-@interface SUBSelectProvidersTableViewController ()<UIAlertViewDelegate> {
+@interface CMAMainTableViewController () {
     NSMutableArray *_providers;
-    NSMutableArray *_myProviders;
 }
 
 @end
 
-@implementation SUBSelectProvidersTableViewController
+@implementation CMAMainTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         _providers = [[NSMutableArray alloc] init];
-        _myProviders = [[NSMutableArray alloc] init];
-        [self customizeNavigationItem];
-        // Custom initialization
+        [self customizeNavigationBar];
     }
     return self;
 }
@@ -37,15 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self fetchProvidersInBackground];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [[self tableView] reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,11 +68,7 @@
     Provider *providerInstance = [self providerAtIndexPath:indexPath];
     [[cell textLabel]setText:[providerInstance providerName]];
     
-    if ([providerInstance isSelected]) {
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-    } else {
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
-    }
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }
@@ -97,9 +82,11 @@
 {
     Provider *selectedProvider = [self providerAtIndexPath:indexPath];
     
-    SUBProviderDetailTableViewController *detailView = [[SUBProviderDetailTableViewController alloc] initWithProvider:selectedProvider];
+    CMAContentListTableViewController *contentList = [[CMAContentListTableViewController alloc] initWithProvider:selectedProvider];
     
-    [[self navigationController] pushViewController:detailView animated:YES];
+//    CMAEditContentDetailsViewController *contentList = [[CMAEditContentDetailsViewController alloc] init];
+    
+    [[self navigationController] pushViewController:contentList animated:YES];
 }
 
 #pragma mark - Connection Information
@@ -132,18 +119,6 @@
             [_providers addObject:currentProvider];
         }
         
-        NSDictionary *myProviders = [dataDict objectForKey:@"my_providers"];
-        
-        for (NSDictionary *providerDictionary in myProviders) {
-            Provider *currentProvider = [[Provider alloc] init];
-            [currentProvider setIdNumber:[providerDictionary objectForKey:@"id"]];
-            [currentProvider setProviderName:[providerDictionary objectForKey:@"name"]];
-            [currentProvider setIsSelected:YES];
-            [_myProviders addObject:currentProvider];
-        }
-        
-        [self synchronizeMyProvidersListWithProvidersList];
-        
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
@@ -152,30 +127,19 @@
     [[self tableView] reloadData];
 }
 
-- (void)synchronizeMyProvidersListWithProvidersList
-{
-    for (Provider *currProv in _providers) {
-        for (Provider *myProv in _myProviders) {
-            if ([currProv idNumber] == [myProv idNumber]) {
-                [currProv setIsSelected:YES];
-            }
-        }
-    }
-}
-
-#pragma mark - Navigation Information
+#pragma mark - Navigation Item Configuration
 
 - (IBAction)settings:(id)sender
 {
-    SUBSettingsViewController *settingsView = [[SUBSettingsViewController alloc] init];
+    UNISettingsViewController *settingsView = [[UNISettingsViewController alloc] init];
     [[self navigationController] pushViewController:settingsView animated:YES];
 }
 
-- (void)customizeNavigationItem
+- (void)customizeNavigationBar
 {
-    [[self navigationItem] setTitle:@"Select Providers"];
-//    UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
-//    [[self navigationItem] setRightBarButtonItem:rightbbi];
+    UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
+    [[self navigationItem] setRightBarButtonItem:rightbbi];
+    [[self navigationItem] setTitle:@"Content Manager"];
 }
 
 

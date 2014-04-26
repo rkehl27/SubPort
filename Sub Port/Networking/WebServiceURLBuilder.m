@@ -66,4 +66,46 @@
     return request;
 }
 
++ (NSMutableURLRequest *)deleteRequestForRouteAppendix:(NSString *)routeAppendix withDictionary:(NSDictionary *)deleteDictionary
+{
+    NSError *error = nil;
+    NSData *jsonInputData = [NSJSONSerialization dataWithJSONObject:deleteDictionary options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSString *baseURL = @"http://subportinc.herokuapp.com/api/v1/{routeAppendix}/?auth_token=";
+    baseURL = [baseURL stringByReplacingOccurrencesOfString:@"{routeAppendix}" withString:routeAppendix];
+    NSString *fullURL = [baseURL stringByAppendingString:[[VerifiedUser sharedUser] authToken]];
+    
+    NSURL *url = [NSURL URLWithString:fullURL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    [request setHTTPMethod:@"DELETE"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setHTTPBody:jsonInputData];
+    
+    return request;
+}
+
++ (NSMutableURLRequest *)putRequestForRouteAppendix:(NSString *)routeAppendix withDictionary:(NSDictionary *)putDictionary
+{
+    NSError *error = nil;
+    NSData *jsonInputData = [NSJSONSerialization dataWithJSONObject:putDictionary options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSString *baseURL = @"http://subportinc.herokuapp.com/api/v1/{routeAppendix}/?auth_token=";
+    baseURL = [baseURL stringByReplacingOccurrencesOfString:@"{routeAppendix}" withString:routeAppendix];
+    NSString *fullURL = [baseURL stringByAppendingString:[[VerifiedUser sharedUser] authToken]];
+    
+    NSURL *url = [NSURL URLWithString:fullURL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    [request setHTTPMethod:@"PUT"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setHTTPBody:jsonInputData];
+    
+    return request;
+}
+
 @end

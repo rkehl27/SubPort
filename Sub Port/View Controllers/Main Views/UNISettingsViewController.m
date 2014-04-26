@@ -1,29 +1,27 @@
 //
-//  SUBSettingsViewController.m
+//  UNISettingsViewController.m
 //  Sub Port
 //
-//  Created by Brandon Michael Kiefer on 4/10/14.
+//  Created by School on 4/13/14.
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
 
-#import "SUBSettingsViewController.h"
-#import "SUBSelectProvidersTableViewController.h"
+#import "UNISettingsViewController.h"
 #import "VerifiedUser.h"
-#import "MainViewController.h"
 #import "WebServiceURLBuilder.h"
+#import "MainViewController.h"
 
-@interface SUBSettingsViewController ()
+@interface UNISettingsViewController ()
 
 @end
 
-@implementation SUBSettingsViewController
+@implementation UNISettingsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [self customizeNavigationItem];
     }
     return self;
 }
@@ -31,6 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self customizeNavigationItem];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -40,13 +39,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)changeProviders:(id)sender
-{
-    SUBSelectProvidersTableViewController *selectProvidersViewController = [[SUBSelectProvidersTableViewController alloc] init];
-    [[self navigationController] pushViewController:selectProvidersViewController animated:YES];
-}
-
-- (IBAction)updateAccount:(id)sender
+- (IBAction)updateAccountInfo:(id)sender
 {
     //do nothing
 }
@@ -54,7 +47,7 @@
 - (IBAction)signOut:(id)sender
 {
     NSMutableURLRequest *request = [WebServiceURLBuilder deleteRequestForRouteAppendix:@"sessions"];
-  
+    
     NSURLResponse *response;
     NSError *err;
     

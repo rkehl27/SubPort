@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "SUBMainTableViewController.h"
+#import "CMAMainTableViewController.h"
+#import "ADMMainTableViewController.h"
 
 @interface LoginViewController () <UIAlertViewDelegate>{
     NSURLConnection *_connection;
@@ -76,7 +78,6 @@
 - (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
     NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-    
     NSLog(@"Response: %@", responseString);
     
     NSError *localError;
@@ -87,8 +88,20 @@
         NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
         [[VerifiedUser sharedUser] setAuthToken:[dataDict objectForKey:@"auth_token"]];
         NSLog(@"Auth Token: %@", [[VerifiedUser sharedUser] authToken]);
-
-        SUBMainTableViewController *mainViewController = [[SUBMainTableViewController alloc] init];
+        
+        UITableViewController *mainViewController;
+        
+        NSLog(@"Content Manager Flag: %@", [dataDict objectForKey:@"content_manager_flag"]);
+        NSLog(@"Admin Flag: %@", [dataDict objectForKey:@"admin_flag"]);
+        
+        if (![[[dataDict objectForKey:@"content_manager_flag"] class] isSubclassOfClass:[NSNull class]]) {
+            mainViewController = [[CMAMainTableViewController alloc] init];
+        } else if (![[[dataDict objectForKey:@"admin_flag"] class] isSubclassOfClass:[NSNull class]]) {
+            mainViewController = [[ADMMainTableViewController alloc] init];
+        } else {
+            mainViewController = [[SUBMainTableViewController alloc] init];
+        }
+        
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
         
         [self presentViewController:navController animated:YES completion:nil];

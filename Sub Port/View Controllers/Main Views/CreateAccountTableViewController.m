@@ -64,6 +64,14 @@
     
     [[cell rowLabel] setText:[item label]];
     
+    if ([[[cell rowLabel] text] isEqualToString:@"Password"]) {
+        [[cell rowTextField] setSecureTextEntry:YES];
+    }
+    
+    if ([[[cell rowLabel] text] isEqualToString:@"Password Confirmation"]) {
+        [[cell rowTextField] setSecureTextEntry:YES];
+    }
+    
     [_cells addObject:cell];
     
     return cell;

@@ -4,18 +4,28 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/LoginViewController.m"
-            timestampString = "416558484.458086"
+            filePath = "Sub Port/View Controllers/Subscriber Views/SUBContentDetailsViewController.m"
+            timestampString = "419227813.18896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "-validateUserInformation"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "-connectionDidFinishWithData:orError:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +35,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/LoginViewController.m"
-            timestampString = "416558813.079492"
+            filePath = "Sub Port/View Controllers/Content Manager Views/CMAContentListTableViewController.m"
+            timestampString = "419292772.86003"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "-connectionDidFinishLoading:"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "-connectionDidFinishWithData:orError:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +51,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/LoginViewController.m"
-            timestampString = "416558131.678474"
+            filePath = "Sub Port/View Controllers/Subscriber Views/SUBContentDetailsViewController.m"
+            timestampString = "419291710.655846"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "-loginComplete:"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "-fetchURLForWebView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +67,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/LoginViewController.m"
-            timestampString = "417473346.405672"
+            filePath = "Sub Port/View Controllers/Subscriber Views/SUBContentDetailsViewController.m"
+            timestampString = "419291714.777903"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "-connection:didReceiveData:"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "-connectionDidFinishWithData:orError:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +83,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/Networking/WebServiceURLBuilder.m"
-            timestampString = "417473789.584604"
+            filePath = "Sub Port/View Controllers/Admin Views/ADMFormatTableViewController.m"
+            timestampString = "420187328.865241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "11"
-            endingLineNumber = "11"
-            landmarkName = "@implementation WebServiceURLBuilder"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "-switchChanged:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sub Port/View Controllers/Admin Views/ADMFormatTableViewController.m"
+            timestampString = "420187328.865241"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "@implementation ADMFormatTableViewController"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
@@ -89,13 +115,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Table View Components/PickerTableViewCell.m"
-            timestampString = "419061710.080561"
+            filePath = "Sub Port/View Controllers/Admin Views/ADMFormatTableViewController.m"
+            timestampString = "420187328.865241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "-setSelected:animated:"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "-switchChanged:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
