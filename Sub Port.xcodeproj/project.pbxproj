@@ -18,9 +18,9 @@
 		2BA190F0190C36AA0051FDED /* FormatType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190E8190C36AA0051FDED /* FormatType.m */; };
 		2BA190F1190C36AA0051FDED /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190EA190C36AA0051FDED /* Provider.m */; };
 		2BA190F2190C36AA0051FDED /* SubscriptionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190EC190C36AA0051FDED /* SubscriptionType.m */; };
-		567729271909851F000AF156 /* ADMFormatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567729261909851F000AF156 /* ADMFormatTableViewController.m */; };
-		5677292A19098537000AF156 /* ADMContentAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5677292919098537000AF156 /* ADMContentAreasTableViewController.m */; };
-		5677292D1909854E000AF156 /* ADMDeliveryModesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5677292C1909854E000AF156 /* ADMDeliveryModesTableViewController.m */; };
+		2BA190FA190C3EDD0051FDED /* ADMContentAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190F5190C3EDD0051FDED /* ADMContentAreasTableViewController.m */; };
+		2BA190FB190C3EDD0051FDED /* ADMDeliveryModesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190F7190C3EDD0051FDED /* ADMDeliveryModesTableViewController.m */; };
+		2BA190FC190C3EDD0051FDED /* ADMFormatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190F9190C3EDD0051FDED /* ADMFormatTableViewController.m */; };
 		56B7885E18F74F6E00E0022D /* SUBMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B7885D18F74F6E00E0022D /* SUBMainTableViewController.m */; };
 		56B7886218F7584100E0022D /* SUBSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B7886018F7584100E0022D /* SUBSettingsViewController.m */; };
 		56B7886318F7584100E0022D /* SUBSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56B7886118F7584100E0022D /* SUBSettingsViewController.xib */; };
@@ -94,12 +94,12 @@
 		2BA190EA190C36AA0051FDED /* Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Provider.m; sourceTree = "<group>"; };
 		2BA190EB190C36AA0051FDED /* SubscriptionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionType.h; sourceTree = "<group>"; };
 		2BA190EC190C36AA0051FDED /* SubscriptionType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionType.m; sourceTree = "<group>"; };
-		567729251909851F000AF156 /* ADMFormatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADMFormatTableViewController.h; path = ../ADMFormatTableViewController.h; sourceTree = "<group>"; };
-		567729261909851F000AF156 /* ADMFormatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADMFormatTableViewController.m; path = ../ADMFormatTableViewController.m; sourceTree = "<group>"; };
-		5677292819098537000AF156 /* ADMContentAreasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADMContentAreasTableViewController.h; path = ../ADMContentAreasTableViewController.h; sourceTree = "<group>"; };
-		5677292919098537000AF156 /* ADMContentAreasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADMContentAreasTableViewController.m; path = ../ADMContentAreasTableViewController.m; sourceTree = "<group>"; };
-		5677292B1909854E000AF156 /* ADMDeliveryModesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADMDeliveryModesTableViewController.h; path = ../ADMDeliveryModesTableViewController.h; sourceTree = "<group>"; };
-		5677292C1909854E000AF156 /* ADMDeliveryModesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADMDeliveryModesTableViewController.m; path = ../ADMDeliveryModesTableViewController.m; sourceTree = "<group>"; };
+		2BA190F4190C3EDD0051FDED /* ADMContentAreasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMContentAreasTableViewController.h; sourceTree = "<group>"; };
+		2BA190F5190C3EDD0051FDED /* ADMContentAreasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMContentAreasTableViewController.m; sourceTree = "<group>"; };
+		2BA190F6190C3EDD0051FDED /* ADMDeliveryModesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMDeliveryModesTableViewController.h; sourceTree = "<group>"; };
+		2BA190F7190C3EDD0051FDED /* ADMDeliveryModesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMDeliveryModesTableViewController.m; sourceTree = "<group>"; };
+		2BA190F8190C3EDD0051FDED /* ADMFormatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMFormatTableViewController.h; sourceTree = "<group>"; };
+		2BA190F9190C3EDD0051FDED /* ADMFormatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMFormatTableViewController.m; sourceTree = "<group>"; };
 		56B7885C18F74F6E00E0022D /* SUBMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBMainTableViewController.h; sourceTree = "<group>"; };
 		56B7885D18F74F6E00E0022D /* SUBMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBMainTableViewController.m; sourceTree = "<group>"; };
 		56B7885F18F7584100E0022D /* SUBSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBSettingsViewController.h; sourceTree = "<group>"; };
@@ -190,19 +190,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2B44D4E9190B6D6C0027B984 /* List Views */ = {
-			isa = PBXGroup;
-			children = (
-				567729251909851F000AF156 /* ADMFormatTableViewController.h */,
-				567729261909851F000AF156 /* ADMFormatTableViewController.m */,
-				5677292819098537000AF156 /* ADMContentAreasTableViewController.h */,
-				5677292919098537000AF156 /* ADMContentAreasTableViewController.m */,
-				5677292B1909854E000AF156 /* ADMDeliveryModesTableViewController.h */,
-				5677292C1909854E000AF156 /* ADMDeliveryModesTableViewController.m */,
-			);
-			path = "List Views";
-			sourceTree = "<group>";
-		};
 		2B44D4EA190B6D8A0027B984 /* Detail Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +217,19 @@
 				2BA190EC190C36AA0051FDED /* SubscriptionType.m */,
 			);
 			path = "Admin Objects";
+			sourceTree = "<group>";
+		};
+		2BA190F3190C3EDD0051FDED /* List Views */ = {
+			isa = PBXGroup;
+			children = (
+				2BA190F4190C3EDD0051FDED /* ADMContentAreasTableViewController.h */,
+				2BA190F5190C3EDD0051FDED /* ADMContentAreasTableViewController.m */,
+				2BA190F6190C3EDD0051FDED /* ADMDeliveryModesTableViewController.h */,
+				2BA190F7190C3EDD0051FDED /* ADMDeliveryModesTableViewController.m */,
+				2BA190F8190C3EDD0051FDED /* ADMFormatTableViewController.h */,
+				2BA190F9190C3EDD0051FDED /* ADMFormatTableViewController.m */,
+			);
+			path = "List Views";
 			sourceTree = "<group>";
 		};
 		56B7885818F74BF700E0022D /* Universal Views */ = {
@@ -396,7 +396,7 @@
 			children = (
 				BFAC495A18FB5B43007F3862 /* ADMMainTableViewController.h */,
 				BFAC495B18FB5B43007F3862 /* ADMMainTableViewController.m */,
-				2B44D4E9190B6D6C0027B984 /* List Views */,
+				2BA190F3190C3EDD0051FDED /* List Views */,
 				2B44D4EA190B6D8A0027B984 /* Detail Views */,
 			);
 			path = "Admin Views";
@@ -529,7 +529,6 @@
 				BFB04CCD18F8FA0D00B28EC8 /* DetailRow.m in Sources */,
 				2B44D4E1190B61900027B984 /* ToggleRowTableViewCell.m in Sources */,
 				BF7A776718D3AEA60035C267 /* WebServiceURLBuilder.m in Sources */,
-				5677292D1909854E000AF156 /* ADMDeliveryModesTableViewController.m in Sources */,
 				BFAF6B9F18FCEB470004FCE1 /* CMAContentListTableViewController.m in Sources */,
 				BFAC495F18FB5B59007F3862 /* CMAMainTableViewController.m in Sources */,
 				BF9FB23218E9055700B81140 /* CreateAccountTableViewController.m in Sources */,
@@ -537,20 +536,21 @@
 				BF69871F18BA850C0004E31F /* VerifiedUser.m in Sources */,
 				BF9FB27618E9350200B81140 /* FormFieldRow.m in Sources */,
 				BFB04CC918F8F9ED00B28EC8 /* DetailTableViewCell.m in Sources */,
+				2BA190FA190C3EDD0051FDED /* ADMContentAreasTableViewController.m in Sources */,
 				BF6986E518B9D2E80004E31F /* AppDelegate.m in Sources */,
 				BF061B6118E7893F005B1246 /* FormFieldTableViewCell.m in Sources */,
 				BFB04C6218F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m in Sources */,
 				BFAF6B7518FCBF270004FCE1 /* ContentElement.m in Sources */,
 				BFB04C8718F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m in Sources */,
+				2BA190FB190C3EDD0051FDED /* ADMDeliveryModesTableViewController.m in Sources */,
 				2BA190F1190C36AA0051FDED /* Provider.m in Sources */,
-				567729271909851F000AF156 /* ADMFormatTableViewController.m in Sources */,
-				5677292A19098537000AF156 /* ADMContentAreasTableViewController.m in Sources */,
 				2BA190F0190C36AA0051FDED /* FormatType.m in Sources */,
 				2BA190EF190C36AA0051FDED /* DeliveryMode.m in Sources */,
 				BF6986E118B9D2E80004E31F /* main.m in Sources */,
 				2BA190F2190C36AA0051FDED /* SubscriptionType.m in Sources */,
 				BF69871618BA82B90004E31F /* LoginViewController.m in Sources */,
 				BFAC496618FB6A90007F3862 /* UNISettingsViewController.m in Sources */,
+				2BA190FC190C3EDD0051FDED /* ADMFormatTableViewController.m in Sources */,
 				2B44D4F6190B75EE0027B984 /* ADMDetailViewController.m in Sources */,
 				BF69871B18BA82D00004E31F /* MainViewController.m in Sources */,
 				2BA190ED190C36AA0051FDED /* AdminObject.m in Sources */,
