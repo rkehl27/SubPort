@@ -36,6 +36,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self fetchDeliveryModesInBackground];
 }
 
@@ -70,7 +71,38 @@
     DeliveryMode *deliveryModeInstance = [self deliveryModeAtIndexPath:indexPath];
     [[cell textLabel]setText:[deliveryModeInstance deliveryModeName]];
     
+    UISwitch *switchView = [[UISwitch alloc] init];
+    cell.accessoryView = switchView;
+    if ([deliveryModeInstance isHidden]) {
+        [switchView setOn:NO animated:NO];
+    }
+    else {
+        [switchView setOn:YES animated:NO];
+    }
+    [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+    
     return cell;
+}
+
+- (void) switchChanged:(id)sender {
+    UISwitch* switchControl = sender;
+    UIView* contentView = [switchControl superview];
+    UITableViewCell* cell = (UITableViewCell *)[contentView superview];
+    
+    for (DeliveryMode *tempDeliveryMode in _deliveryModes) {
+        if ([tempDeliveryMode deliveryModeName] == cell.textLabel.text) {
+            NSDictionary *postDictionary = @{@"id":[tempDeliveryMode idNumber]};
+            NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"hide_delivery_modes"];
+            
+            NSURLResponse *response;
+            NSError *err;
+            
+            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+            
+            [self connectionDidFinishWithDataAfterPost:responseData orError:err];
+        }
+    }
+    
 }
 
 - (DeliveryMode *)deliveryModeAtIndexPath:(NSIndexPath *)indexPath
@@ -124,6 +156,13 @@
             DeliveryMode *currentDeliveryMode = [[DeliveryMode alloc] init];
             [currentDeliveryMode setIdNumber:[deliveryModeDictionary objectForKey:@"id"]];
             [currentDeliveryMode setDeliveryModeName:[deliveryModeDictionary objectForKey:@"name"]];
+            if([[[deliveryModeDictionary objectForKey:@"hidden_flag"] class] isSubclassOfClass:[NSNull class]])
+            {
+                [currentDeliveryMode setIsHidden:NO];
+            } else {
+                [currentDeliveryMode setIsHidden:YES];
+            }
+            
             [_deliveryModes addObject:currentDeliveryMode];
         }
         
@@ -133,6 +172,25 @@
     }
     
     [[self tableView] reloadData];
+}
+
+- (void)connectionDidFinishWithDataAfterPost:(NSData *)responseData orError:(NSError *)error
+{
+    NSError *localError;
+    
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&localError];
+    
+    if ([responseDictionary valueForKey:@"success"]) {
+        NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+        
+        
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
+    
 }
 
 - (void)deleteDeliveryMode:(DeliveryMode *)modeToDelete

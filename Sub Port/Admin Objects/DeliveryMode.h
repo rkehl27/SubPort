@@ -12,5 +12,6 @@
 
 @property (nonatomic, readwrite) NSString *deliveryModeName;
 @property (nonatomic, readwrite) NSNumber *idNumber;
+@property (nonatomic, readwrite) BOOL isHidden;
 
 @end
