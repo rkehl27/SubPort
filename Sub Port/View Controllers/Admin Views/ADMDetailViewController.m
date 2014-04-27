@@ -81,7 +81,7 @@
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
     if ([responseDictionary valueForKey:@"success"]) {
-        NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+       // NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
         
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
