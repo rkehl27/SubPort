@@ -89,12 +89,9 @@
     UISwitch* switchControl = sender;
     UIView* contentView = [switchControl superview];
     UITableViewCell* cell = (UITableViewCell *)[contentView superview];
-    //NSIndexPath* indexPath = [[self tableView] indexPathForCell:cell];
-    //NSLog(@"The %@ switch is %@", cell.textLabel.text, switchControl.on ? @"ON" : @"OFF" );
     
     for (FormatType *tempFormatType in _formatTypes) {
         if ([tempFormatType formatTypeName] == cell.textLabel.text) {
-            NSLog(@"The %@ %@ switch is %@", cell.textLabel.text, [tempFormatType idNumber], switchControl.on ? @"ON" : @"OFF" );
             NSDictionary *postDictionary = @{@"id":[tempFormatType idNumber]};
             NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"manage_formats"];
     
@@ -166,8 +163,6 @@
             } else {
                 [currentFormatType setIsHidden:YES];
             }
-            
-            NSLog( @"%@ is %hhd", [currentFormatType formatTypeName], [currentFormatType isHidden] );
             
             [_formatTypes addObject:currentFormatType];
         }

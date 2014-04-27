@@ -37,6 +37,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self fetchContentAreasInBackground];
 }
 
@@ -73,7 +74,38 @@
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
+    UISwitch *switchView = [[UISwitch alloc] init];
+    cell.accessoryView = switchView;
+    if ([contentAreaInstance isHidden]) {
+        [switchView setOn:NO animated:NO];
+    }
+    else {
+        [switchView setOn:YES animated:NO];
+    }
+    [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+    
     return cell;
+}
+
+- (void) switchChanged:(id)sender {
+    UISwitch* switchControl = sender;
+    UIView* contentView = [switchControl superview];
+    UITableViewCell* cell = (UITableViewCell *)[contentView superview];
+    
+    for (ContentArea *tempContentArea in _contentAreas) {
+        if ([tempContentArea contentAreaName] == cell.textLabel.text) {
+            NSDictionary *postDictionary = @{@"id":[tempContentArea idNumber]};
+            NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"hide_content_areas"];
+            
+            NSURLResponse *response;
+            NSError *err;
+            
+            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+            
+            [self connectionDidFinishWithDataAfterPost:responseData orError:err];
+        }
+    }
+    
 }
 
 - (ContentArea *)contentAreaAtIndexPath:(NSIndexPath *)indexPath
@@ -125,6 +157,13 @@
             ContentArea *currentContentArea = [[ContentArea alloc] init];
             [currentContentArea setIdNumber:[contentAreaDictionary objectForKey:@"id"]];
             [currentContentArea setContentAreaName:[contentAreaDictionary objectForKey:@"name"]];
+            if([[[contentAreaDictionary objectForKey:@"hidden_flag"] class] isSubclassOfClass:[NSNull class]])
+            {
+                [currentContentArea setIsHidden:NO];
+            } else {
+                [currentContentArea setIsHidden:YES];
+            }
+
             [_contentAreas addObject:currentContentArea];
         }
         
@@ -135,6 +174,24 @@
     
     [[self tableView] reloadData];
 }
+
+- (void)connectionDidFinishWithDataAfterPost:(NSData *)responseData orError:(NSError *)error
+{
+    NSError *localError;
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&localError];
+    
+    if ([responseDictionary valueForKey:@"success"]) {
+        NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+        
+        
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
+}
+
 
 - (void)deleteContentArea:(ContentArea *)areaToDelete
 {
