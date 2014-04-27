@@ -223,8 +223,11 @@
     NSError *localError;
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
 
-    NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
-    
+    if ([responseDictionary objectForKey:@"success"]) {
+        
+    } else {
+        //error presentation
+    }
     NSLog(@"Put request Completed");
 }
 
@@ -247,8 +250,12 @@
     NSError *localError;
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
-    NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
-    
+    if ([responseDictionary objectForKey:@"success"]) {
+        
+    } else {
+        //error presentation
+    }
+        
     NSLog(@"Delete request Completed");
 }
 

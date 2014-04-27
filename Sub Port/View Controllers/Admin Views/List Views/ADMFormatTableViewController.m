@@ -65,12 +65,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        
-
     }
     
     FormatType *formatTypeInstance = [self formatTypeAtIndexPath:indexPath];
     [[cell textLabel]setText:[formatTypeInstance formatTypeName]];
+    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     UISwitch *switchView = [[UISwitch alloc] init];
     cell.accessoryView = switchView;
@@ -81,7 +81,6 @@
         [switchView setOn:YES animated:NO];
     }
     [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
-    
     
     return cell;
 }
@@ -119,6 +118,7 @@
 
 - (void)fetchFormatTypesInBackground
 {
+    [_formatTypes removeAllObjects];
     NSMutableURLRequest *request = [WebServiceURLBuilder getRequestForRouteAppendix:@"formats"];
     
     NSURLResponse *response;
@@ -133,34 +133,17 @@
 {
     NSError *localError;
     
-    
-//    NSArray *json = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
-//    if (!json && error && [error.domain isEqualToString:NSCocoaErrorDomain] && (error.code == NSPropertyListReadCorruptError)) {
-//        // Encoding issue, try Latin-1
-//        NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSISOLatin1StringEncoding];
-//        if (jsonString) {
-//            // Need to re-encode as UTF8 to parse, thanks Apple
-//            json = [NSJSONSerialization JSONObjectWithData:
-//                    [jsonString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]
-//                                                   options:0 error:&error];
-//        }
-//    }
-    
     NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     NSLog(@"Response: %@", responseString);
     
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&localError];
 
     if ([responseDictionary valueForKey:@"success"]) {
-        NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
-        
-        
+        //NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
     }
-    
-    //[[self tableView] reloadData];
 }
 
 - (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error

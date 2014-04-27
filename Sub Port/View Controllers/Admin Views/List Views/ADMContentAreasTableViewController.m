@@ -70,7 +70,9 @@
     
     ContentArea *contentAreaInstance = [self contentAreaAtIndexPath:indexPath];
     [[cell textLabel]setText:[contentAreaInstance contentAreaName]];
-        
+    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
     return cell;
 }
 
@@ -99,6 +101,7 @@
 
 - (void)fetchContentAreasInBackground
 {
+    [_contentAreas removeAllObjects];
     NSMutableURLRequest *request = [WebServiceURLBuilder getRequestForRouteAppendix:@"content_areas"];
     
     NSURLResponse *response;
@@ -153,7 +156,7 @@
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
     if ([responseDictionary valueForKey:@"success"]) {
-        NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+//        NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
         
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
