@@ -43,10 +43,6 @@
 {
     [super viewDidLoad];
     [self customizeNavigationBar];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
     [self fetchContentInBackground];
 }
 
@@ -84,7 +80,6 @@
     ContentElement *currElement = [_contentList objectAtIndex:[indexPath row]];
     
     [[cell textLabel] setText:[currElement name]];
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }
@@ -93,15 +88,40 @@
 {
     ContentElement *_selectedElement = [_contentList objectAtIndex:[indexPath row]];
     
-    CMAEditContentDetailsViewController *contentDetails = [[CMAEditContentDetailsViewController alloc] initWithContentElement:_selectedElement];
+    CMAEditContentDetailsViewController *addContentView = [[CMAEditContentDetailsViewController alloc] initWithContentElement:_selectedElement];
     
-    [[self navigationController] pushViewController:contentDetails animated:YES];
+    addContentView.dismissBlock = ^{
+        [self fetchContentInBackground];
+    };
+    
+    UINavigationController *navControl = [[UINavigationController alloc] initWithRootViewController:addContentView];
+    
+    [self presentViewController:navControl animated:YES completion:nil];
+}
+
+#pragma mark - Swipe to Delete
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return YES - we will be able to delete all rows
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ContentElement *elementToDelete = [_contentList objectAtIndex:[indexPath row]];
+    
+    [_contentList removeObjectAtIndex:[indexPath row]];
+    [self deleteContentElement:elementToDelete];
+    
+    NSLog(@"Deleted row.");
 }
 
 #pragma mark - Connection Information
 
 - (void)fetchContentInBackground
 {
+    [_contentList removeAllObjects];
     NSDictionary *postDictionary = @{@"id": [_currProvider idNumber]};
     NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"provider_content_elements"];
     
@@ -116,8 +136,6 @@
 - (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
     [[self refreshControl] endRefreshing];
-    [_contentList removeAllObjects];
-    
     NSError *localError;
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
@@ -149,8 +167,45 @@
     
     CMAEditContentDetailsViewController *addContentView = [[CMAEditContentDetailsViewController alloc] initWithContentElement:newContentElement];
     
-    [[self navigationController] pushViewController:addContentView animated:YES];
+    addContentView.dismissBlock = ^{
+        [self fetchContentInBackground];
+    };
+    
+    UINavigationController *navControl = [[UINavigationController alloc] initWithRootViewController:addContentView];
+    
+    [self presentViewController:navControl animated:YES completion:nil];
 }
+
+- (void)deleteContentElement:(ContentElement *)elementToDelete
+{
+    NSDictionary *deleteDict = @{@"id":[elementToDelete idNumber]};
+    
+    NSMutableURLRequest *request = [WebServiceURLBuilder deleteRequestForRouteAppendix:@"manage_content_elements" withDictionary:deleteDict];
+    
+    NSURLResponse *response;
+    NSError *err;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    [self deleteConnectionDidFinishWithData:responseData orError:err];
+}
+
+- (void)deleteConnectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
+{
+    NSError *localError;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
+    
+    if ([responseDictionary valueForKey:@"success"]) {
+        NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+        
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
+    
+    [[self tableView] reloadData];
+}
+
 
 #pragma mark - Configure Navigation
 

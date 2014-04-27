@@ -11,6 +11,7 @@
 
 @interface SUBContentDetailsViewController ()<UIAlertViewDelegate> {
     ContentElement *_contentElement;
+    NSString *_stringForURL;
 }
 
 @end
@@ -22,6 +23,15 @@
     self = [super init];
     if (self) {
         _contentElement = contentElement;
+    }
+    return self;
+}
+
+- (id)initWithURL:(NSString *)stringForURL
+{
+    self = [super init];
+    if (self) {
+        _stringForURL = [stringForURL copy];
     }
     return self;
 }
@@ -39,10 +49,15 @@
 {
     [super viewDidLoad];
     
-    [self customizeNavigationBar];
-    [self fetchURLForWebView];
-
-    // Do any additional setup after loading the view from its nib.
+    if ([[_contentElement name] length] > 0) {
+        [self customizeNavigationBar];
+        [self fetchURLForWebView];
+    } else {
+        [[self webView] setBackgroundColor:[UIColor whiteColor]];
+        [[self webView] setScalesPageToFit:YES];
+        [[self webView] setMediaPlaybackRequiresUserAction:NO];
+        [[self webView] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_stringForURL]]];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,6 +93,7 @@
         
         [[self webView] setBackgroundColor:[UIColor whiteColor]];
         [[self webView] setScalesPageToFit:YES];
+        [[self webView] setMediaPlaybackRequiresUserAction:NO];
         [[self webView] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
         
     } else {

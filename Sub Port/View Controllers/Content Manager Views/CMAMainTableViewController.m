@@ -83,9 +83,7 @@
     Provider *selectedProvider = [self providerAtIndexPath:indexPath];
     
     CMAContentListTableViewController *contentList = [[CMAContentListTableViewController alloc] initWithProvider:selectedProvider];
-    
-//    CMAEditContentDetailsViewController *contentList = [[CMAEditContentDetailsViewController alloc] init];
-    
+        
     [[self navigationController] pushViewController:contentList animated:YES];
 }
 
