@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *urlField;
 @property (weak, nonatomic) IBOutlet UISwitch *hiddenToggle;
 @property (weak, nonatomic) IBOutlet UITextField *dateField;
+@property (nonatomic, copy) void (^dismissBlock)(void);
 
 - (id)initWithContentElement:(ContentElement *)contentElement;
 

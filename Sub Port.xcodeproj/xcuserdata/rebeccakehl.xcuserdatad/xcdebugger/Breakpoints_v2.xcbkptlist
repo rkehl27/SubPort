@@ -127,7 +127,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "234"
             endingLineNumber = "234"
-            landmarkName = "-toggleEditing:"
+            landmarkName = "-pushConnectionDidFinishWithData:orError:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -175,7 +175,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "202"
             endingLineNumber = "202"
-            landmarkName = "-pushNewContentToServer"
+            landmarkName = "-formatConnectionDidFinishWithData:orError:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -191,7 +191,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "213"
             endingLineNumber = "213"
-            landmarkName = "-pushNewContentToServer"
+            landmarkName = "-connectionDidFinishWithData:orError:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -206,7 +206,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "360"
-            endingLineNumber = "360">
+            endingLineNumber = "360"
+            landmarkName = "-cancel:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -220,38 +222,8 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "361"
-            endingLineNumber = "361">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Subscriber Views/SUBProviderDetailTableViewController.m"
-            timestampString = "420252150.506378"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
-            landmarkName = "-putConnectionDidFinishWithData:orError:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Subscriber Views/SUBProviderDetailTableViewController.m"
-            timestampString = "420253050.485317"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
-            landmarkName = "-deleteConnectionDidFinishWithData:orError:"
+            endingLineNumber = "361"
+            landmarkName = "-cancel:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -15,4 +15,6 @@
 
 - (id)initWithContent:(ContentElement *)contentElement;
 
+- (id)initWithURL:(NSString *)stringForURL;
+
 @end
