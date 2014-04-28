@@ -49,6 +49,10 @@
 		BF7A776718D3AEA60035C267 /* WebServiceURLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7A776618D3AEA60035C267 /* WebServiceURLBuilder.m */; };
 		BF9FB23218E9055700B81140 /* CreateAccountTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9FB23118E9055700B81140 /* CreateAccountTableViewController.m */; };
 		BF9FB27618E9350200B81140 /* FormFieldRow.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9FB27518E9350200B81140 /* FormFieldRow.m */; };
+		BFAB66C1190DE5CA008908B4 /* ResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAB66BF190DE5CA008908B4 /* ResetPasswordViewController.m */; };
+		BFAB66C2190DE5CA008908B4 /* ResetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFAB66C0190DE5CA008908B4 /* ResetPasswordViewController.xib */; };
+		BFAB66C4190DFCB7008908B4 /* Login.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAB66C3190DFCB7008908B4 /* Login.png */; };
+		BFAB66C6190E00DF008908B4 /* LaunchImageRedone.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAB66C5190E00DF008908B4 /* LaunchImageRedone.png */; };
 		BFAC495C18FB5B43007F3862 /* ADMMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC495B18FB5B43007F3862 /* ADMMainTableViewController.m */; };
 		BFAC495F18FB5B59007F3862 /* CMAMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC495E18FB5B59007F3862 /* CMAMainTableViewController.m */; };
 		BFAC496618FB6A90007F3862 /* UNISettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC496418FB6A90007F3862 /* UNISettingsViewController.m */; };
@@ -147,6 +151,11 @@
 		BF9FB23118E9055700B81140 /* CreateAccountTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountTableViewController.m; sourceTree = "<group>"; };
 		BF9FB27418E9350200B81140 /* FormFieldRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormFieldRow.h; sourceTree = "<group>"; };
 		BF9FB27518E9350200B81140 /* FormFieldRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormFieldRow.m; sourceTree = "<group>"; };
+		BFAB66BE190DE5CA008908B4 /* ResetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPasswordViewController.h; sourceTree = "<group>"; };
+		BFAB66BF190DE5CA008908B4 /* ResetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPasswordViewController.m; sourceTree = "<group>"; };
+		BFAB66C0190DE5CA008908B4 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPasswordViewController.xib; sourceTree = "<group>"; };
+		BFAB66C3190DFCB7008908B4 /* Login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Login.png; sourceTree = "<group>"; };
+		BFAB66C5190E00DF008908B4 /* LaunchImageRedone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImageRedone.png; sourceTree = "<group>"; };
 		BFAC495A18FB5B43007F3862 /* ADMMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMMainTableViewController.h; sourceTree = "<group>"; };
 		BFAC495B18FB5B43007F3862 /* ADMMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMMainTableViewController.m; sourceTree = "<group>"; };
 		BFAC495D18FB5B59007F3862 /* CMAMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMAMainTableViewController.h; sourceTree = "<group>"; };
@@ -264,6 +273,9 @@
 				BFAC496318FB6A90007F3862 /* UNISettingsViewController.h */,
 				BFAC496418FB6A90007F3862 /* UNISettingsViewController.m */,
 				BFAC496518FB6A90007F3862 /* UNISettingsViewController.xib */,
+				BFAB66BE190DE5CA008908B4 /* ResetPasswordViewController.h */,
+				BFAB66BF190DE5CA008908B4 /* ResetPasswordViewController.m */,
+				BFAB66C0190DE5CA008908B4 /* ResetPasswordViewController.xib */,
 			);
 			name = "Universal Views";
 			path = "Main Views";
@@ -341,6 +353,8 @@
 		BF6986DA18B9D2E80004E31F /* Sub Port */ = {
 			isa = PBXGroup;
 			children = (
+				BFAB66C5190E00DF008908B4 /* LaunchImageRedone.png */,
+				BFAB66C3190DFCB7008908B4 /* Login.png */,
 				BF6986E318B9D2E80004E31F /* AppDelegate.h */,
 				BF6986E418B9D2E80004E31F /* AppDelegate.m */,
 				BF69871D18BA850C0004E31F /* VerifiedUser.h */,
@@ -514,8 +528,11 @@
 				BFFB40B318FDDCA500F99243 /* CMAEditContentDetailsViewController.xib in Resources */,
 				BFAC496718FB6A90007F3862 /* UNISettingsViewController.xib in Resources */,
 				56B7886318F7584100E0022D /* SUBSettingsViewController.xib in Resources */,
+				BFAB66C6190E00DF008908B4 /* LaunchImageRedone.png in Resources */,
 				BF061B6218E7893F005B1246 /* FormFieldTableViewCell.xib in Resources */,
+				BFAB66C4190DFCB7008908B4 /* Login.png in Resources */,
 				BF69871718BA82B90004E31F /* LoginViewController.xib in Resources */,
+				BFAB66C2190DE5CA008908B4 /* ResetPasswordViewController.xib in Resources */,
 				BFB04CCA18F8F9ED00B28EC8 /* DetailTableViewCell.xib in Resources */,
 				BF69871C18BA82D00004E31F /* MainViewController.xib in Resources */,
 			);
@@ -563,6 +580,7 @@
 				2BA190FB190C3EDD0051FDED /* ADMDeliveryModesTableViewController.m in Sources */,
 				2BA190F1190C36AA0051FDED /* Provider.m in Sources */,
 				2BA190F0190C36AA0051FDED /* FormatType.m in Sources */,
+				BFAB66C1190DE5CA008908B4 /* ResetPasswordViewController.m in Sources */,
 				2BA190EF190C36AA0051FDED /* DeliveryMode.m in Sources */,
 				BF6986E118B9D2E80004E31F /* main.m in Sources */,
 				2BA190F2190C36AA0051FDED /* SubscriptionType.m in Sources */,

@@ -1,34 +1,29 @@
 //
-//  LoginViewController.m
+//  ResetPasswordViewController.m
 //  Sub Port
 //
-//  Created by School on 2/23/14.
+//  Created by School on 4/27/14.
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
 
-#import "LoginViewController.h"
-#import "SUBMainTableViewController.h"
-#import "CMAMainTableViewController.h"
-#import "ADMMainTableViewController.h"
 #import "ResetPasswordViewController.h"
 
-@interface LoginViewController () <UIAlertViewDelegate>{
+@interface ResetPasswordViewController () <UIAlertViewDelegate>{
     NSURLConnection *_connection;
     NSMutableData *_jsonData;
 }
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
 @end
 
-@implementation LoginViewController
+@implementation ResetPasswordViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [[self navigationItem] setTitle:@"Login"];
+        [[self navigationItem] setTitle:@"Reset Password"];
     }
     return self;
 }
@@ -37,7 +32,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,27 +40,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)loginComplete:(id)sender {
-    [[VerifiedUser sharedUser] setEmail:[_emailField text]];
-    [[VerifiedUser sharedUser] setPassword:[_passwordField text]];
-    
-    [self postUserInformationToServer];
+
+- (IBAction)resetPressed:(id)sender {
+    if ([[_emailField text] length] != 0)
+    {
+        [self postEmailToServer];
+    }
 }
 
-- (IBAction)forgotSelected:(id)sender {
-    ResetPasswordViewController *resetPasswordViewController = [[ResetPasswordViewController alloc] init];
-    
-    [[self navigationController] pushViewController:resetPasswordViewController animated:YES];
-}
-
--(void)postUserInformationToServer
+-(void)postEmailToServer
 {
-    NSDictionary *inputData = @{@"user":@{@"email":[[VerifiedUser sharedUser] email], @"password":[[VerifiedUser sharedUser] password]}};
+    NSDictionary *inputData = @{@"email":[_emailField text]};
     
     NSError *error = nil;
     NSData *jsonInputData = [NSJSONSerialization dataWithJSONObject:inputData options:NSJSONWritingPrettyPrinted error:&error];
     
-    NSURL *url = [NSURL URLWithString:@"http://subportinc.herokuapp.com/api/v1/sessions"];
+    NSURL *url = [NSURL URLWithString:@"http://subportinc.herokuapp.com/api/v1/reset_password"];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
@@ -74,7 +63,7 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setHTTPBody:jsonInputData];
-
+    
     NSURLResponse *response;
     NSError *err;
     
@@ -94,25 +83,11 @@
     
     if([responseDictionary valueForKey:@"success"]) {
         NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
-        [[VerifiedUser sharedUser] setAuthToken:[dataDict objectForKey:@"auth_token"]];
-        NSLog(@"Auth Token: %@", [[VerifiedUser sharedUser] authToken]);
         
-        UITableViewController *mainViewController;
+        UIAlertView *emailFoundAlertView = [[UIAlertView alloc] initWithTitle:@"Success" message:[responseDictionary valueForKey:[NSString stringWithFormat:@"An email has been sent to %@ with a new password", [_emailField text]]] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [emailFoundAlertView show];
         
-        NSLog(@"Content Manager Flag: %@", [dataDict objectForKey:@"content_manager_flag"]);
-        NSLog(@"Admin Flag: %@", [dataDict objectForKey:@"admin_flag"]);
         
-        if (![[[dataDict objectForKey:@"content_manager_flag"] class] isSubclassOfClass:[NSNull class]]) {
-            mainViewController = [[CMAMainTableViewController alloc] init];
-        } else if (![[[dataDict objectForKey:@"admin_flag"] class] isSubclassOfClass:[NSNull class]]) {
-            mainViewController = [[ADMMainTableViewController alloc] init];
-        } else {
-            mainViewController = [[SUBMainTableViewController alloc] init];
-        }
-        
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-        
-        [self presentViewController:navController animated:YES completion:nil];
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
