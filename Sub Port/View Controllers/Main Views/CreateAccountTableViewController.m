@@ -24,7 +24,7 @@
 
 - (id)init
 {
-    self = [super initWithStyle:UITableViewStylePlain];
+    self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         [self.tableView setRowHeight:66];
         _rows = [[NSMutableArray alloc] init];
@@ -49,6 +49,12 @@
     
     UINib *nib = [UINib nibWithNibName:@"FormFieldTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"FormFieldTableViewCell"];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [super viewWillAppear:animated];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -80,6 +86,20 @@
     [_cells addObject:cell];
     
     return cell;
+}
+
+- (void)configureNavigationController
+{
+    [[self navigationItem] setTitle:@"Create Account"];
+    
+    UIBarButtonItem *signUpButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up"
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(signUp:)];
+    
+    [[self navigationItem] setRightBarButtonItem:signUpButton];
+    
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Login.png"]];
 }
 
 - (BOOL)validateInformation
@@ -234,18 +254,6 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
     }
-}
-
-- (void)configureNavigationController
-{
-    [[self navigationItem] setTitle:@"Create Account"];
-    
-    UIBarButtonItem *signUpButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up"
-                                                                     style:UIBarButtonItemStylePlain
-                                                                    target:self
-                                                                    action:@selector(signUp:)];
-    
-    [[self navigationItem] setRightBarButtonItem:signUpButton];
 }
 
 @end

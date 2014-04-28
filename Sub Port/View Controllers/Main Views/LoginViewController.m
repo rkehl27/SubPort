@@ -28,7 +28,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [[self navigationItem] setTitle:@"Login"];
+
     }
     return self;
 }
@@ -37,7 +37,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [[self navigationItem] setTitle:@"Login"];
 }
 
 - (void)didReceiveMemoryWarning
