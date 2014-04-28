@@ -12,10 +12,15 @@
 #import "WebServiceURLBuilder.h"
 #import "ContentElement.h"
 
+#import "Provider.h"
+
 @interface SUBMainTableViewController ()<UIAlertViewDelegate> {
     NSMutableArray *_tableData;
     NSMutableArray *_contentList;
     NSMutableArray *_searchData;
+    
+    NSMutableArray *_providers;
+    
     UISearchBar *_searchBar;
     UISearchDisplayController *_searchDisplayController;
 }
@@ -26,11 +31,12 @@
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithStyle:style];
+    self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         _tableData = [[NSMutableArray alloc] init];
         _contentList = [[NSMutableArray alloc] init];
         _searchData = [[NSMutableArray alloc] init];
+        _providers = [[NSMutableArray alloc] init];
         [self customizeNavigationItem];
         [self configureRefreshControl];
     }
@@ -55,12 +61,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return [_providers count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    
     return [_tableData count];
 }
 
@@ -128,6 +135,32 @@
     [[self tableView] reloadData];
 }
 
+- (Provider *)providerInArrayWithId:(NSNumber *)provId
+{
+    for (Provider *currProv in _providers) {
+        if ([[currProv idNumber] isEqualToNumber:provId]) {
+            return currProv;
+        }
+    }
+    return nil;
+}
+
+- (void)addProviderToArray:(NSNumber *)provId
+{
+    Provider *currProv = [self providerInArrayWithId:provId];
+    if ([currProv idNumber] != nil) {
+        //Provider exists in array
+        NSNumber *currCount = [currProv elementCount];
+        int currCountVal = [currCount integerValue];
+        currCountVal++;
+        [currProv setElementCount:[NSNumber numberWithInt:currCountVal]];
+    } else {
+        //Provider does not exist in array
+        Provider *newProv = [[Provider alloc] init];
+        [newProv setIdNumber:provId];
+        [newProv setElementCount:[NSNumber numberWithInt:1]];
+    }
+}
 
 - (void)configureRefreshControl
 {

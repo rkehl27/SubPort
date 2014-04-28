@@ -17,4 +17,6 @@
 @property (nonatomic, readwrite) SubscriptionType *subType;
 @property (nonatomic, readwrite) BOOL isSelected;
 
+@property (nonatomic, readwrite) NSNumber *elementCount;
+
 @end
