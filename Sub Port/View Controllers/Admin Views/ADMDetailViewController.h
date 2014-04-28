@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *objectLabel;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (nonatomic, copy) void (^dismissBlock)(void);
 
 - (id)initWithAdminObject:(AdminObject *)administratorObj;
 

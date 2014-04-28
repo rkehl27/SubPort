@@ -9,13 +9,39 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Content Manager Views/CMAEditContentDetailsViewController.m"
-            timestampString = "420248822.573095"
+            filePath = "Sub Port/View Controllers/Admin Views/List Views/ADMSubscriptionTypesTableViewController.m"
+            timestampString = "420328865.77801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "-connectionDidFinishWithData:orError:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sub Port/View Controllers/Subscriber Views/SUBSearchTableViewController.m"
+            timestampString = "420334422.143299"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "-customizeNavigationBar"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,76 +51,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Admin Views/ADMDeliveryModesTableViewController.m"
-            timestampString = "420232364.729237"
+            filePath = "Sub Port/View Controllers/Admin Views/List Views/ADMSubscriptionTypesTableViewController.m"
+            timestampString = "420328865.77801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "-deleteDeliveryMode:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.m"
-            timestampString = "420186732.506449"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "-addConnectionDidFinishWithData:orError:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Admin Views/ADMDeliveryModesTableViewController.m"
-            timestampString = "420186833.156038"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.m"
-            timestampString = "420187047.596341"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "-addConnectionDidFinishWithData:orError:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Subscriber Views/SUBProviderDetailTableViewController.m"
-            timestampString = "420232974.358175"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "-connectionDidFinishWithData:orError:"
             landmarkType = "5">
          </BreakpointContent>
@@ -105,13 +67,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Subscriber Views/SUBProviderDetailTableViewController.m"
-            timestampString = "420233012.985498"
+            filePath = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.m"
+            timestampString = "420329026.116188"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "-fetchProviderDetails"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "-addConnectionDidFinishWithData:orError:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,13 +83,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Content Manager Views/CMAEditContentDetailsViewController.m"
-            timestampString = "420249066.296595"
+            filePath = "Sub Port/View Controllers/Admin Views/List Views/ADMSubscriptionTypesTableViewController.m"
+            timestampString = "420346130.717528"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "-pushConnectionDidFinishWithData:orError:"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
+            landmarkName = "-addSubType:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,12 +99,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Subscriber Views/SUBContentDetailsViewController.m"
-            timestampString = "420237186.946177"
+            filePath = "Sub Port/View Controllers/Admin Views/ADMSubTypeDetailViewController.m"
+            timestampString = "420330448.954464"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -153,13 +115,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Subscriber Views/SUBContentDetailsViewController.m"
-            timestampString = "420237186.905105"
+            filePath = "Sub Port/View Controllers/Admin Views/ADMSubTypeDetailViewController.m"
+            timestampString = "420330551.946912"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "-done:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -169,13 +131,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Content Manager Views/CMAEditContentDetailsViewController.m"
-            timestampString = "420248822.573095"
+            filePath = "Sub Port/View Controllers/Admin Views/ADMSubTypeDetailViewController.m"
+            timestampString = "420330559.545961"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
-            landmarkName = "-formatConnectionDidFinishWithData:orError:"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "-addConnectionDidFinishWithData:orError:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -185,13 +147,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Content Manager Views/CMAEditContentDetailsViewController.m"
-            timestampString = "420248822.573095"
+            filePath = "Sub Port/View Controllers/Subscriber Views/SUBMainTableViewController.m"
+            timestampString = "420341764.046045"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
-            landmarkName = "-connectionDidFinishWithData:orError:"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "-searchDisplayControllerWillEndSearch:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -201,13 +163,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Content Manager Views/CMAEditContentDetailsViewController.m"
-            timestampString = "420249817.045887"
+            filePath = "Sub Port/View Controllers/Subscriber Views/SUBMainTableViewController.m"
+            timestampString = "420337436.210922"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "360"
-            endingLineNumber = "360"
-            landmarkName = "-cancel:"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -217,13 +179,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sub Port/View Controllers/Content Manager Views/CMAEditContentDetailsViewController.m"
-            timestampString = "420249817.045887"
+            filePath = "Sub Port/View Controllers/Subscriber Views/SUBMainTableViewController.m"
+            timestampString = "420338790.20168"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
-            landmarkName = "-cancel:"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

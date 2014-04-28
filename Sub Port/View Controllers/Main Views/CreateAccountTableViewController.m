@@ -72,6 +72,11 @@
         [[cell rowTextField] setSecureTextEntry:YES];
     }
     
+    if ([[[cell rowLabel] text] isEqualToString:@"Credit Card Number"]) {
+        [[cell rowTextField] setKeyboardType:UIKeyboardTypeNumberPad];
+        [[cell rowTextField] setPlaceholder:@"################"];
+    }
+    
     [_cells addObject:cell];
     
     return cell;
@@ -93,8 +98,10 @@
 {
     UIAlertView *av1 = [[UIAlertView alloc] init];
     UIAlertView *av2 = [[UIAlertView alloc] init];
+    UIAlertView *av3 = [[UIAlertView alloc] init];
     BOOL emptyField = false;
     BOOL passwordsMatch = false;
+    BOOL error = false;
     _user = [[VerifiedUser alloc] init];
     NSString *password;
     NSString *passwordConfirm;
@@ -121,7 +128,23 @@
             } else if ([[[cell rowLabel] text] isEqualToString:@"Email"]) {
                 [_user setEmail:[[cell rowTextField] text]];
             } else if ([[[cell rowLabel] text] isEqualToString:@"Credit Card Number"]) {
-                [_user setCreditCardNumber:[[cell rowTextField] text]];
+                if ([[[cell rowTextField] text] length] < 16) {
+                    av3 = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:@"Credit Card number is too short."
+                                                    delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles: nil];
+                    error = true;
+                } else if ([[[cell rowTextField] text] length] > 16) {
+                    av3 = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:@"Credit Card number is too long."
+                                                    delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles: nil];
+                    error = true;
+                } else {
+                    [_user setCreditCardNumber:[[cell rowTextField] text]];
+                }
             } else if ([[[cell rowLabel] text] isEqualToString:@"Expiration Date"]) {
                 [_user setExpirationDate:[[cell rowTextField] text]];
             } else {
@@ -145,8 +168,10 @@
         [av1 show];
     } else if (!passwordsMatch) {
         [av2 show];
+    } else if (error) {
+        [av3 show];
     } else {
-       return true;
+        return true;
     }
     
     return false;

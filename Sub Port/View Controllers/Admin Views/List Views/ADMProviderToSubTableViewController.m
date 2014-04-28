@@ -1,35 +1,30 @@
 //
-//  SUBSelectProvidersTableViewController.m
+//  ADMProviderToSubTableViewController.m
 //  Sub Port
 //
-//  Created by School on 4/11/14.
+//  Created by Rebecca Kehl on 4/26/14.
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
 
-#import "SUBSelectProvidersTableViewController.h"
-#import "SUBProviderDetailTableViewController.h"
-#import "SUBSettingsViewController.h"
-#import "VerifiedUser.h"
+#import "ADMProviderToSubTableViewController.h"
+#import "ADMSubscriptionTypesTableViewController.h"
 #import "Provider.h"
 #import "WebServiceURLBuilder.h"
 
-@interface SUBSelectProvidersTableViewController ()<UIAlertViewDelegate> {
+@interface ADMProviderToSubTableViewController () {
     NSMutableArray *_providers;
-    NSMutableArray *_myProviders;
 }
 
 @end
 
-@implementation SUBSelectProvidersTableViewController
+@implementation ADMProviderToSubTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         _providers = [[NSMutableArray alloc] init];
-        _myProviders = [[NSMutableArray alloc] init];
-        [self customizeNavigationItem];
-        // Custom initialization
+        [self customizeNavigationBar];
     }
     return self;
 }
@@ -37,15 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self fetchProvidersInBackground];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [[self tableView] reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,11 +66,7 @@
     Provider *providerInstance = [self providerAtIndexPath:indexPath];
     [[cell textLabel]setText:[providerInstance providerName]];
     
-    if ([providerInstance isSelected]) {
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-    } else {
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
-    }
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }
@@ -95,11 +78,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Provider *selectedProvider = [self providerAtIndexPath:indexPath];
+    ADMSubscriptionTypesTableViewController *detailViewController = [[ADMSubscriptionTypesTableViewController alloc] initWithProvider:[self providerAtIndexPath:indexPath]];
     
-    SUBProviderDetailTableViewController *detailView = [[SUBProviderDetailTableViewController alloc] initWithProvider:selectedProvider];
-    
-    [[self navigationController] pushViewController:detailView animated:YES];
+    [[self navigationController] pushViewController:detailViewController animated:YES];
 }
 
 #pragma mark - Connection Information
@@ -135,18 +116,6 @@
             [_providers addObject:currentProvider];
         }
         
-        NSDictionary *myProviders = [dataDict objectForKey:@"my_providers"];
-        
-        for (NSDictionary *providerDictionary in myProviders) {
-            Provider *currentProvider = [[Provider alloc] init];
-            [currentProvider setIdNumber:[providerDictionary objectForKey:@"id"]];
-            [currentProvider setProviderName:[providerDictionary objectForKey:@"name"]];
-            [currentProvider setIsSelected:YES];
-            [_myProviders addObject:currentProvider];
-        }
-        
-        [self synchronizeMyProvidersListWithProvidersList];
-        
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
@@ -155,31 +124,11 @@
     [[self tableView] reloadData];
 }
 
-- (void)synchronizeMyProvidersListWithProvidersList
+#pragma mark - Navigation Item Configuration
+
+- (void)customizeNavigationBar
 {
-    for (Provider *currProv in _providers) {
-        for (Provider *myProv in _myProviders) {
-            if ([currProv idNumber] == [myProv idNumber]) {
-                [currProv setIsSelected:YES];
-            }
-        }
-    }
+    [[self navigationItem] setTitle:@"Providers List"];
 }
-
-#pragma mark - Navigation Information
-
-- (IBAction)settings:(id)sender
-{
-    SUBSettingsViewController *settingsView = [[SUBSettingsViewController alloc] init];
-    [[self navigationController] pushViewController:settingsView animated:YES];
-}
-
-- (void)customizeNavigationItem
-{
-    [[self navigationItem] setTitle:@"Select Providers"];
-//    UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
-//    [[self navigationItem] setRightBarButtonItem:rightbbi];
-}
-
 
 @end

@@ -137,6 +137,9 @@
 {
     [[self refreshControl] endRefreshing];
     NSError *localError;
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response: %@", responseString);
+    
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
     if ([responseDictionary valueForKey:@"success"]) {
@@ -193,6 +196,9 @@
 - (void)deleteConnectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
     NSError *localError;
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response: %@", responseString);
+    
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
     if ([responseDictionary valueForKey:@"success"]) {

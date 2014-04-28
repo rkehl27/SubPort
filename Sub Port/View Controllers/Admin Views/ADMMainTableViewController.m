@@ -10,6 +10,7 @@
 #import "ADMFormatTableViewController.h"
 #import "ADMContentAreasTableViewController.h"
 #import "ADMDeliveryModesTableViewController.h"
+#import "ADMProviderToSubTableViewController.h"
 #import "UNISettingsViewController.h"
 #import "DetailRow.h"
 #import "DetailTableViewCell.h"
@@ -98,8 +99,8 @@
             
         case 3:
             //Subscription types
-            
-            //[[self navigationController] pushViewController:view animated:YES];
+            view = [[ADMProviderToSubTableViewController alloc] init];
+            [[self navigationController] pushViewController:view animated:YES];
             break;
             
         default:

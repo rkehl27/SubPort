@@ -150,6 +150,8 @@
 - (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
     NSError *localError;
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response: %@", responseString);
     
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
@@ -221,6 +223,9 @@
 - (void)putConnectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
     NSError *localError;
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response: %@", responseString);
+    
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
 
     if ([responseDictionary objectForKey:@"success"]) {
@@ -248,6 +253,9 @@
 - (void)deleteConnectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
     NSError *localError;
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response: %@", responseString);
+    
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
     if ([responseDictionary objectForKey:@"success"]) {

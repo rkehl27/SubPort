@@ -1,28 +1,31 @@
 //
-//  ADMDetailViewController.m
+//  ADMSubTypeDetailViewController.m
 //  Sub Port
 //
-//  Created by Rebecca Kehl on 4/26/14.
+//  Created by Rebecca Kehl on 4/27/14.
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
 
-#import "ADMDetailViewController.h"
+#import "ADMSubTypeDetailViewController.h"
 #import "AdminObject.h"
+#import "Provider.h"
 #import "WebServiceURLBuilder.h"
 
-@interface ADMDetailViewController ()<UIAlertViewDelegate> {
+@interface ADMSubTypeDetailViewController (){
     AdminObject *_adminObject;
+    Provider *_providerObj;
 }
 
 @end
 
-@implementation ADMDetailViewController
+@implementation ADMSubTypeDetailViewController
 
-- (id)initWithAdminObject:(AdminObject *)administratorObj
+- (id)initWithAdminObject:(AdminObject *)administratorObj AndProvider:(Provider *)provider
 {
     self = [super init];
     if (self) {
         _adminObject = administratorObj;
+        _providerObj = provider;
     }
     return self;
 }
@@ -73,7 +76,7 @@
 
 - (BOOL)validateObject
 {
-    if ([[[self textField] text] length] > 0) {
+    if ([[[self objectTextField] text] length] > 0) {
         return true;
     } else {
         return false;
@@ -82,9 +85,10 @@
 
 - (void)addAdminObjectType
 {
-    NSDictionary *postDict = @{@"name":[[self textField] text]};
+    NSDictionary *postDict = @{@"name":[[self objectTextField] text],
+                               @"provider_id":[_providerObj idNumber]};
     
-    NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDict forRouteAppendix:[_adminObject routeAppendix]];
+    NSMutableURLRequest *request = [WebServiceURLBuilder putRequestForRouteAppendix:[_adminObject routeAppendix] withDictionary:postDict];
     
     NSURLResponse *response;
     NSError *err;
@@ -103,7 +107,7 @@
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
     if ([responseDictionary valueForKey:@"success"]) {
-       // NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+        // NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
         
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -121,5 +125,4 @@
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed:)];
     [[self navigationItem] setLeftBarButtonItem:cancelButton];
 }
-
 @end

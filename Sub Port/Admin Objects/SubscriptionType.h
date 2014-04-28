@@ -16,5 +16,6 @@
 @property (nonatomic, readwrite) NSString *subscriberName;
 @property (nonatomic, readwrite) NSNumber *idNumber;
 @property (nonatomic, readwrite) Provider *associatedProvider;
+@property (nonatomic, readwrite) BOOL isHidden;
 
 @end

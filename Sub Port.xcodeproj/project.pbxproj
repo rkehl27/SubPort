@@ -18,6 +18,11 @@
 		2BA190FA190C3EDD0051FDED /* ADMContentAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190F5190C3EDD0051FDED /* ADMContentAreasTableViewController.m */; };
 		2BA190FB190C3EDD0051FDED /* ADMDeliveryModesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190F7190C3EDD0051FDED /* ADMDeliveryModesTableViewController.m */; };
 		2BA190FC190C3EDD0051FDED /* ADMFormatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190F9190C3EDD0051FDED /* ADMFormatTableViewController.m */; };
+		2BA190FF190CAB420051FDED /* ADMSubscriptionTypesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190FE190CAB420051FDED /* ADMSubscriptionTypesTableViewController.m */; };
+		2BA19102190CC5EF0051FDED /* ADMProviderToSubTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA19101190CC5EF0051FDED /* ADMProviderToSubTableViewController.m */; };
+		2BA19105190CC6BA0051FDED /* ADMProvidersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA19104190CC6BA0051FDED /* ADMProvidersTableViewController.m */; };
+		2BA1910F190DB8940051FDED /* ADMSubTypeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA1910D190DB8940051FDED /* ADMSubTypeDetailViewController.m */; };
+		2BA19110190DB8940051FDED /* ADMSubTypeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BA1910E190DB8940051FDED /* ADMSubTypeDetailViewController.xib */; };
 		56B7885E18F74F6E00E0022D /* SUBMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B7885D18F74F6E00E0022D /* SUBMainTableViewController.m */; };
 		56B7886218F7584100E0022D /* SUBSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B7886018F7584100E0022D /* SUBSettingsViewController.m */; };
 		56B7886318F7584100E0022D /* SUBSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56B7886118F7584100E0022D /* SUBSettingsViewController.xib */; };
@@ -92,6 +97,15 @@
 		2BA190F7190C3EDD0051FDED /* ADMDeliveryModesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMDeliveryModesTableViewController.m; sourceTree = "<group>"; };
 		2BA190F8190C3EDD0051FDED /* ADMFormatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMFormatTableViewController.h; sourceTree = "<group>"; };
 		2BA190F9190C3EDD0051FDED /* ADMFormatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMFormatTableViewController.m; sourceTree = "<group>"; };
+		2BA190FD190CAB420051FDED /* ADMSubscriptionTypesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMSubscriptionTypesTableViewController.h; sourceTree = "<group>"; };
+		2BA190FE190CAB420051FDED /* ADMSubscriptionTypesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMSubscriptionTypesTableViewController.m; sourceTree = "<group>"; };
+		2BA19100190CC5EF0051FDED /* ADMProviderToSubTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMProviderToSubTableViewController.h; sourceTree = "<group>"; };
+		2BA19101190CC5EF0051FDED /* ADMProviderToSubTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMProviderToSubTableViewController.m; sourceTree = "<group>"; };
+		2BA19103190CC6BA0051FDED /* ADMProvidersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMProvidersTableViewController.h; sourceTree = "<group>"; };
+		2BA19104190CC6BA0051FDED /* ADMProvidersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADMProvidersTableViewController.m; sourceTree = "<group>"; };
+		2BA1910C190DB8940051FDED /* ADMSubTypeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADMSubTypeDetailViewController.h; path = "Sub Port/View Controllers/Admin Views/ADMSubTypeDetailViewController.h"; sourceTree = SOURCE_ROOT; };
+		2BA1910D190DB8940051FDED /* ADMSubTypeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADMSubTypeDetailViewController.m; path = "Sub Port/View Controllers/Admin Views/ADMSubTypeDetailViewController.m"; sourceTree = SOURCE_ROOT; };
+		2BA1910E190DB8940051FDED /* ADMSubTypeDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ADMSubTypeDetailViewController.xib; path = "Sub Port/View Controllers/Admin Views/ADMSubTypeDetailViewController.xib"; sourceTree = SOURCE_ROOT; };
 		56B7885C18F74F6E00E0022D /* SUBMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBMainTableViewController.h; sourceTree = "<group>"; };
 		56B7885D18F74F6E00E0022D /* SUBMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBMainTableViewController.m; sourceTree = "<group>"; };
 		56B7885F18F7584100E0022D /* SUBSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBSettingsViewController.h; sourceTree = "<group>"; };
@@ -188,6 +202,9 @@
 				2B44D4F3190B75EE0027B984 /* ADMDetailViewController.h */,
 				2B44D4F4190B75EE0027B984 /* ADMDetailViewController.m */,
 				2B44D4F5190B75EE0027B984 /* ADMDetailViewController.xib */,
+				2BA1910C190DB8940051FDED /* ADMSubTypeDetailViewController.h */,
+				2BA1910D190DB8940051FDED /* ADMSubTypeDetailViewController.m */,
+				2BA1910E190DB8940051FDED /* ADMSubTypeDetailViewController.xib */,
 			);
 			path = "Detail Views";
 			sourceTree = "<group>";
@@ -220,6 +237,12 @@
 				2BA190F7190C3EDD0051FDED /* ADMDeliveryModesTableViewController.m */,
 				2BA190F8190C3EDD0051FDED /* ADMFormatTableViewController.h */,
 				2BA190F9190C3EDD0051FDED /* ADMFormatTableViewController.m */,
+				2BA19103190CC6BA0051FDED /* ADMProvidersTableViewController.h */,
+				2BA19104190CC6BA0051FDED /* ADMProvidersTableViewController.m */,
+				2BA19100190CC5EF0051FDED /* ADMProviderToSubTableViewController.h */,
+				2BA19101190CC5EF0051FDED /* ADMProviderToSubTableViewController.m */,
+				2BA190FD190CAB420051FDED /* ADMSubscriptionTypesTableViewController.h */,
+				2BA190FE190CAB420051FDED /* ADMSubscriptionTypesTableViewController.m */,
 			);
 			path = "List Views";
 			sourceTree = "<group>";
@@ -481,6 +504,7 @@
 				BFAF6B9C18FCDB860004FCE1 /* SUBContentDetailsViewController.xib in Resources */,
 				BF6986DF18B9D2E80004E31F /* InfoPlist.strings in Resources */,
 				BF6986E718B9D2E80004E31F /* Images.xcassets in Resources */,
+				2BA19110190DB8940051FDED /* ADMSubTypeDetailViewController.xib in Resources */,
 				2B44D4F7190B75EE0027B984 /* ADMDetailViewController.xib in Resources */,
 				BFFB40B318FDDCA500F99243 /* CMAEditContentDetailsViewController.xib in Resources */,
 				BFAC496718FB6A90007F3862 /* UNISettingsViewController.xib in Resources */,
@@ -510,14 +534,18 @@
 				2BA190EE190C36AA0051FDED /* ContentArea.m in Sources */,
 				56B7886218F7584100E0022D /* SUBSettingsViewController.m in Sources */,
 				BFAC495C18FB5B43007F3862 /* ADMMainTableViewController.m in Sources */,
+				2BA19102190CC5EF0051FDED /* ADMProviderToSubTableViewController.m in Sources */,
+				2BA19105190CC6BA0051FDED /* ADMProvidersTableViewController.m in Sources */,
 				BFAF6B9B18FCDB860004FCE1 /* SUBContentDetailsViewController.m in Sources */,
 				BFB04CCD18F8FA0D00B28EC8 /* DetailRow.m in Sources */,
+				2BA190FF190CAB420051FDED /* ADMSubscriptionTypesTableViewController.m in Sources */,
 				BF7A776718D3AEA60035C267 /* WebServiceURLBuilder.m in Sources */,
 				BFAF6B9F18FCEB470004FCE1 /* CMAContentListTableViewController.m in Sources */,
 				BFAC495F18FB5B59007F3862 /* CMAMainTableViewController.m in Sources */,
 				BF9FB23218E9055700B81140 /* CreateAccountTableViewController.m in Sources */,
 				56B7885E18F74F6E00E0022D /* SUBMainTableViewController.m in Sources */,
 				BF69871F18BA850C0004E31F /* VerifiedUser.m in Sources */,
+				2BA1910F190DB8940051FDED /* ADMSubTypeDetailViewController.m in Sources */,
 				BF9FB27618E9350200B81140 /* FormFieldRow.m in Sources */,
 				BFB04CC918F8F9ED00B28EC8 /* DetailTableViewCell.m in Sources */,
 				2BA190FA190C3EDD0051FDED /* ADMContentAreasTableViewController.m in Sources */,
