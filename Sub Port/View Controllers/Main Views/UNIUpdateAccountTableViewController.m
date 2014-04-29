@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
 #import "UNIUpdateAccountTableViewController.h"
+#import "WebServiceURLBuilder.h"
 #import "FormFieldTableViewCell.h"
 #import "FormFieldRow.h"
 #import "VerifiedUser.h"
@@ -64,8 +65,6 @@
 {
     FormFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FormFieldTableViewCell1" forIndexPath:indexPath];
     
-    [[cell rowTextField] setText:@"???"];
-    
     FormFieldRow *item = [_rows objectAtIndex:[indexPath row]];
     
     [[cell rowLabel] setText:[item label]];
@@ -78,10 +77,9 @@
         [[cell rowTextField] setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
     }
     
+    [self synchronizeCellWithUserInfo];
     
     [_cells addObject:cell];
-    
-    [self synchronizeCellWithUserInfo];
     
     return cell;
 }
@@ -90,7 +88,7 @@
 
 - (void)configureNavigationController
 {
-    [[self navigationItem] setTitle:@"Create Account"];
+    [[self navigationItem] setTitle:@"Update Account"];
     
     UIBarButtonItem *signUpButton = [[UIBarButtonItem alloc] initWithTitle:@"Change Info"
                                                                      style:UIBarButtonItemStylePlain
@@ -142,7 +140,11 @@
                                            otherButtonTitles: nil];
                     error = true;
                 } else {
-                    [_user setCreditCardNumber:[[cell rowTextField] text]];
+                    if ([[[[cell rowTextField] text] stringByReplacingOccurrencesOfString:@"X" withString:@""] length] < 16) {
+                        [_user setCreditCardNumber:[[VerifiedUser sharedUser] creditCardNumber]];
+                    } else {
+                        [_user setCreditCardNumber:[[cell rowTextField] text]];
+                    }
                 }
             } else if ([[[cell rowLabel] text] isEqualToString:@"Expiration Date"]) {
                 [_user setExpirationDate:[[cell rowTextField] text]];
@@ -178,15 +180,18 @@
 {
     for (FormFieldTableViewCell *cell in _cells) {
         if ([[[cell rowLabel] text] isEqualToString:@"Username"]) {
-            [[cell rowTextField] setPlaceholder:[_user name]];
+            [[cell rowTextField] setText:[[VerifiedUser sharedUser] name]];
         } else if ([[[cell rowLabel] text] isEqualToString:@"Email"]) {
-            [[cell rowTextField] setText:[_user email]];
+            [[cell rowTextField] setText:[[VerifiedUser sharedUser] email]];
         } else if ([[[cell rowLabel] text] isEqualToString:@"Credit Card Number"]) {
-            [[cell rowTextField] setText:[_user creditCardNumber]];
+            NSString *creditCardString = [[VerifiedUser sharedUser] creditCardNumber];
+            NSString *hideNumbers = [creditCardString stringByReplacingCharactersInRange:NSMakeRange(0, 12) withString:@"XXXXXXXXXXXX"];
+            [[cell rowTextField] setText:hideNumbers];
+            
         } else if ([[[cell rowLabel] text] isEqualToString:@"Expiration Date"]) {
-            [[cell rowTextField] setText:[_user expirationDate]];
+            [[cell rowTextField] setText:[[VerifiedUser sharedUser] expirationDate]];
         } else if ([[[cell rowLabel] text] isEqualToString:@"CSV Code"]){
-            [[cell rowTextField] setText:[_user csvCode]];
+            [[cell rowTextField] setText:[[VerifiedUser sharedUser] csvCode]];
         } else {
             //error
         }
@@ -197,32 +202,21 @@
 
 -(void)postNewAccountInformationToServer
 {
-    NSDictionary *inputData = @{@"user":@{
-                                        @"email":[_user email],
-                                        @"name":[_user name],
-                                        @"password":[_user password],
-                                        @"password_confirmation":[_user password],
-                                        @"credit_card_number":[_user creditCardNumber],
-                                        @"expiration_date":[_user expirationDate]}};
+    NSDictionary *putDict = @{@"email":[_user email],
+                              @"name":[_user name],
+                              @"credit_card_number":[_user creditCardNumber],
+                              @"expiration_date":[_user expirationDate],
+                              @"csc":[_user csvCode]
+                              };
     
-    NSError *error = nil;
-    NSData *jsonInputData = [NSJSONSerialization dataWithJSONObject:inputData options:NSJSONWritingPrettyPrinted error:&error];
+    NSMutableURLRequest *request = [WebServiceURLBuilder putRequestForRouteAppendix:@"update_account" withDictionary:putDict];
     
-    //    NSURL *url = [NSURL URLWithString:@"http://subportinc.herokuapp.com/api/v1/registrations"];
-    //
-    //    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    //
-    //    [request setHTTPMethod:@"POST"];
-    //    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    //    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    //    [request setHTTPBody:jsonInputData];
-    //
-    //    NSURLResponse *response;
-    //    NSError *err;
-    //
-    //    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    NSURLResponse *response;
+    NSError *err;
     
-    //    [self connectionDidFinishWithData:responseData orError:err];
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    [self connectionDidFinishWithData:responseData orError:err];
 }
 
 - (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
@@ -243,8 +237,9 @@
         [[VerifiedUser sharedUser] setCreditCardNumber:[_user creditCardNumber]];
         [[VerifiedUser sharedUser] setCsvCode:[_user csvCode]];
         [[VerifiedUser sharedUser] setExpirationDate:[_user expirationDate]];
-        
-        //Present alert view with success message
+
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success" message:[responseDictionary valueForKey:@"info"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];

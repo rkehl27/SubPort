@@ -245,12 +245,12 @@
     if([[responseDictionary objectForKey:@"info"] isKindOfClass:[NSString class]]) {
         NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
         
-        [[VerifiedUser sharedUser] setName:[_user name]];
-        [[VerifiedUser sharedUser] setPassword:[_user password]];
-        [[VerifiedUser sharedUser] setEmail:[_user email]];
-        [[VerifiedUser sharedUser] setCreditCardNumber:[_user creditCardNumber]];
-        [[VerifiedUser sharedUser] setExpirationDate:[_user expirationDate]];
-        [[VerifiedUser sharedUser] setCsvCode:[_user csvCode]];
+        NSDictionary *userDict = [dataDict objectForKey:@"user"];
+        [[VerifiedUser sharedUser] setExpirationDate:[userDict objectForKey:@"expiration_date"]];
+        [[VerifiedUser sharedUser] setName:[userDict objectForKey:@"name"]];
+        [[VerifiedUser sharedUser] setCsvCode:[userDict objectForKey:@"csc"]];
+        [[VerifiedUser sharedUser] setCreditCardNumber:[userDict objectForKey:@"credit_card_number"]];
+        [[VerifiedUser sharedUser] setEmail:[userDict objectForKey:@"email"]];
         [[VerifiedUser sharedUser] setAuthToken:[dataDict objectForKey:@"auth_token"]];
         
         SUBSelectProvidersTableViewController *selectProvidersViewController = [[SUBSelectProvidersTableViewController alloc] initWithRootView:@"createAccount"];

@@ -28,6 +28,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [_emailField setAccessibilityLabel:@"Email"];
+        [_passwordField setAccessibilityLabel:@"Password"];
 
     }
     return self;
@@ -105,7 +107,13 @@
     if([responseDictionary valueForKey:@"success"]) {
         NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
         [[VerifiedUser sharedUser] setAuthToken:[dataDict objectForKey:@"auth_token"]];
-        NSLog(@"Auth Token: %@", [[VerifiedUser sharedUser] authToken]);
+        [[VerifiedUser sharedUser] setEmail:[_emailField text]];
+        
+        NSDictionary *userDict = [dataDict objectForKey:@"user"];
+        [[VerifiedUser sharedUser] setExpirationDate:[userDict objectForKey:@"expiration_date"]];
+        [[VerifiedUser sharedUser] setName:[userDict objectForKey:@"name"]];
+        [[VerifiedUser sharedUser] setCsvCode:[userDict objectForKey:@"csc"]];
+        [[VerifiedUser sharedUser] setCreditCardNumber:[userDict objectForKey:@"credit_card_number"]];
         
         UITableViewController *mainViewController;
         
