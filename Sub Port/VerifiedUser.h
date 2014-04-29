@@ -14,6 +14,7 @@
 @property (nonatomic, strong, readwrite) NSString *password;
 @property (nonatomic, strong, readwrite) NSString *email;
 @property (nonatomic, strong, readwrite) NSString *creditCardNumber;
+@property (nonatomic, strong, readwrite) NSString *csvCode;
 @property (nonatomic, strong, readwrite) NSString *expirationDate;
 @property (nonatomic, strong, readwrite) NSString *authToken;
 

@@ -40,7 +40,7 @@
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithStyle:style];
+    self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         _providers = [[NSMutableArray alloc] init];
         _myProviders = [[NSMutableArray alloc] init];
@@ -52,7 +52,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.tableView.backgroundColor = [UIColor colorWithRed:.086 green:.7216 blue:1 alpha:1];
     [self fetchProvidersInBackground];
 }
 

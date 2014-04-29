@@ -39,6 +39,9 @@
     // Do any additional setup after loading the view from its nib.
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [[self navigationItem] setTitle:@"Login"];
+    
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    [self.view addGestureRecognizer:gestureRecognizer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,6 +61,12 @@
     ResetPasswordViewController *resetPasswordViewController = [[ResetPasswordViewController alloc] init];
     
     [[self navigationController] pushViewController:resetPasswordViewController animated:YES];
+}
+
+- (IBAction)dismissKeyboard:(id)sender
+{
+    [_emailField resignFirstResponder];
+    [_passwordField resignFirstResponder];
 }
 
 -(void)postUserInformationToServer
