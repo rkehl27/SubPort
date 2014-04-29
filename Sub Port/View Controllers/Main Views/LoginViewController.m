@@ -10,6 +10,7 @@
 #import "SUBMainTableViewController.h"
 #import "CMAMainTableViewController.h"
 #import "ADMMainTableViewController.h"
+#import "ResetPasswordViewController.h"
 
 @interface LoginViewController () <UIAlertViewDelegate>{
     NSURLConnection *_connection;
@@ -27,7 +28,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [[self navigationItem] setTitle:@"Login"];
+
     }
     return self;
 }
@@ -36,6 +37,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [[self navigationItem] setTitle:@"Login"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,6 +52,12 @@
     [[VerifiedUser sharedUser] setPassword:[_passwordField text]];
     
     [self postUserInformationToServer];
+}
+
+- (IBAction)forgotSelected:(id)sender {
+    ResetPasswordViewController *resetPasswordViewController = [[ResetPasswordViewController alloc] init];
+    
+    [[self navigationController] pushViewController:resetPasswordViewController animated:YES];
 }
 
 -(void)postUserInformationToServer
