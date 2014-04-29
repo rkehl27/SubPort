@@ -8,10 +8,10 @@
 
 #import "SUBMainTableViewController.h"
 #import "SUBSettingsViewController.h"
+#import "SUBSearchTableViewController.h"
 #import "SUBContentDetailsViewController.h"
 #import "WebServiceURLBuilder.h"
 #import "ContentElement.h"
-
 #import "Provider.h"
 
 @interface SUBMainTableViewController ()<UIAlertViewDelegate> {
@@ -20,9 +20,6 @@
     NSMutableArray *_searchData;
     
     NSMutableArray *_providers;
-    
-    UISearchBar *_searchBar;
-    UISearchDisplayController *_searchDisplayController;
 }
 
 @end
@@ -186,38 +183,6 @@
     [self fetchContentInBackground];
 }
 
-#pragma mark - UISearchBar
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
-{
-    [_tableData removeAllObjects];
-    
-    if ([searchString length] == 0) {
-        [_tableData addObjectsFromArray:_contentList];
-    } else {
-        for (ContentElement *contElem in _contentList) {
-            NSString *contentName = [contElem name];
-            NSRange range = [contentName rangeOfString:searchString
-                                           options:NSCaseInsensitiveSearch];
-            
-            if (range.length > 0) { //if the substring match
-                [_tableData addObject:contElem];
-            }
-        }
-    }
-    
-    [[self tableView] reloadData];
-    
-    return YES;
-}
-
-- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
-{
-    [_tableData removeAllObjects];
-    [_tableData addObjectsFromArray:_contentList];
-    [[self tableView] reloadData];
-}
-
 #pragma mark - Configure Navigation Bar
 
 - (IBAction)settings:(id)sender
@@ -226,21 +191,21 @@
     [[self navigationController] pushViewController:settingsView animated:YES];
 }
 
+- (IBAction)searchButton:(id)sender
+{
+    SUBSearchTableViewController *searchView = [[SUBSearchTableViewController alloc] initWithContentList:_contentList];
+    [[self navigationController] pushViewController:searchView animated:YES];
+}
+
 - (void)customizeNavigationItem
 {
     UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
     [[self navigationItem] setRightBarButtonItem:rightbbi];
     
+    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchButton:)];
+    [[self navigationItem] setLeftBarButtonItem:searchButton];
+    
     [[self navigationItem] setTitle:@"List"];
-    
-    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    _searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
-    
-    _searchDisplayController.delegate = self;
-    _searchDisplayController.searchResultsDataSource = self;
-    [_searchDisplayController.searchResultsTableView setDelegate:self];
-    
-    self.tableView.tableHeaderView = _searchBar;
 }
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B34EBD1190F3B4E002495BC /* SUBSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B34EBD0190F3B4E002495BC /* SUBSearchTableViewController.m */; };
 		2B44D4F6190B75EE0027B984 /* ADMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4F4190B75EE0027B984 /* ADMDetailViewController.m */; };
 		2B44D4F7190B75EE0027B984 /* ADMDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B44D4F5190B75EE0027B984 /* ADMDetailViewController.xib */; };
 		2BA190ED190C36AA0051FDED /* AdminObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190E2190C36AA0051FDED /* AdminObject.m */; };
@@ -76,6 +77,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B34EBCF190F3B4E002495BC /* SUBSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBSearchTableViewController.h; sourceTree = "<group>"; };
+		2B34EBD0190F3B4E002495BC /* SUBSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBSearchTableViewController.m; sourceTree = "<group>"; };
 		2B44D4F3190B75EE0027B984 /* ADMDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADMDetailViewController.h; path = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.h"; sourceTree = SOURCE_ROOT; };
 		2B44D4F4190B75EE0027B984 /* ADMDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADMDetailViewController.m; path = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.m"; sourceTree = SOURCE_ROOT; };
 		2B44D4F5190B75EE0027B984 /* ADMDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ADMDetailViewController.xib; path = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.xib"; sourceTree = SOURCE_ROOT; };
@@ -281,6 +284,8 @@
 				BFB04C6118F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m */,
 				BFB04C8518F8D0C700B28EC8 /* SUBProviderDetailTableViewController.h */,
 				BFB04C8618F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m */,
+				2B34EBCF190F3B4E002495BC /* SUBSearchTableViewController.h */,
+				2B34EBD0190F3B4E002495BC /* SUBSearchTableViewController.m */,
 			);
 			path = "Subscriber Views";
 			sourceTree = "<group>";
@@ -546,6 +551,7 @@
 				56B7885E18F74F6E00E0022D /* SUBMainTableViewController.m in Sources */,
 				BF69871F18BA850C0004E31F /* VerifiedUser.m in Sources */,
 				2BA1910F190DB8940051FDED /* ADMSubTypeDetailViewController.m in Sources */,
+				2B34EBD1190F3B4E002495BC /* SUBSearchTableViewController.m in Sources */,
 				BF9FB27618E9350200B81140 /* FormFieldRow.m in Sources */,
 				BFB04CC918F8F9ED00B28EC8 /* DetailTableViewCell.m in Sources */,
 				2BA190FA190C3EDD0051FDED /* ADMContentAreasTableViewController.m in Sources */,
