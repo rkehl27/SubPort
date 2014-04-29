@@ -14,12 +14,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *objectLabel;
 @property (weak, nonatomic) IBOutlet UITextField *objectTextField;
 @property (nonatomic, copy) void (^dismissBlock)(void);
+@property (weak, nonatomic) IBOutlet UILabel *dayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *monthLabel;
+@property (weak, nonatomic) IBOutlet UILabel *yearLabel;
 @property (weak, nonatomic) IBOutlet UIStepper *dayStepper;
 @property (weak, nonatomic) IBOutlet UIStepper *monthStepper;
 @property (weak, nonatomic) IBOutlet UIStepper *yearStepper;
-@property (weak, nonatomic) IBOutlet UILabel *dayLabel;
-@property (weak, nonatomic) IBOutlet UILabel *monthLabel;
-
 
 - (id)initWithAdminObject:(AdminObject *)administratorObj AndProvider:(Provider *)provider;
 

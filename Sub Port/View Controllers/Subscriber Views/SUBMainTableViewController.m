@@ -68,7 +68,9 @@
 {
     // Return the number of rows in the section.
     
-    return [_tableData count];
+    Provider *currProv = [_providers objectAtIndex:section];
+    
+    return [[currProv elementCount] integerValue];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -79,7 +81,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    ContentElement *contentElementInstance = [_tableData objectAtIndex:[indexPath row]];
+    ContentElement *contentElementInstance = [[ContentElement alloc] init];
+
+    Provider *currProv = [_providers objectAtIndex:[indexPath section]];
+    contentElementInstance = [[currProv contentElements] objectAtIndex:[indexPath row]];
+
     [[cell textLabel] setText:[contentElementInstance name]];
     
     return cell;
@@ -125,6 +131,8 @@
             [currElement setIdNumber:[dict objectForKey:@"id"]];
             [currElement setName:[dict objectForKey:@"name"]];
             
+            [self addProviderToArray:[dict objectForKey:@"provider_id"] withContentElement:currElement];
+            
             [_contentList addObject:currElement];
             [_tableData addObject:currElement];
         }
@@ -145,7 +153,7 @@
     return nil;
 }
 
-- (void)addProviderToArray:(NSNumber *)provId
+- (void)addProviderToArray:(NSNumber *)provId withContentElement:(ContentElement *)element
 {
     Provider *currProv = [self providerInArrayWithId:provId];
     if ([currProv idNumber] != nil) {
@@ -154,11 +162,14 @@
         int currCountVal = [currCount integerValue];
         currCountVal++;
         [currProv setElementCount:[NSNumber numberWithInt:currCountVal]];
+        [[currProv contentElements] addObject:element];
     } else {
         //Provider does not exist in array
         Provider *newProv = [[Provider alloc] init];
         [newProv setIdNumber:provId];
         [newProv setElementCount:[NSNumber numberWithInt:1]];
+        [[newProv contentElements] addObject:element];
+        [_providers addObject:newProv];
     }
 }
 

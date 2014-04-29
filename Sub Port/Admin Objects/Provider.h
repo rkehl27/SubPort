@@ -19,4 +19,6 @@
 
 @property (nonatomic, readwrite) NSNumber *elementCount;
 
+@property (nonatomic, readwrite) NSMutableArray *contentElements;
+
 @end
