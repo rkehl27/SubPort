@@ -8,12 +8,18 @@
 
 #import "SUBMainTableViewController.h"
 #import "SUBSettingsViewController.h"
+#import "SUBSearchTableViewController.h"
 #import "SUBContentDetailsViewController.h"
 #import "WebServiceURLBuilder.h"
 #import "ContentElement.h"
+#import "Provider.h"
 
 @interface SUBMainTableViewController ()<UIAlertViewDelegate> {
+    NSMutableArray *_tableData;
     NSMutableArray *_contentList;
+    NSMutableArray *_searchData;
+    
+    NSMutableArray *_providers;
 }
 
 @end
@@ -22,9 +28,12 @@
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithStyle:style];
+    self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
+        _tableData = [[NSMutableArray alloc] init];
         _contentList = [[NSMutableArray alloc] init];
+        _searchData = [[NSMutableArray alloc] init];
+        _providers = [[NSMutableArray alloc] init];
         [self customizeNavigationItem];
         [self configureRefreshControl];
     }
@@ -49,13 +58,16 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return [_providers count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [_contentList count];
+    
+    Provider *currProv = [_providers objectAtIndex:section];
+    
+    return [[currProv elementCount] integerValue];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -66,7 +78,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    ContentElement *contentElementInstance = [_contentList objectAtIndex:[indexPath row]];
+    ContentElement *contentElementInstance = [[ContentElement alloc] init];
+
+    Provider *currProv = [_providers objectAtIndex:[indexPath section]];
+    contentElementInstance = [[currProv contentElements] objectAtIndex:[indexPath row]];
+
     [[cell textLabel] setText:[contentElementInstance name]];
     
     return cell;
@@ -74,7 +90,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SUBContentDetailsViewController *detailView = [[SUBContentDetailsViewController alloc] initWithContent:[_contentList objectAtIndex:[indexPath row]]];
+    SUBContentDetailsViewController *detailView = [[SUBContentDetailsViewController alloc] initWithContent:[_tableData objectAtIndex:[indexPath row]]];
     [[self navigationController] pushViewController:detailView animated:YES];
 }
 
@@ -95,9 +111,12 @@
 - (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
     [[self refreshControl] endRefreshing];
-    [_contentList removeAllObjects];
+    [_tableData removeAllObjects];
 
     NSError *localError;
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response: %@", responseString);
+    
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
     if ([responseDictionary valueForKey:@"success"]) {
@@ -109,16 +128,47 @@
             [currElement setIdNumber:[dict objectForKey:@"id"]];
             [currElement setName:[dict objectForKey:@"name"]];
             
+            [self addProviderToArray:[dict objectForKey:@"provider_id"] withContentElement:currElement];
+            
             [_contentList addObject:currElement];
+            [_tableData addObject:currElement];
         }
     }else {
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [av show];
     }
-    
     [[self tableView] reloadData];
 }
 
+- (Provider *)providerInArrayWithId:(NSNumber *)provId
+{
+    for (Provider *currProv in _providers) {
+        if ([[currProv idNumber] isEqualToNumber:provId]) {
+            return currProv;
+        }
+    }
+    return nil;
+}
+
+- (void)addProviderToArray:(NSNumber *)provId withContentElement:(ContentElement *)element
+{
+    Provider *currProv = [self providerInArrayWithId:provId];
+    if ([currProv idNumber] != nil) {
+        //Provider exists in array
+        NSNumber *currCount = [currProv elementCount];
+        int currCountVal = [currCount integerValue];
+        currCountVal++;
+        [currProv setElementCount:[NSNumber numberWithInt:currCountVal]];
+        [[currProv contentElements] addObject:element];
+    } else {
+        //Provider does not exist in array
+        Provider *newProv = [[Provider alloc] init];
+        [newProv setIdNumber:provId];
+        [newProv setElementCount:[NSNumber numberWithInt:1]];
+        [[newProv contentElements] addObject:element];
+        [_providers addObject:newProv];
+    }
+}
 
 - (void)configureRefreshControl
 {
@@ -141,10 +191,19 @@
     [[self navigationController] pushViewController:settingsView animated:YES];
 }
 
+- (IBAction)searchButton:(id)sender
+{
+    SUBSearchTableViewController *searchView = [[SUBSearchTableViewController alloc] initWithContentList:_contentList];
+    [[self navigationController] pushViewController:searchView animated:YES];
+}
+
 - (void)customizeNavigationItem
 {
     UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
     [[self navigationItem] setRightBarButtonItem:rightbbi];
+    
+    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchButton:)];
+    [[self navigationItem] setLeftBarButtonItem:searchButton];
     
     [[self navigationItem] setTitle:@"List"];
 }

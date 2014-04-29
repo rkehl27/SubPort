@@ -1,28 +1,32 @@
 //
-//  ADMDetailViewController.m
+//  ADMSubTypeDetailViewController.m
 //  Sub Port
 //
-//  Created by Rebecca Kehl on 4/26/14.
+//  Created by Rebecca Kehl on 4/27/14.
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
 
-#import "ADMDetailViewController.h"
+#import "ADMSubTypeDetailViewController.h"
 #import "AdminObject.h"
+#import "Provider.h"
 #import "WebServiceURLBuilder.h"
 
-@interface ADMDetailViewController ()<UIAlertViewDelegate> {
+@interface ADMSubTypeDetailViewController (){
     AdminObject *_adminObject;
+    Provider *_providerObj;
+    UIBarButtonItem *_doneButton;
 }
 
 @end
 
-@implementation ADMDetailViewController
+@implementation ADMSubTypeDetailViewController
 
-- (id)initWithAdminObject:(AdminObject *)administratorObj
+- (id)initWithAdminObject:(AdminObject *)administratorObj AndProvider:(Provider *)provider
 {
     self = [super init];
     if (self) {
         _adminObject = administratorObj;
+        _providerObj = provider;
     }
     return self;
 }
@@ -73,7 +77,7 @@
 
 - (BOOL)validateObject
 {
-    if ([[[self textField] text] length] > 0) {
+    if ([[[self objectTextField] text] length] > 0) {
         return true;
     } else {
         return false;
@@ -82,9 +86,13 @@
 
 - (void)addAdminObjectType
 {
-    NSDictionary *postDict = @{@"name":[[self textField] text]};
+    NSDictionary *postDict = @{@"name":[[self objectTextField] text],
+                               @"provider_id":[_providerObj idNumber],
+                               @"days":[NSNumber numberWithInteger:[[_dayLabel text] integerValue]],
+                               @"months":[NSNumber numberWithInteger:[[_monthLabel text] integerValue]],
+                               @"years":[NSNumber numberWithInteger:[[_yearLabel text] integerValue]]};
     
-    NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDict forRouteAppendix:[_adminObject routeAppendix]];
+    NSMutableURLRequest *request = [WebServiceURLBuilder putRequestForRouteAppendix:[_adminObject routeAppendix] withDictionary:postDict];
     
     NSURLResponse *response;
     NSError *err;
@@ -103,7 +111,7 @@
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
     if ([responseDictionary valueForKey:@"success"]) {
-       // NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+        // NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
         
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -111,15 +119,56 @@
     }
 }
 
+#pragma mark - Stepper Control
+
+- (IBAction)dayStepperChanged:(UIStepper *)sender
+{
+    double value = [sender value];
+    
+    [_dayLabel setText:[NSString stringWithFormat:@"%d", (int)value]];
+    
+    if (value > 0) {
+        [_doneButton setEnabled:YES];
+    } else {
+        [_doneButton setEnabled:NO];
+    }
+}
+
+- (IBAction)monthStepperChanged:(UIStepper *)sender
+{
+    double value = [sender value];
+    
+    [_monthLabel setText:[NSString stringWithFormat:@"%d", (int)value]];
+    
+    if (value > 0) {
+        [_doneButton setEnabled:YES];
+    } else {
+        [_doneButton setEnabled:NO];
+    }
+}
+
+- (IBAction)yearStepperChanged:(UIStepper *)sender
+{
+    double value = [sender value];
+    
+    [_yearLabel setText:[NSString stringWithFormat:@"%d", (int)value]];
+    
+    if (value > 0) {
+        [_doneButton setEnabled:YES];
+    } else {
+        [_doneButton setEnabled:NO];
+    }
+}
+
 #pragma mark - Navigation Control
 
 - (void)customizeNavigationBar
 {
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
-    [[self navigationItem] setRightBarButtonItem:doneButton];
+    _doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
+    [[self navigationItem] setRightBarButtonItem:_doneButton];
+    [_doneButton setEnabled:NO];
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed:)];
     [[self navigationItem] setLeftBarButtonItem:cancelButton];
 }
-
 @end

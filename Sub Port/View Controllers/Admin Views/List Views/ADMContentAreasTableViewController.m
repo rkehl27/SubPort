@@ -33,18 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     [self fetchContentAreasInBackground];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -147,6 +136,10 @@
 - (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
     NSError *localError;
+    
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response: %@", responseString);
+    
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
     if ([responseDictionary valueForKey:@"success"]) {
@@ -210,6 +203,9 @@
 - (void)deleteConnectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
     NSError *localError;
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response: %@", responseString);
+    
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
     if ([responseDictionary valueForKey:@"success"]) {
@@ -230,7 +226,14 @@
     AdminObject *adminObj = [[AdminObject alloc] initWithObjectType:@"Content Area" andRouteAppendix:@"content_areas"];
     
     ADMDetailViewController *detailView = [[ADMDetailViewController alloc] initWithAdminObject:adminObj];
-    [[self navigationController] pushViewController:detailView animated:YES];
+    
+    detailView.dismissBlock = ^{
+        [self fetchContentAreasInBackground];
+    };
+    
+    UINavigationController *navControl = [[UINavigationController alloc] initWithRootViewController:detailView];
+    
+    [self presentViewController:navControl animated:YES completion:nil];
 }
 
 - (void)customizeNavigationBar

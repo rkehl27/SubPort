@@ -50,6 +50,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self fetchFormatTypesInBackground];
     if ([[_contentElement name] length] > 0) {
         //Is Editing
         [self fetchContentInBackground];
@@ -64,7 +65,6 @@
         [[self dateField] setText:currDateString];
         [[self hiddenToggle] setOn:NO];
     }
-    [self fetchFormatTypesInBackground];
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,6 +80,8 @@
     [[self hiddenToggle] setOn:[_contentElement isHidden]];
     
     [[self hiddenToggle] addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    [[self formatField] setText:[[_contentElement format] formatTypeName]];
 }
 
 - (void)initializePicker
@@ -123,6 +125,8 @@
 - (void)connectionDidFinishWithDataAfterPost:(NSData *)responseData orError:(NSError *)error
 {
     NSError *localError;
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response: %@", responseString);
     
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
@@ -204,6 +208,9 @@
 - (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
     NSError *localError;
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response: %@", responseString);
+    
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
     if ([responseDictionary valueForKey:@"success"]) {
@@ -212,6 +219,9 @@
         
         [_contentElement setName:[contentElementDict objectForKey:@"name"]];
         [_contentElement setUrl:[contentElementDict objectForKey:@"url"]];
+        
+        FormatType *currFormat = [self getFormatTypeByName:[contentElementDict objectForKey:@"format_name"]];
+        [_contentElement setFormat: currFormat];
         
         if([[[contentElementDict objectForKey:@"hidden_flag"] class] isSubclassOfClass:[NSNull class]])
         {
@@ -233,6 +243,9 @@
 - (void)pushConnectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
     NSError *localError;
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response: %@", responseString);
+    
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
     if ([responseDictionary valueForKey:@"success"]) {
@@ -249,6 +262,16 @@
     [_contentElement setUrl:[[self urlField] text]];
     [_contentElement setIsHidden:[[self hiddenToggle] isOn]];
     [_contentElement setFormat:_selectedFormatType];
+}
+
+- (FormatType *)getFormatTypeByName:(NSString *)formatName
+{
+    for (FormatType *currType in _formatTypes) {
+        if ([[currType formatTypeName] isEqualToString:formatName]) {
+            return currType;
+        }
+    }
+    return nil;
 }
 
 #pragma mark - Connection Information FOR EDITING CONTENT

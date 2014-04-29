@@ -10,4 +10,13 @@
 
 @implementation Provider
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _contentElements = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
 @end

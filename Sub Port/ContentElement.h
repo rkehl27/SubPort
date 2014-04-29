@@ -18,6 +18,9 @@
 @property (nonatomic, readwrite) FormatType *format;
 @property (nonatomic, readwrite) BOOL isHidden;
 
+//temp variable
+@property (nonatomic, readwrite) NSNumber *provId;
+
 @property (nonatomic, readwrite) Provider *provider;
 
 @end

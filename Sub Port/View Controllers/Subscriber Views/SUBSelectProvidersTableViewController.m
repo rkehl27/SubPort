@@ -9,6 +9,7 @@
 #import "SUBSelectProvidersTableViewController.h"
 #import "SUBProviderDetailTableViewController.h"
 #import "SUBSettingsViewController.h"
+#import "SUBMainTableViewController.h"
 #import "VerifiedUser.h"
 #import "Provider.h"
 #import "WebServiceURLBuilder.h"
@@ -16,11 +17,26 @@
 @interface SUBSelectProvidersTableViewController ()<UIAlertViewDelegate> {
     NSMutableArray *_providers;
     NSMutableArray *_myProviders;
+    
+    BOOL cameFromCreateAccount;
 }
 
 @end
 
 @implementation SUBSelectProvidersTableViewController
+
+- (id)initWithRootView:(NSString *)rootViewName
+{
+    self = [super init];
+    if (self) {
+        if ([rootViewName isEqualToString:@"createAccount"]) {
+            [self customizeNavBarForCreateAccount];
+        } else {
+            [self customizeNavigationItem];
+        }
+    }
+    return self;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -28,7 +44,6 @@
     if (self) {
         _providers = [[NSMutableArray alloc] init];
         _myProviders = [[NSMutableArray alloc] init];
-        [self customizeNavigationItem];
         // Custom initialization
     }
     return self;
@@ -119,6 +134,9 @@
 - (void)connectionDidFinishWithData:(NSData *)responseData orError:(NSError *)error
 {
     NSError *localError;
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response: %@", responseString);
+    
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
     if ([responseDictionary valueForKey:@"success"]) {
@@ -171,11 +189,26 @@
     [[self navigationController] pushViewController:settingsView animated:YES];
 }
 
+- (IBAction)mainView:(id)sender
+{
+    SUBMainTableViewController *mainView = [[SUBMainTableViewController alloc] init];
+    [[self navigationController] pushViewController:mainView animated:YES];
+}
+
+- (void)customizeNavBarForCreateAccount
+{
+    [[self navigationItem] setTitle:@"Select Providers"];
+
+    UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
+    [[self navigationItem] setRightBarButtonItem:rightbbi];
+    
+    UIBarButtonItem *leftbbi = [[UIBarButtonItem alloc] initWithTitle:@"Content" style:UIBarButtonItemStylePlain target:self action:@selector(mainView:)];
+    [[self navigationItem] setLeftBarButtonItem:leftbbi];
+}
+
 - (void)customizeNavigationItem
 {
     [[self navigationItem] setTitle:@"Select Providers"];
-//    UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
-//    [[self navigationItem] setRightBarButtonItem:rightbbi];
 }
 
 

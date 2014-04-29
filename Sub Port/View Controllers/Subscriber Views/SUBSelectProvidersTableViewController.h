@@ -10,4 +10,6 @@
 
 @interface SUBSelectProvidersTableViewController : UITableViewController
 
+- (id)initWithRootView:(NSString *) rootViewName;
+
 @end

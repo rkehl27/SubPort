@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ADMDetailViewController">
             <connections>
                 <outlet property="objectLabel" destination="JJB-we-Ctf" id="ndU-c4-JRy"/>
+                <outlet property="searchDisplayController" destination="CRE-hm-oGT" id="qRm-fk-ncD"/>
                 <outlet property="textField" destination="K5f-rD-Fs9" id="enG-w1-gRO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -34,5 +35,13 @@
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
+        <searchDisplayController id="CRE-hm-oGT">
+            <connections>
+                <outlet property="delegate" destination="-1" id="qf8-r1-hiM"/>
+                <outlet property="searchContentsController" destination="-1" id="vfp-rL-rYx"/>
+                <outlet property="searchResultsDataSource" destination="-1" id="MQE-ye-vvp"/>
+                <outlet property="searchResultsDelegate" destination="-1" id="659-eC-JyC"/>
+            </connections>
+        </searchDisplayController>
     </objects>
 </document>

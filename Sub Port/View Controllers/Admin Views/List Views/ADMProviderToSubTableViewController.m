@@ -1,25 +1,23 @@
 //
-//  CMAMainTableViewController.m
+//  ADMProviderToSubTableViewController.m
 //  Sub Port
 //
-//  Created by School on 4/13/14.
+//  Created by Rebecca Kehl on 4/26/14.
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
 
-#import "CMAMainTableViewController.h"
-#import "CMAContentListTableViewController.h"
-#import "CMAEditContentDetailsViewController.h"
-#import "UNISettingsViewController.h"
+#import "ADMProviderToSubTableViewController.h"
+#import "ADMSubscriptionTypesTableViewController.h"
 #import "Provider.h"
 #import "WebServiceURLBuilder.h"
 
-@interface CMAMainTableViewController () {
+@interface ADMProviderToSubTableViewController () {
     NSMutableArray *_providers;
 }
 
 @end
 
-@implementation CMAMainTableViewController
+@implementation ADMProviderToSubTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -80,11 +78,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Provider *selectedProvider = [self providerAtIndexPath:indexPath];
+    ADMSubscriptionTypesTableViewController *detailViewController = [[ADMSubscriptionTypesTableViewController alloc] initWithProvider:[self providerAtIndexPath:indexPath]];
     
-    CMAContentListTableViewController *contentList = [[CMAContentListTableViewController alloc] initWithProvider:selectedProvider];
-        
-    [[self navigationController] pushViewController:contentList animated:YES];
+    [[self navigationController] pushViewController:detailViewController animated:YES];
 }
 
 #pragma mark - Connection Information
@@ -130,18 +126,9 @@
 
 #pragma mark - Navigation Item Configuration
 
-- (IBAction)settings:(id)sender
-{
-    UNISettingsViewController *settingsView = [[UNISettingsViewController alloc] init];
-    [[self navigationController] pushViewController:settingsView animated:YES];
-}
-
 - (void)customizeNavigationBar
 {
-    UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
-    [[self navigationItem] setRightBarButtonItem:rightbbi];
-    [[self navigationItem] setTitle:@"Content Manager"];
+    [[self navigationItem] setTitle:@"Providers List"];
 }
-
 
 @end

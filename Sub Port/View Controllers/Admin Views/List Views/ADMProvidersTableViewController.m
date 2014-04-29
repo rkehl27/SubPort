@@ -1,25 +1,22 @@
 //
-//  CMAMainTableViewController.m
+//  ADMProvidersTableViewController.m
 //  Sub Port
 //
-//  Created by School on 4/13/14.
+//  Created by School on 4/14/14.
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
 
-#import "CMAMainTableViewController.h"
-#import "CMAContentListTableViewController.h"
-#import "CMAEditContentDetailsViewController.h"
-#import "UNISettingsViewController.h"
+#import "ADMProvidersTableViewController.h"
 #import "Provider.h"
 #import "WebServiceURLBuilder.h"
 
-@interface CMAMainTableViewController () {
+@interface ADMProvidersTableViewController () {
     NSMutableArray *_providers;
 }
 
 @end
 
-@implementation CMAMainTableViewController
+@implementation ADMProvidersTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -67,9 +64,7 @@
     
     Provider *providerInstance = [self providerAtIndexPath:indexPath];
     [[cell textLabel]setText:[providerInstance providerName]];
-    
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    
+        
     return cell;
 }
 
@@ -78,13 +73,19 @@
     return [_providers objectAtIndex:[indexPath row]];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - Swipe to Delete
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Provider *selectedProvider = [self providerAtIndexPath:indexPath];
-    
-    CMAContentListTableViewController *contentList = [[CMAContentListTableViewController alloc] initWithProvider:selectedProvider];
-        
-    [[self navigationController] pushViewController:contentList animated:YES];
+    // Return YES - we will be able to delete all rows
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Perform the real delete action here. Note: you may need to check editing style
+    //   if you do not perform delete only.
+    NSLog(@"Deleted row.");
 }
 
 #pragma mark - Connection Information
@@ -130,18 +131,9 @@
 
 #pragma mark - Navigation Item Configuration
 
-- (IBAction)settings:(id)sender
-{
-    UNISettingsViewController *settingsView = [[UNISettingsViewController alloc] init];
-    [[self navigationController] pushViewController:settingsView animated:YES];
-}
-
 - (void)customizeNavigationBar
 {
-    UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settings:)];
-    [[self navigationItem] setRightBarButtonItem:rightbbi];
-    [[self navigationItem] setTitle:@"Content Manager"];
+    [[self navigationItem] setTitle:@"Providers List"];
 }
-
 
 @end

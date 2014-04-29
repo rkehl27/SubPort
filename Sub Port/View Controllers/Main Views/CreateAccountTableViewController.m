@@ -72,29 +72,24 @@
         [[cell rowTextField] setSecureTextEntry:YES];
     }
     
+    if ([[[cell rowLabel] text] isEqualToString:@"Credit Card Number"]) {
+        [[cell rowTextField] setKeyboardType:UIKeyboardTypeNumberPad];
+        [[cell rowTextField] setPlaceholder:@"################"];
+    }
+    
     [_cells addObject:cell];
     
     return cell;
-}
-
-- (void)configureNavigationController
-{
-    [[self navigationItem] setTitle:@"Create Account"];
-    
-    UIBarButtonItem *signUpButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up"
-                                                                     style:UIBarButtonItemStylePlain
-                                                                    target:self
-                                                                    action:@selector(signUp:)];
-    
-    [[self navigationItem] setRightBarButtonItem:signUpButton];
 }
 
 - (BOOL)validateInformation
 {
     UIAlertView *av1 = [[UIAlertView alloc] init];
     UIAlertView *av2 = [[UIAlertView alloc] init];
+    UIAlertView *av3 = [[UIAlertView alloc] init];
     BOOL emptyField = false;
     BOOL passwordsMatch = false;
+    BOOL error = false;
     _user = [[VerifiedUser alloc] init];
     NSString *password;
     NSString *passwordConfirm;
@@ -121,7 +116,23 @@
             } else if ([[[cell rowLabel] text] isEqualToString:@"Email"]) {
                 [_user setEmail:[[cell rowTextField] text]];
             } else if ([[[cell rowLabel] text] isEqualToString:@"Credit Card Number"]) {
-                [_user setCreditCardNumber:[[cell rowTextField] text]];
+                if ([[[cell rowTextField] text] length] < 16) {
+                    av3 = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:@"Credit Card number is too short."
+                                                    delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles: nil];
+                    error = true;
+                } else if ([[[cell rowTextField] text] length] > 16) {
+                    av3 = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:@"Credit Card number is too long."
+                                                    delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles: nil];
+                    error = true;
+                } else {
+                    [_user setCreditCardNumber:[[cell rowTextField] text]];
+                }
             } else if ([[[cell rowLabel] text] isEqualToString:@"Expiration Date"]) {
                 [_user setExpirationDate:[[cell rowTextField] text]];
             } else {
@@ -145,8 +156,10 @@
         [av1 show];
     } else if (!passwordsMatch) {
         [av2 show];
+    } else if (error) {
+        [av3 show];
     } else {
-       return true;
+        return true;
     }
     
     return false;
@@ -214,13 +227,25 @@
         [[VerifiedUser sharedUser] setExpirationDate:[_user expirationDate]];
         [[VerifiedUser sharedUser] setAuthToken:[dataDict objectForKey:@"auth_token"]];
         
-        SUBSelectProvidersTableViewController *selectProvidersViewController = [[SUBSelectProvidersTableViewController alloc] init];
+        SUBSelectProvidersTableViewController *selectProvidersViewController = [[SUBSelectProvidersTableViewController alloc] initWithRootView:@"createAccount"];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:selectProvidersViewController];
         [self presentViewController:navController animated:YES completion:nil];
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
     }
+}
+
+- (void)configureNavigationController
+{
+    [[self navigationItem] setTitle:@"Create Account"];
+    
+    UIBarButtonItem *signUpButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up"
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(signUp:)];
+    
+    [[self navigationItem] setRightBarButtonItem:signUpButton];
 }
 
 @end
