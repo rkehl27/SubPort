@@ -12,7 +12,6 @@
     NSURLConnection *_connection;
     NSMutableData *_jsonData;
 }
-@property (weak, nonatomic) IBOutlet UITextField *emailField;
 
 @end
 
@@ -45,6 +44,9 @@
     if ([[_emailField text] length] != 0)
     {
         [self postEmailToServer];
+    } else {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You must enter an email!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [av show];
     }
 }
 
@@ -84,7 +86,7 @@
     if([responseDictionary valueForKey:@"success"]) {
         NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
         
-        UIAlertView *emailFoundAlertView = [[UIAlertView alloc] initWithTitle:@"Success" message:[responseDictionary valueForKey:[NSString stringWithFormat:@"An email has been sent to %@ with a new password", [_emailField text]]] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *emailFoundAlertView = [[UIAlertView alloc] initWithTitle:@"Success" message:[NSString stringWithFormat:@"If the email address has been registered, an email will be sent to %@ with a new password", [_emailField text]] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [emailFoundAlertView show];
         
         

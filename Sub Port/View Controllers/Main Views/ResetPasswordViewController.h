@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ResetPasswordViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
 
 @end
