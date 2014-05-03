@@ -28,9 +28,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [_emailField setAccessibilityLabel:@"Email"];
-        [_passwordField setAccessibilityLabel:@"Password"];
-
     }
     return self;
 }

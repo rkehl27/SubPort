@@ -41,8 +41,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
     [self fetchContentInBackground];
-    [[self refreshControl] beginRefreshing];
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,11 +100,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SUBContentDetailsViewController *detailView = [[SUBContentDetailsViewController alloc] initWithContent:[_tableData objectAtIndex:[indexPath row]]];
+    ContentElement *contentElementInstance = [[ContentElement alloc] init];
+    
+    Provider *currProv = [_providers objectAtIndex:[indexPath section]];
+    contentElementInstance = [[currProv contentElements] objectAtIndex:[indexPath row]];
+    
+    SUBContentDetailsViewController *detailView = [[SUBContentDetailsViewController alloc] initWithContent:contentElementInstance];
     [[self navigationController] pushViewController:detailView animated:YES];
 }
 
-#pragma mark - Connection Information
+#pragma mark - Connection Information-
 
 - (void)fetchContentInBackground
 {
