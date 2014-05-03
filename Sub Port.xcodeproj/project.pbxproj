@@ -10,6 +10,7 @@
 		2B34EBD1190F3B4E002495BC /* SUBSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B34EBD0190F3B4E002495BC /* SUBSearchTableViewController.m */; };
 		2B44D4F6190B75EE0027B984 /* ADMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B44D4F4190B75EE0027B984 /* ADMDetailViewController.m */; };
 		2B44D4F7190B75EE0027B984 /* ADMDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B44D4F5190B75EE0027B984 /* ADMDetailViewController.xib */; };
+		2B97ADE8190F5F68006A983D /* UNIUpdateAccountTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B97ADE7190F5F68006A983D /* UNIUpdateAccountTableViewController.m */; };
 		2BA190ED190C36AA0051FDED /* AdminObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190E2190C36AA0051FDED /* AdminObject.m */; };
 		2BA190EE190C36AA0051FDED /* ContentArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190E4190C36AA0051FDED /* ContentArea.m */; };
 		2BA190EF190C36AA0051FDED /* DeliveryMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA190E6190C36AA0051FDED /* DeliveryMode.m */; };
@@ -86,6 +87,8 @@
 		2B44D4F3190B75EE0027B984 /* ADMDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADMDetailViewController.h; path = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.h"; sourceTree = SOURCE_ROOT; };
 		2B44D4F4190B75EE0027B984 /* ADMDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADMDetailViewController.m; path = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.m"; sourceTree = SOURCE_ROOT; };
 		2B44D4F5190B75EE0027B984 /* ADMDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ADMDetailViewController.xib; path = "Sub Port/View Controllers/Admin Views/ADMDetailViewController.xib"; sourceTree = SOURCE_ROOT; };
+		2B97ADE6190F5F68006A983D /* UNIUpdateAccountTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIUpdateAccountTableViewController.h; sourceTree = "<group>"; };
+		2B97ADE7190F5F68006A983D /* UNIUpdateAccountTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIUpdateAccountTableViewController.m; sourceTree = "<group>"; };
 		2BA190E1190C36AA0051FDED /* AdminObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminObject.h; sourceTree = "<group>"; };
 		2BA190E2190C36AA0051FDED /* AdminObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminObject.m; sourceTree = "<group>"; };
 		2BA190E3190C36AA0051FDED /* ContentArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentArea.h; sourceTree = "<group>"; };
@@ -276,6 +279,8 @@
 				BFAB66BE190DE5CA008908B4 /* ResetPasswordViewController.h */,
 				BFAB66BF190DE5CA008908B4 /* ResetPasswordViewController.m */,
 				BFAB66C0190DE5CA008908B4 /* ResetPasswordViewController.xib */,
+				2B97ADE6190F5F68006A983D /* UNIUpdateAccountTableViewController.h */,
+				2B97ADE7190F5F68006A983D /* UNIUpdateAccountTableViewController.m */,
 			);
 			name = "Universal Views";
 			path = "Main Views";
@@ -576,6 +581,7 @@
 				BF061B6118E7893F005B1246 /* FormFieldTableViewCell.m in Sources */,
 				BFB04C6218F8B84400B28EC8 /* SUBSelectProvidersTableViewController.m in Sources */,
 				BFAF6B7518FCBF270004FCE1 /* ContentElement.m in Sources */,
+				2B97ADE8190F5F68006A983D /* UNIUpdateAccountTableViewController.m in Sources */,
 				BFB04C8718F8D0C700B28EC8 /* SUBProviderDetailTableViewController.m in Sources */,
 				2BA190FB190C3EDD0051FDED /* ADMDeliveryModesTableViewController.m in Sources */,
 				2BA190F1190C36AA0051FDED /* Provider.m in Sources */,

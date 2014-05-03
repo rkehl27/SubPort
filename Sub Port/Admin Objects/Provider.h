@@ -21,4 +21,6 @@
 
 @property (nonatomic, readwrite) NSMutableArray *contentElements;
 
+@property (nonatomic, readwrite) NSString *expDate;
+
 @end

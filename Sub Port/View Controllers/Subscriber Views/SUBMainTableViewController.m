@@ -17,7 +17,6 @@
 @interface SUBMainTableViewController ()<UIAlertViewDelegate> {
     NSMutableArray *_tableData;
     NSMutableArray *_contentList;
-    NSMutableArray *_searchData;
     
     NSMutableArray *_providers;
 }
@@ -32,7 +31,6 @@
     if (self) {
         _tableData = [[NSMutableArray alloc] init];
         _contentList = [[NSMutableArray alloc] init];
-        _searchData = [[NSMutableArray alloc] init];
         _providers = [[NSMutableArray alloc] init];
         [self customizeNavigationItem];
         [self configureRefreshControl];
@@ -43,8 +41,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
     [self fetchContentInBackground];
-    [[self refreshControl] beginRefreshing];
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,6 +61,14 @@
 {
     // Return the number of sections.
     return [_providers count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    Provider *currProv = [_providers objectAtIndex:section];
+    
+
+    return [NSString stringWithFormat:@"%@\n%@", [currProv providerName], [currProv expDate]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -90,11 +100,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SUBContentDetailsViewController *detailView = [[SUBContentDetailsViewController alloc] initWithContent:[_tableData objectAtIndex:[indexPath row]]];
+    ContentElement *contentElementInstance = [[ContentElement alloc] init];
+    
+    Provider *currProv = [_providers objectAtIndex:[indexPath section]];
+    contentElementInstance = [[currProv contentElements] objectAtIndex:[indexPath row]];
+    
+    SUBContentDetailsViewController *detailView = [[SUBContentDetailsViewController alloc] initWithContent:contentElementInstance];
     [[self navigationController] pushViewController:detailView animated:YES];
 }
 
-#pragma mark - Connection Information
+#pragma mark - Connection Information-
 
 - (void)fetchContentInBackground
 {
@@ -112,6 +127,8 @@
 {
     [[self refreshControl] endRefreshing];
     [_tableData removeAllObjects];
+    [_providers removeAllObjects];
+    [_contentList removeAllObjects];
 
     NSError *localError;
     NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
@@ -122,17 +139,35 @@
     if ([responseDictionary valueForKey:@"success"]) {
         NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
         NSArray *content = [dataDict objectForKey:@"content_elements"];
+        NSArray *providers = [dataDict objectForKey:@"providers"];
+        NSArray *subscriptions = [dataDict objectForKey:@"subscriptions"];
         
-        for (NSDictionary *dict in content) {
+        for (NSDictionary *contentDict in content) {
             ContentElement *currElement = [[ContentElement alloc] init];
-            [currElement setIdNumber:[dict objectForKey:@"id"]];
-            [currElement setName:[dict objectForKey:@"name"]];
+            [currElement setIdNumber:[contentDict objectForKey:@"id"]];
+            [currElement setName:[contentDict objectForKey:@"name"]];
             
-            [self addProviderToArray:[dict objectForKey:@"provider_id"] withContentElement:currElement];
+            [self addProviderToArray:[contentDict objectForKey:@"provider_id"] withContentElement:currElement];
             
             [_contentList addObject:currElement];
             [_tableData addObject:currElement];
         }
+        
+        for (NSDictionary *provDict in providers) {
+            Provider *newProv = [[Provider alloc] init];
+            [newProv setProviderName:[provDict objectForKey:@"name"]];
+            [newProv setIdNumber:[provDict objectForKey:@"id"]];
+            [self addProviderNameToProvider:newProv];
+        }
+        
+        for (NSDictionary *subscripDict in subscriptions) {
+            Provider *newProv = [[Provider alloc] init];
+            [newProv setIdNumber:[subscripDict objectForKey:@"provider_id"]];
+            [newProv setExpDate:[subscripDict objectForKey:@"expiration_date"]];
+            [self addProviderExpDateToProvider:newProv];
+        }
+        
+        
     }else {
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [av show];
@@ -167,6 +202,24 @@
         [newProv setElementCount:[NSNumber numberWithInt:1]];
         [[newProv contentElements] addObject:element];
         [_providers addObject:newProv];
+    }
+}
+
+- (void)addProviderNameToProvider:(Provider *)currProv
+{
+    for (Provider *prov in _providers) {
+        if ([[prov idNumber] isEqualToNumber:[currProv idNumber]]) {
+            [prov setProviderName:[currProv providerName]];
+        }
+    }
+}
+
+- (void)addProviderExpDateToProvider:(Provider *)currProv
+{
+    for (Provider *prov in _providers) {
+        if ([[prov idNumber] isEqualToNumber:[currProv idNumber]]) {
+            [prov setExpDate:[currProv expDate]];
+        }
     }
 }
 
@@ -206,6 +259,8 @@
     [[self navigationItem] setLeftBarButtonItem:searchButton];
     
     [[self navigationItem] setTitle:@"List"];
+    
+    self.tableView.backgroundColor = [UIColor colorWithRed:.086 green:.7216 blue:1 alpha:1];
 }
 
 @end

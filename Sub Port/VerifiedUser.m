@@ -36,6 +36,7 @@
     [[VerifiedUser sharedUser] setEmail:nil];
     [[VerifiedUser sharedUser] setCreditCardNumber:nil];
     [[VerifiedUser sharedUser] setExpirationDate:nil];
+    [[VerifiedUser sharedUser] setCsvCode:nil];
     [[VerifiedUser sharedUser] setAuthToken:nil];
 }
 

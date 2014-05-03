@@ -182,11 +182,18 @@
             [subscriptionTypeInst setIdNumber:[typeOfSubscriptionDict objectForKey:@"id"]];
             [subscriptionTypeInst setAssociatedProvider:_provider];
             
-            [_subscriptionTypes addObject:subscriptionTypeInst];
-            
-            DetailRow *typeRow = [[DetailRow alloc] init];
-            [typeRow setLeftLabel:[subscriptionTypeInst subscriberName]];
-            [_rows addObject:typeRow];
+            if([[[typeOfSubscriptionDict objectForKey:@"hidden_flag"] class] isSubclassOfClass:[NSNull class]])
+            {
+                [subscriptionTypeInst setIsHidden:NO];
+                [_subscriptionTypes addObject:subscriptionTypeInst];
+                
+                DetailRow *typeRow = [[DetailRow alloc] init];
+                [typeRow setLeftLabel:[subscriptionTypeInst subscriberName]];
+                
+                [_rows addObject:typeRow];
+            } else {
+                [subscriptionTypeInst setIsHidden:YES];
+            }
         }
         
         [self synchronizeSubscriptionTypesWithSelectedSubscription:[dataDict objectForKey:@"sub_id"]];
@@ -199,9 +206,13 @@
 
 - (void)synchronizeSubscriptionTypesWithSelectedSubscription:(NSNumber *)idNumber
 {
-    for (SubscriptionType *subType in _subscriptionTypes) {
-        if ([subType idNumber] == idNumber) {
-            _selectedSubType = subType;
+    if([[idNumber class] isSubclassOfClass:[NSNull class]]){
+        NSLog(@"Error");
+    } else {
+        for (SubscriptionType *subType in _subscriptionTypes) {
+            if ([[subType idNumber] isEqualToNumber:idNumber]) {
+                _selectedSubType = subType;
+            }
         }
     }
 }
@@ -319,6 +330,7 @@
     if ([_subscriptionTypes count] == 0) {
         [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
     }
+    self.tableView.backgroundColor = [UIColor colorWithRed:.086 green:.7216 blue:1 alpha:1];
 }
 
 @end

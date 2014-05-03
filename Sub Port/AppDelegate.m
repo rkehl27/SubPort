@@ -16,16 +16,17 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Login.png"] forBarMetrics:UIBarMetricsDefault];
-//    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-//    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:.086 green:.7216 blue:1 alpha:1]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:.0627 green:.50196 blue:.70588 alpha:1]}];
     
     MainViewController *mainViewController = [[MainViewController alloc] init];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     
+    [[navController navigationBar] setTranslucent:YES];
+    
     self.window.rootViewController = navController;
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor colorWithRed:.086 green:.7216 blue:1 alpha:1];
     [self.window makeKeyAndVisible];
     return YES;
 }

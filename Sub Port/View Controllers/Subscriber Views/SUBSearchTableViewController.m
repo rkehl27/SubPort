@@ -36,7 +36,7 @@
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithStyle:style];
+    self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         // Custom initialization
     }
@@ -144,6 +144,7 @@
     _searchDisplayController.searchResultsDelegate = self;
     
     self.navigationItem.titleView = _searchBar;
+    self.tableView.backgroundColor = [UIColor colorWithRed:.086 green:.7216 blue:1 alpha:1];
 }
 
 @end

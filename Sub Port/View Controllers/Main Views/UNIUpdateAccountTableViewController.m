@@ -1,18 +1,17 @@
 //
-//  CreateAccountTableViewController.m
+//  UNIUpdateAccountTableViewController.m
 //  Sub Port
 //
-//  Created by School on 3/30/14.
+//  Created by Rebecca Kehl on 4/28/14.
 //  Copyright (c) 2014 Sub Port Inc. All rights reserved.
 //
-
-#import "CreateAccountTableViewController.h"
+#import "UNIUpdateAccountTableViewController.h"
+#import "WebServiceURLBuilder.h"
 #import "FormFieldTableViewCell.h"
 #import "FormFieldRow.h"
 #import "VerifiedUser.h"
-#import "SUBSelectProvidersTableViewController.h"
 
-@interface CreateAccountTableViewController ()<UIAlertViewDelegate>{
+@interface UNIUpdateAccountTableViewController ()<UIAlertViewDelegate>{
     NSMutableArray *_rows;
     NSMutableArray *_cells;
     VerifiedUser *_user;
@@ -20,7 +19,7 @@
 
 @end
 
-@implementation CreateAccountTableViewController
+@implementation UNIUpdateAccountTableViewController
 
 - (id)init
 {
@@ -29,8 +28,6 @@
         [self.tableView setRowHeight:66];
         _rows = [[NSMutableArray alloc] init];
         [_rows addObject:[[FormFieldRow alloc] initWithLabel:@"Username"]];
-        [_rows addObject:[[FormFieldRow alloc] initWithLabel:@"Password"]];
-        [_rows addObject:[[FormFieldRow alloc] initWithLabel:@"Password Confirmation"]];
         [_rows addObject:[[FormFieldRow alloc] initWithLabel:@"Email"]];
         [_rows addObject:[[FormFieldRow alloc] initWithLabel:@"Credit Card Number"]];
         [_rows addObject:[[FormFieldRow alloc] initWithLabel:@"Expiration Date"]];
@@ -47,9 +44,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     UINib *nib = [UINib nibWithNibName:@"FormFieldTableViewCell" bundle:nil];
-    [[self tableView] registerNib:nib forCellReuseIdentifier:@"FormFieldTableViewCell"];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"FormFieldTableViewCell1"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -58,6 +54,8 @@
     [super viewWillAppear:animated];
 }
 
+#pragma mark - UITableView
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [_rows count];
@@ -65,56 +63,52 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FormFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FormFieldTableViewCell" forIndexPath:indexPath];
+    FormFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FormFieldTableViewCell1" forIndexPath:indexPath];
     
     FormFieldRow *item = [_rows objectAtIndex:[indexPath row]];
     
     [[cell rowLabel] setText:[item label]];
     
-    if ([[[cell rowLabel] text] isEqualToString:@"Password"]) {
-        [[cell rowTextField] setSecureTextEntry:YES];
-    } else if ([[[cell rowLabel] text] isEqualToString:@"Password Confirmation"]) {
-        [[cell rowTextField] setSecureTextEntry:YES];
-    } else if ([[[cell rowLabel] text] isEqualToString:@"Credit Card Number"]) {
+    if ([[[cell rowLabel] text] isEqualToString:@"Credit Card Number"]) {
         [[cell rowTextField] setKeyboardType:UIKeyboardTypeNumberPad];
-        [[cell rowTextField] setPlaceholder:@"################"];
     } else if ([[[cell rowLabel] text] isEqualToString:@"CSV Code"]) {
         [[cell rowTextField] setKeyboardType:UIKeyboardTypeNumberPad];
     } else if ([[[cell rowLabel] text] isEqualToString:@"Expiration Date"]) {
         [[cell rowTextField] setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
-        [[cell rowTextField] setPlaceholder:@"##/##"];
     }
+    
+    [self synchronizeCellWithUserInfo];
     
     [_cells addObject:cell];
     
     return cell;
 }
 
+#pragma mark - Configure nav control
+
 - (void)configureNavigationController
 {
-    [[self navigationItem] setTitle:@"Create Account"];
+    [[self navigationItem] setTitle:@"Update Account"];
     
-    UIBarButtonItem *signUpButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up"
+    UIBarButtonItem *signUpButton = [[UIBarButtonItem alloc] initWithTitle:@"Change Info"
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
-                                                                    action:@selector(signUp:)];
+                                                                    action:@selector(updateInfo:)];
     
     [[self navigationItem] setRightBarButtonItem:signUpButton];
     
     self.tableView.backgroundColor = [UIColor colorWithRed:.086 green:.7216 blue:1 alpha:1];
 }
 
+#pragma mark - Validation and synchronization
+
 - (BOOL)validateInformation
 {
     UIAlertView *av1 = [[UIAlertView alloc] init];
-    UIAlertView *av2 = [[UIAlertView alloc] init];
     UIAlertView *av3 = [[UIAlertView alloc] init];
     BOOL emptyField = false;
-    BOOL passwordsMatch = false;
     BOOL error = false;
     _user = [[VerifiedUser alloc] init];
-    NSString *password;
-    NSString *passwordConfirm;
     
     for (int i = 0; i<[_cells count]; i++) {
         FormFieldTableViewCell *cell = [_cells objectAtIndex:i];
@@ -128,13 +122,6 @@
         } else {
             if ([[[cell rowLabel] text] isEqualToString:@"Username"]) {
                 [_user setName:[[cell rowTextField] text]];
-            } else if ([[[cell rowLabel] text] isEqualToString:@"Password"]) {
-                password = [[cell rowTextField] text];
-            } else if ([[[cell rowLabel] text] isEqualToString:@"Password Confirmation"]) {
-                passwordConfirm = [[cell rowTextField] text];
-                if ([password isEqualToString:passwordConfirm]){
-                    passwordsMatch = true;
-                }
             } else if ([[[cell rowLabel] text] isEqualToString:@"Email"]) {
                 [_user setEmail:[[cell rowTextField] text]];
             } else if ([[[cell rowLabel] text] isEqualToString:@"Credit Card Number"]) {
@@ -153,7 +140,11 @@
                                            otherButtonTitles: nil];
                     error = true;
                 } else {
-                    [_user setCreditCardNumber:[[cell rowTextField] text]];
+                    if ([[[[cell rowTextField] text] stringByReplacingOccurrencesOfString:@"X" withString:@""] length] < 16) {
+                        [_user setCreditCardNumber:[[VerifiedUser sharedUser] creditCardNumber]];
+                    } else {
+                        [_user setCreditCardNumber:[[cell rowTextField] text]];
+                    }
                 }
             } else if ([[[cell rowLabel] text] isEqualToString:@"Expiration Date"]) {
                 [_user setExpirationDate:[[cell rowTextField] text]];
@@ -162,24 +153,12 @@
             } else {
                 //error
             }
-            
-            if (passwordsMatch) {
-                [_user setPassword:password];
-            } else {
-                av2 = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                 message:@"Passwords Don't Match"
-                                                delegate:self
-                                       cancelButtonTitle:@"OK"
-                                       otherButtonTitles: nil];
-            }
         }
     }
     
     
     if (emptyField) {
         [av1 show];
-    } else if (!passwordsMatch) {
-        [av2 show];
     } else if (error) {
         [av3 show];
     } else {
@@ -189,40 +168,48 @@
     return false;
 }
 
-- (IBAction)signUp:(id)sender
+- (IBAction)updateInfo:(id)sender
 {
     if ([self validateInformation]) {
-        NSLog(@"Sign up valid");
         [self postNewAccountInformationToServer];
     } else {
-        NSLog(@"Sign up Invalid");
     }
-    
-    NSLog(@"Sign Up Pressed!");
 }
+
+- (void)synchronizeCellWithUserInfo
+{
+    for (FormFieldTableViewCell *cell in _cells) {
+        if ([[[cell rowLabel] text] isEqualToString:@"Username"]) {
+            [[cell rowTextField] setText:[[VerifiedUser sharedUser] name]];
+        } else if ([[[cell rowLabel] text] isEqualToString:@"Email"]) {
+            [[cell rowTextField] setText:[[VerifiedUser sharedUser] email]];
+        } else if ([[[cell rowLabel] text] isEqualToString:@"Credit Card Number"]) {
+            NSString *creditCardString = [[VerifiedUser sharedUser] creditCardNumber];
+            NSString *hideNumbers = [creditCardString stringByReplacingCharactersInRange:NSMakeRange(0, 12) withString:@"XXXXXXXXXXXX"];
+            [[cell rowTextField] setText:hideNumbers];
+            
+        } else if ([[[cell rowLabel] text] isEqualToString:@"Expiration Date"]) {
+            [[cell rowTextField] setText:[[VerifiedUser sharedUser] expirationDate]];
+        } else if ([[[cell rowLabel] text] isEqualToString:@"CSV Code"]){
+            [[cell rowTextField] setText:[[VerifiedUser sharedUser] csvCode]];
+        } else {
+            //error
+        }
+    }
+}
+
+#pragma mark - Connection Information
 
 -(void)postNewAccountInformationToServer
 {
-    NSDictionary *inputData = @{@"user":@{
-                                        @"email":[_user email],
-                                        @"name":[_user name],
-                                        @"password":[_user password],
-                                        @"password_confirmation":[_user password],
-                                        @"credit_card_number":[_user creditCardNumber],
-                                        @"expiration_date":[_user expirationDate],
-                                        @"csc":[_user csvCode]}};
+    NSDictionary *putDict = @{@"email":[_user email],
+                              @"name":[_user name],
+                              @"credit_card_number":[_user creditCardNumber],
+                              @"expiration_date":[_user expirationDate],
+                              @"csc":[_user csvCode]
+                              };
     
-    NSError *error = nil;
-    NSData *jsonInputData = [NSJSONSerialization dataWithJSONObject:inputData options:NSJSONWritingPrettyPrinted error:&error];
-    
-    NSURL *url = [NSURL URLWithString:@"http://subportinc.herokuapp.com/api/v1/registrations"];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setHTTPBody:jsonInputData];
+    NSMutableURLRequest *request = [WebServiceURLBuilder putRequestForRouteAppendix:@"update_account" withDictionary:putDict];
     
     NSURLResponse *response;
     NSError *err;
@@ -242,30 +229,19 @@
     
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&localError];
     
-    if([[responseDictionary objectForKey:@"info"] isKindOfClass:[NSString class]]) {
+    if([responseDictionary valueForKey:@"success"]) {
         NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
         
-        NSDictionary *userDict = [dataDict objectForKey:@"user"];
-        [[VerifiedUser sharedUser] setExpirationDate:[userDict objectForKey:@"expiration_date"]];
-        [[VerifiedUser sharedUser] setName:[userDict objectForKey:@"name"]];
-        [[VerifiedUser sharedUser] setCsvCode:[userDict objectForKey:@"csc"]];
-        [[VerifiedUser sharedUser] setCreditCardNumber:[userDict objectForKey:@"credit_card_number"]];
-        [[VerifiedUser sharedUser] setEmail:[userDict objectForKey:@"email"]];
-        [[VerifiedUser sharedUser] setAuthToken:[dataDict objectForKey:@"auth_token"]];
-        
-        SUBSelectProvidersTableViewController *selectProvidersViewController = [[SUBSelectProvidersTableViewController alloc] initWithRootView:@"createAccount"];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:selectProvidersViewController];
-        [self presentViewController:navController animated:YES completion:nil];
+        [[VerifiedUser sharedUser] setName:[_user name]];
+        [[VerifiedUser sharedUser] setEmail:[_user email]];
+        [[VerifiedUser sharedUser] setCreditCardNumber:[_user creditCardNumber]];
+        [[VerifiedUser sharedUser] setCsvCode:[_user csvCode]];
+        [[VerifiedUser sharedUser] setExpirationDate:[_user expirationDate]];
+
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success" message:[responseDictionary valueForKey:@"info"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
     } else {
-        NSDictionary *infoDict = [responseDictionary objectForKey:@"info"];
-        NSString *message = [[NSString alloc] init];
-        if ([infoDict valueForKey:@"email"]) {
-            message = [NSString stringWithFormat:@"Email %@", [[infoDict valueForKey:@"email"] objectAtIndex:0]];
-        } else if ([infoDict valueForKey:@"password"]) {
-            message = [NSString stringWithFormat:@"Password %@", [[infoDict valueForKey:@"email"] objectAtIndex:0]];
-        }
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
     }
 }

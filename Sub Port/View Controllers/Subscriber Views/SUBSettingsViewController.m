@@ -8,6 +8,7 @@
 
 #import "SUBSettingsViewController.h"
 #import "SUBSelectProvidersTableViewController.h"
+#import "UNIUpdateAccountTableViewController.h"
 #import "VerifiedUser.h"
 #import "MainViewController.h"
 #import "WebServiceURLBuilder.h"
@@ -48,6 +49,8 @@
 
 - (IBAction)updateAccount:(id)sender
 {
+    UNIUpdateAccountTableViewController *updateView = [[UNIUpdateAccountTableViewController alloc] init];
+    [[self navigationController] pushViewController:updateView animated:YES];
     //do nothing
 }
 
