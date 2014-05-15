@@ -13,6 +13,7 @@
 
 @interface ADMDeliveryModesTableViewController () {
     NSMutableArray *_deliveryModes;
+    DeliveryMode *_modeToRemove;
 }
 
 @end
@@ -79,7 +80,7 @@
     UITableViewCell* cell = (UITableViewCell *)[contentView superview];
     
     for (DeliveryMode *tempDeliveryMode in _deliveryModes) {
-        if ([tempDeliveryMode deliveryModeName] == cell.textLabel.text) {
+        if ([[tempDeliveryMode deliveryModeName] isEqualToString:cell.textLabel.text]) {
             NSDictionary *postDictionary = @{@"id":[tempDeliveryMode idNumber]};
             NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"hide_delivery_modes"];
             
@@ -109,10 +110,10 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DeliveryMode *modeToDelete = [_deliveryModes objectAtIndex:[indexPath row]];
+    _modeToRemove = [_deliveryModes objectAtIndex:[indexPath row]];
     
-    [_deliveryModes removeObjectAtIndex:[indexPath row]];
-    [self deleteDeliveryMode:modeToDelete];
+    //[_deliveryModes removeObjectAtIndex:[indexPath row]];
+    [self deleteDeliveryMode:_modeToRemove];
     
     NSLog(@"Deleted row.");
 }
@@ -210,6 +211,12 @@
     
     if ([responseDictionary valueForKey:@"success"]) {
         //NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[responseDictionary valueForKey:@"info"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        
+        if (![[responseDictionary valueForKey:@"info"] isEqualToString:@"Cannot Delete Delivery Mode that has providers with it"]) {
+            [_deliveryModes removeObject:_modeToRemove];
+        }
         
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];

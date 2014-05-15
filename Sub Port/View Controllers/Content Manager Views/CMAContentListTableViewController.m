@@ -150,6 +150,8 @@
             ContentElement *currElement = [[ContentElement alloc] init];
             [currElement setIdNumber:[dict objectForKey:@"id"]];
             [currElement setName:[dict objectForKey:@"name"]];
+            [currElement setProvId:[_currProvider idNumber]];
+            [currElement setProvider:_currProvider];
             
             [_contentList addObject:currElement];
         }

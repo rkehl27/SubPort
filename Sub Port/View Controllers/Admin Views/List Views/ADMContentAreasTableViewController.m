@@ -14,6 +14,7 @@
 
 @interface ADMContentAreasTableViewController () {
     NSMutableArray *_contentAreas;
+    ContentArea *_areaToDelete;
 }
 
 @end
@@ -82,7 +83,7 @@
     UITableViewCell* cell = (UITableViewCell *)[contentView superview];
     
     for (ContentArea *tempContentArea in _contentAreas) {
-        if ([tempContentArea contentAreaName] == cell.textLabel.text) {
+        if ([[tempContentArea contentAreaName] isEqualToString:cell.textLabel.text]) {
             NSDictionary *postDictionary = @{@"id":[tempContentArea idNumber]};
             NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"hide_content_areas"];
             
@@ -112,10 +113,10 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ContentArea *areaToDelete = [_contentAreas objectAtIndex:[indexPath row]];
+    _areaToDelete = [_contentAreas objectAtIndex:[indexPath row]];
     
-    [_contentAreas removeObjectAtIndex:[indexPath row]];
-    [self deleteContentArea:areaToDelete];
+    //[_contentAreas removeObjectAtIndex:[indexPath row]];
+    [self deleteContentArea:_areaToDelete];
 }
 
 #pragma mark - Connection Information
@@ -210,6 +211,13 @@
     
     if ([responseDictionary valueForKey:@"success"]) {
 //        NSDictionary *dataDict = [responseDictionary objectForKey:@"data"];
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[responseDictionary valueForKey:@"info"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        
+        if (![[responseDictionary valueForKey:@"info"] isEqualToString:@"Cannot Delete Content Area that has providers with it"]) {
+            [_contentAreas removeObject:_areaToDelete];
+        }
         
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[responseDictionary valueForKey:@"error"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];

@@ -91,7 +91,7 @@
     UITableViewCell* cell = (UITableViewCell *)[contentView superview];
     
     for (SubscriptionType *tempSubType in _subscriptionTypes) {
-        if ([tempSubType subscriberName] == cell.textLabel.text) {
+        if ([[tempSubType subscriberName] isEqualToString:cell.textLabel.text]) {
             NSDictionary *postDictionary = @{@"id":[tempSubType idNumber]};
             NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"hide_subscriptions"];
             

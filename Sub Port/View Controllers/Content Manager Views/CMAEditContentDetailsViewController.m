@@ -223,6 +223,8 @@
         FormatType *currFormat = [self getFormatTypeByName:[contentElementDict objectForKey:@"format_name"]];
         [_contentElement setFormat: currFormat];
         
+        _selectedFormatType = [self getFormatTypeByName:[contentElementDict objectForKey:@"format_name"]];
+        
         if([[[contentElementDict objectForKey:@"hidden_flag"] class] isSubclassOfClass:[NSNull class]])
         {
             [_contentElement setIsHidden:NO];
@@ -296,6 +298,7 @@
     NSNumber *isHiddenValue = [NSNumber numberWithBool:[_contentElement isHidden]];
     
     NSDictionary *postDictionary = @{ @"provider_id":[[_contentElement provider] idNumber],
+                                      @"id":[_contentElement idNumber],
                                      @"name":[_contentElement name],
                                      @"link":[_contentElement url],
                                      @"format_id":[[_contentElement format] idNumber],

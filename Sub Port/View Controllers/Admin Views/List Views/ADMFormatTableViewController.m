@@ -91,7 +91,7 @@
     UITableViewCell* cell = (UITableViewCell *)[contentView superview];
     
     for (FormatType *tempFormatType in _formatTypes) {
-        if ([tempFormatType formatTypeName] == cell.textLabel.text) {
+        if ([[tempFormatType formatTypeName] isEqualToString:cell.textLabel.text]) {
             NSDictionary *postDictionary = @{@"id":[tempFormatType idNumber]};
             NSMutableURLRequest *request = [WebServiceURLBuilder postRequestWithDictionary:postDictionary forRouteAppendix:@"manage_formats"];
     
