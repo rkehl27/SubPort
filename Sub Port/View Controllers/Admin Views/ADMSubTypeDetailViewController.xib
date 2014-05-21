@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -37,6 +37,7 @@
                 <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="Rfa-yb-bv1">
                     <rect key="frame" x="113" y="166" width="94" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <color key="tintColor" red="0.0" green="0.77254909279999995" blue="1" alpha="1" colorSpace="deviceRGB"/>
                     <connections>
                         <action selector="dayStepperChanged:" destination="-1" eventType="valueChanged" id="r8N-0e-w3o"/>
                     </connections>
@@ -44,6 +45,7 @@
                 <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="12" translatesAutoresizingMaskIntoConstraints="NO" id="87o-ZQ-bsd">
                     <rect key="frame" x="113" y="203" width="94" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <color key="tintColor" red="0.0" green="0.77254909279999995" blue="1" alpha="1" colorSpace="deviceRGB"/>
                     <connections>
                         <action selector="monthStepperChanged:" destination="-1" eventType="valueChanged" id="XY5-N4-uL7"/>
                     </connections>
@@ -51,6 +53,7 @@
                 <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="HEd-0g-dyQ">
                     <rect key="frame" x="113" y="240" width="94" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <color key="tintColor" red="0.0" green="0.77254909279999995" blue="1" alpha="1" colorSpace="deviceRGB"/>
                     <connections>
                         <action selector="yearStepperChanged:" destination="-1" eventType="valueChanged" id="wwJ-Xs-e3P"/>
                     </connections>

@@ -73,6 +73,8 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     UISwitch *switchView = [[UISwitch alloc] init];
+    [switchView setTintColor:[UIColor colorWithRed:.086 green:.7216 blue:1 alpha:1]];
+    [switchView setOnTintColor:[UIColor colorWithRed:.086 green:.7216 blue:1 alpha:1]];
     cell.accessoryView = switchView;
     if ([formatTypeInstance isHidden]) {
         [switchView setOn:NO animated:NO];
